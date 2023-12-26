@@ -113,7 +113,7 @@ class ProfileScreenState extends State<ProfileScreen> {
               SizedBox(height: 2.v),
               Padding(
                 padding: EdgeInsets.only(right: 48.h),
-                child: _buildProfileOccupationStack(context),
+                child: _buildProfileOccupationLines(context),
               ),
               SizedBox(height: 36.v),
               _buildProfileOccupation(context),
@@ -121,7 +121,7 @@ class ProfileScreenState extends State<ProfileScreen> {
             ],
           ),
         ),
-        bottomNavigationBar: _buildSevenStack(context),
+        bottomNavigationBar: _buildStackLines(context),
       ),
     );
   }
@@ -179,7 +179,7 @@ class ProfileScreenState extends State<ProfileScreen> {
               left: 13.h,
               top: 28.v,
             ),
-            child: _buildProfileOccupationStack(context),
+            child: _buildProfileOccupationLines(context),
           ),
         ],
       ),
@@ -187,7 +187,7 @@ class ProfileScreenState extends State<ProfileScreen> {
   }
 
   /// Section Widget
-  Widget _buildSevenStack(BuildContext context) {
+  Widget _buildStackLines(BuildContext context) {
     return Container(
       height: 6.v,
       width: 120.h,
@@ -223,7 +223,7 @@ class ProfileScreenState extends State<ProfileScreen> {
   }
 
   /// Common widget
-  Widget _buildProfileOccupationStack(BuildContext context) {
+  Widget _buildProfileOccupationLines(BuildContext context) {
     return SizedBox(
       height: 1.v,
       width: 161.h,

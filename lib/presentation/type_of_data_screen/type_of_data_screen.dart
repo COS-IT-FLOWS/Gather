@@ -1,5 +1,5 @@
-import '../type_of_data_screen/widgets/grid_item_widget.dart';
-import 'models/grid_item_model.dart';
+import '../type_of_data_screen/widgets/gridfour_item_widget.dart';
+import 'models/gridfour_item_model.dart';
 import 'models/type_of_data_model.dart';
 import 'package:flutter/material.dart';
 import 'package:gather/core/app_export.dart';
@@ -34,9 +34,11 @@ class TypeOfDataScreenState extends State<TypeOfDataScreen> {
             appBar: _buildAppBar(context),
             body: SizedBox(
                 width: double.maxFinite,
-                child: Column(
-                    children: [SizedBox(height: 5.v), _buildGrid(context)])),
-            bottomNavigationBar: _buildStack(context)));
+                child: Column(children: [
+                  SizedBox(height: 5.v),
+                  _buildGridFour(context)
+                ])),
+            bottomNavigationBar: _buildStackFive(context)));
   }
 
   /// Section Widget
@@ -65,7 +67,7 @@ class TypeOfDataScreenState extends State<TypeOfDataScreen> {
   }
 
   /// Section Widget
-  Widget _buildGrid(BuildContext context) {
+  Widget _buildGridFour(BuildContext context) {
     return Container(
         decoration: AppDecoration.fillWhiteA,
         child:
@@ -78,11 +80,11 @@ class TypeOfDataScreenState extends State<TypeOfDataScreen> {
                   mainAxisSpacing: 83.h,
                   crossAxisSpacing: 83.h),
               physics: NeverScrollableScrollPhysics(),
-              itemCount: provider.typeOfDataModelObj.gridItemList.length,
+              itemCount: provider.typeOfDataModelObj.gridfourItemList.length,
               itemBuilder: (context, index) {
-                GridItemModel model =
-                    provider.typeOfDataModelObj.gridItemList[index];
-                return GridItemWidget(model, onTapImgCircleImage: () {
+                GridfourItemModel model =
+                    provider.typeOfDataModelObj.gridfourItemList[index];
+                return GridfourItemWidget(model, onTapImgCircleImage: () {
                   onTapImgCircleImage(context);
                 });
               });
@@ -90,7 +92,7 @@ class TypeOfDataScreenState extends State<TypeOfDataScreen> {
   }
 
   /// Section Widget
-  Widget _buildStack(BuildContext context) {
+  Widget _buildStackFive(BuildContext context) {
     return Container(
         height: 6.v,
         width: 120.h,

@@ -1,8 +1,8 @@
 import '../../../core/app_export.dart';
 
-/// This class is used in the [grid_item_widget] screen.
-class GridItemModel {
-  GridItemModel({
+/// This class is used in the [gridfour_item_widget] screen.
+class GridfourItemModel {
+  GridfourItemModel({
     this.circleImage,
     this.text,
     this.id,

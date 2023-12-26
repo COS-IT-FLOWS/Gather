@@ -1,13 +1,14 @@
 import '../../../core/app_export.dart';
-import 'grid_item_model.dart';
+import 'gridfour_item_model.dart';
 
 class TypeOfDataModel {
-  List<GridItemModel> gridItemList = [
-    GridItemModel(circleImage: ImageConstant.imgRectangle4, text: "RAINFALL"),
-    GridItemModel(
+  List<GridfourItemModel> gridfourItemList = [
+    GridfourItemModel(
+        circleImage: ImageConstant.imgRectangle4, text: "RAINFALL"),
+    GridfourItemModel(
         circleImage: ImageConstant.imgRectangle4101x102, text: "RIVER"),
-    GridItemModel(
+    GridfourItemModel(
         circleImage: ImageConstant.imgRectangle41, text: "WELL WATER"),
-    GridItemModel(circleImage: ImageConstant.imgRectangle42, text: "TIDAL")
+    GridfourItemModel(circleImage: ImageConstant.imgRectangle42, text: "TIDAL")
   ];
 }

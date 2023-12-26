@@ -1,18 +1,18 @@
-import '../models/grid_item_model.dart';
+import '../models/gridfour_item_model.dart';
 import 'package:flutter/material.dart';
 import 'package:gather/core/app_export.dart';
 
 // ignore: must_be_immutable
-class GridItemWidget extends StatelessWidget {
-  GridItemWidget(
-    this.gridItemModelObj, {
+class GridfourItemWidget extends StatelessWidget {
+  GridfourItemWidget(
+    this.gridfourItemModelObj, {
     Key? key,
     this.onTapImgCircleImage,
   }) : super(
           key: key,
         );
 
-  GridItemModel gridItemModelObj;
+  GridfourItemModel gridfourItemModelObj;
 
   VoidCallback? onTapImgCircleImage;
 
@@ -26,7 +26,7 @@ class GridItemWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           CustomImageView(
-            imagePath: gridItemModelObj?.circleImage,
+            imagePath: gridfourItemModelObj?.circleImage,
             height: 101.v,
             width: 102.h,
             radius: BorderRadius.circular(
@@ -38,7 +38,7 @@ class GridItemWidget extends StatelessWidget {
           ),
           SizedBox(height: 24.v),
           Text(
-            gridItemModelObj.text!,
+            gridfourItemModelObj.text!,
             style: theme.textTheme.titleLarge,
           ),
         ],

@@ -3,8 +3,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-import '../models/authentication_model.dart';
-export '../models/authentication_model.dart';
+import '../models/auth_model.dart';
+export '../models/auth_model.dart';
 
 class AuthenticationWidget extends StatefulWidget {
   const AuthenticationWidget({super.key});

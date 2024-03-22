@@ -1,15 +1,12 @@
-import '/flutter_flow/flutter_flow_theme.dart';
-import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import '/overlays/data_text_form/data_text_form_widget.dart';
+import '/overlays/data_text_form_widget.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-import 'list_view_model.dart';
-export 'list_view_model.dart';
+import 'package:gather/screens/list_view_widget.dart';
+export 'list_view_widget.dart';
 
 class ListViewWidget extends StatefulWidget {
   const ListViewWidget({super.key});

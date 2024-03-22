@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gather/routes/app_routes.dart';
 
 var globalMessengerKey = GlobalKey<ScaffoldMessengerState>();
 
@@ -14,8 +15,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      // onGenerateRoute: AppRoutes.generateRoute,
-      scaffoldMessengerKey: globalMessengerKey,
+      routes: AppRoutes.routes(),
+      initialRoute: AppRoutes.authScreen,
+      //       scaffoldMessengerKey: globalMessengerKey,
     );
   }
 }

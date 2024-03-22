@@ -1,3 +1,4 @@
+import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -21,7 +22,7 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget> {
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => AuthenticationModel());
+    _model = AuthenticationModel();
 
     _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
@@ -42,7 +43,7 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget> {
           : FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        backgroundColor: Colors.amber,
         appBar: AppBar(
           backgroundColor: Color(0xFFF1F4F8),
           automaticallyImplyLeading: false,
@@ -63,12 +64,12 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget> {
                 children: [
                   Text(
                     'Sign Up',
-                    style: FlutterFlowTheme.of(context).headlineLarge.override(
-                          fontFamily: 'Outfit',
-                          color: Color(0xFF15161E),
-                          fontSize: 32,
-                          fontWeight: FontWeight.w600,
-                        ),
+                    style: TextStyle(
+                      fontFamily: 'Outfit',
+                      color: Color(0xFF15161E),
+                      fontSize: 32,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                   TextFormField(
                     controller: _model.textController,
@@ -76,18 +77,22 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget> {
                     obscureText: false,
                     decoration: InputDecoration(
                       labelText: 'Phone Number',
-                      labelStyle: FlutterFlowTheme.of(context).headlineMedium,
+                      labelStyle: TextStyle(
+                        fontFamily: 'Plus Jakarta Sans',
+                        color: Color(0xFF15161E),
+                        fontSize: 16,
+                        fontWeight: FontWeight.normal,
+                      ),
                       hintText: 'Enter your phone number',
-                      hintStyle:
-                          FlutterFlowTheme.of(context).bodyLarge.override(
-                                fontFamily: 'Plus Jakarta Sans',
-                                color: Color(0xFF15161E),
-                                fontSize: 16,
-                                fontWeight: FontWeight.normal,
-                              ),
+                      hintStyle: TextStyle(
+                        fontFamily: 'Plus Jakarta Sans',
+                        color: Color(0xFF15161E),
+                        fontSize: 16,
+                        fontWeight: FontWeight.normal,
+                      ),
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).primary,
+                          color: Colors.amber,
                           width: 2,
                         ),
                         borderRadius: BorderRadius.circular(12),
@@ -118,42 +123,41 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget> {
                       contentPadding:
                           EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
                     ),
-                    style: FlutterFlowTheme.of(context).bodyLarge.override(
-                          fontFamily: 'Plus Jakarta Sans',
-                          color: Color(0xFF15161E),
-                          fontSize: 16,
-                          fontWeight: FontWeight.normal,
-                        ),
+                    style: TextStyle(
+                      fontFamily: 'Plus Jakarta Sans',
+                      color: Color(0xFF15161E),
+                      fontSize: 16,
+                      fontWeight: FontWeight.normal,
+                    ),
                     textAlign: TextAlign.start,
                     keyboardType: TextInputType.phone,
                     validator:
                         _model.textControllerValidator.asValidator(context),
                   ),
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
-                    child: FFButtonWidget(
-                      onPressed: () async {
-                        context.pushNamed('ListView');
-                      },
-                      text: 'Sign Up with Phone',
-                      options: FFButtonOptions(
-                        width: double.infinity,
-                        height: 50,
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                        iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                        color: FlutterFlowTheme.of(context).primary,
-                        textStyle:
-                            FlutterFlowTheme.of(context).titleMedium.override(
-                                  fontFamily: 'Plus Jakarta Sans',
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                        elevation: 2,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                  ),
+                  // Padding(
+                  //   padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
+                  //   child: FFButtonWidget(
+                  //     onPressed: () async {
+                  //       Navigator.pushNamed('/');
+                  //     },
+                  //     text: 'Sign Up with Phone',
+                  //     options: FFButtonOptions(
+                  //       width: double.infinity,
+                  //       height: 50,
+                  //       padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                  //       iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                  //       color: Colors.amber,
+                  //       textStyle: TextStyle(
+                  //         fontFamily: 'Plus Jakarta Sans',
+                  //         color: Colors.white,
+                  //         fontSize: 18,
+                  //         fontWeight: FontWeight.w500,
+                  //       ),
+                  //       elevation: 2,
+                  //       borderRadius: BorderRadius.circular(12),
+                  //     ),
+                  //   ),
+                  // ),
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
                     child: Text(
@@ -180,13 +184,12 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget> {
                       padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                       iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                       color: Colors.white,
-                      textStyle:
-                          FlutterFlowTheme.of(context).titleMedium.override(
-                                fontFamily: 'Plus Jakarta Sans',
-                                color: FlutterFlowTheme.of(context).primaryText,
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500,
-                              ),
+                      textStyle: TextStyle(
+                        fontFamily: 'Plus Jakarta Sans',
+                        color: Colors.black,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                      ),
                       elevation: 2,
                       borderRadius: BorderRadius.circular(12),
                     ),

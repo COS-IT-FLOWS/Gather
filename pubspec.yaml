@@ -8,6 +8,7 @@ dependencies:
     sdk: flutter
   flutter_localizations: 
     sdk: flutter
+  flutter_lints: ^3.0.1
   provider: ^6.0.4
   cached_network_image: ^3.2.1
   flutter_svg: ^2.0.9
@@ -18,10 +19,12 @@ dependencies:
     git:
       url: https://github.com/maplibre/flutter-maplibre-gl.git
       ref: main
+      publish_to: none
   font_awesome_flutter:  ^10.1.0
   google_fonts: ^4.0.3
   badges: ^3.1.2
   flutterflow_ui: ^0.2.0
+  supabase_auth_ui: ^0.3.0
 
 dev_dependencies: 
   flutter_test: 

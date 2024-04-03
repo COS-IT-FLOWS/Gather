@@ -1,8 +1,8 @@
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
+import 'package:supabase_auth_ui/supabase_auth_ui.dart';
+import 'package:gather/routes/app_routes.dart';
 
 import '../models/auth_model.dart';
 export '../models/auth_model.dart';
@@ -43,7 +43,7 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget> {
           : FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: Colors.amber,
+        backgroundColor: FlutterFlowTheme.of(context).secondary,
         appBar: AppBar(
           backgroundColor: Color(0xFFF1F4F8),
           automaticallyImplyLeading: false,
@@ -76,6 +76,7 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget> {
                     focusNode: _model.textFieldFocusNode,
                     obscureText: false,
                     decoration: InputDecoration(
+                      floatingLabelBehavior: FloatingLabelBehavior.never,
                       labelText: 'Phone Number',
                       labelStyle: TextStyle(
                         fontFamily: 'Plus Jakarta Sans',
@@ -92,7 +93,7 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget> {
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: Colors.amber,
+                          color: FlutterFlowTheme.of(context).primary,
                           width: 2,
                         ),
                         borderRadius: BorderRadius.circular(12),
@@ -134,30 +135,30 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget> {
                     validator:
                         _model.textControllerValidator.asValidator(context),
                   ),
-                  // Padding(
-                  //   padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
-                  //   child: FFButtonWidget(
-                  //     onPressed: () async {
-                  //       Navigator.pushNamed('/');
-                  //     },
-                  //     text: 'Sign Up with Phone',
-                  //     options: FFButtonOptions(
-                  //       width: double.infinity,
-                  //       height: 50,
-                  //       padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                  //       iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                  //       color: Colors.amber,
-                  //       textStyle: TextStyle(
-                  //         fontFamily: 'Plus Jakarta Sans',
-                  //         color: Colors.white,
-                  //         fontSize: 18,
-                  //         fontWeight: FontWeight.w500,
-                  //       ),
-                  //       elevation: 2,
-                  //       borderRadius: BorderRadius.circular(12),
-                  //     ),
-                  //   ),
-                  // ),
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
+                    child: FFButtonWidget(
+                      onPressed: () async {
+                        Navigator.pushNamed(context, '/dataTypes');
+                      },
+                      text: 'Sign Up with Phone',
+                      options: FFButtonOptions(
+                        width: double.infinity,
+                        height: 50,
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                        iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                        color: FlutterFlowTheme.of(context).primary,
+                        textStyle: TextStyle(
+                          fontFamily: 'Plus Jakarta Sans',
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        elevation: 2,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                  ),
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
                     child: Text(

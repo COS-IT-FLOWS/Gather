@@ -25,6 +25,9 @@ dependencies:
   badges: ^3.1.2
   flutterflow_ui: ^0.2.0
   supabase_auth_ui: ^0.3.0
+  image_picker: ^0.8.3+2
+  flutter_speed_dial: ^7.0.0
+
 
 dev_dependencies: 
   flutter_test: 

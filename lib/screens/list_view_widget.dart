@@ -1,9 +1,10 @@
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import '/overlays/data_text_form_widget.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
+import 'package:gather/widgets/floating_camera_widget.dart';
 import 'package:gather/models/list_view_model.dart';
 
 class ListViewWidget extends StatefulWidget {
@@ -40,21 +41,7 @@ class _ListViewWidgetState extends State<ListViewWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        floatingActionButton: Align(
-          alignment: AlignmentDirectional(1, 1),
-          child: FloatingActionButton(
-            onPressed: () {
-              print('FloatingActionButton pressed ...');
-            },
-            backgroundColor: FlutterFlowTheme.of(context).tertiary,
-            elevation: 8,
-            child: Icon(
-              Icons.camera_alt_sharp,
-              color: FlutterFlowTheme.of(context).info,
-              size: 24,
-            ),
-          ),
-        ),
+        floatingActionButton: FloatingCameraWidget(),
         appBar: AppBar(
           backgroundColor: FlutterFlowTheme.of(context).primary,
           automaticallyImplyLeading: false,

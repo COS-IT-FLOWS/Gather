@@ -1,11 +1,13 @@
-import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
-import '/overlays/data_text_form_widget.dart';
+import 'package:gather/components/data_text_form_widget.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:gather/widgets/floating_camera_widget.dart';
+import 'package:gather/components/floating_camera_widget.dart';
 import 'package:gather/models/list_view_model.dart';
+import 'package:gather/screens/dashboard_widget.dart';
+import 'package:gather/screens/notification_widget.dart';
+import 'package:gather/components/appbar_widget.dart';
 
 class ListViewWidget extends StatefulWidget {
   const ListViewWidget({super.key});
@@ -35,6 +37,11 @@ class _ListViewWidgetState extends State<ListViewWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      onHorizontalDragEnd: (dragDetails) {
+        if (dragDetails.primaryVelocity! > 0) {
+          Navigator.pushNamed(context, '/dashboard');
+        }
+      },
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
           : FocusScope.of(context).unfocus(),
@@ -42,46 +49,7 @@ class _ListViewWidgetState extends State<ListViewWidget> {
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         floatingActionButton: FloatingCameraWidget(),
-        appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).primary,
-          automaticallyImplyLeading: false,
-          title: Align(
-            alignment: AlignmentDirectional(-1, -1),
-            child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(24, 0, 0, 0),
-              child: Text(
-                'Enter Data',
-                style: FlutterFlowTheme.of(context).headlineMedium.override(
-                      fontFamily: 'Outfit',
-                      color: Colors.white,
-                      fontSize: 22,
-                    ),
-              ),
-            ),
-          ),
-          actions: [
-            badges.Badge(
-              badgeContent: Text(
-                '1',
-                textAlign: TextAlign.center,
-                style: FlutterFlowTheme.of(context).titleSmall.override(
-                      fontFamily: 'Readex Pro',
-                      color: Colors.white,
-                    ),
-              ),
-              showBadge: true,
-              // shape: badges.BadgeShape.circle,
-              // badgeColor: FlutterFlowTheme.of(context).tertiary,
-              // elevation: 4,
-              // padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
-              // position: badges.BadgePosition.topEnd(),
-              // animationType: badges.BadgeAnimationType.scale,
-              // toAnimate: true,
-            ),
-          ],
-          centerTitle: false,
-          elevation: 2,
-        ),
+        appBar: appBarWidget(context),
         body: SafeArea(
           top: true,
           child: Align(

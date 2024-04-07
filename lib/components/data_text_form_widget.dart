@@ -32,7 +32,7 @@ class _DataTextFormWidgetState extends State<DataTextFormWidget> {
     super.initState();
     _model = createModel(context, () => DataTextFormModel());
 
-    _model.textController ??= TextEditingController(text: '0\n');
+    _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
   }
 
@@ -114,6 +114,7 @@ class _DataTextFormWidgetState extends State<DataTextFormWidget> {
                                   focusNode: _model.textFieldFocusNode,
                                   autofocus: true,
                                   obscureText: false,
+                                  keyboardType: TextInputType.number,
                                   decoration: InputDecoration(
                                     alignLabelWithHint: false,
                                     hintStyle: FlutterFlowTheme.of(context)

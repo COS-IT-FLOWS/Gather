@@ -1,5 +1,5 @@
 import 'package:flutterflow_ui/flutterflow_ui.dart';
-import '../overlays/data_text_form_widget.dart' show DataTextFormWidget;
+import '../components/data_text_form_widget.dart' show DataTextFormWidget;
 import 'package:flutter/material.dart';
 
 class DataTextFormModel extends FlutterFlowModel<DataTextFormWidget> {

@@ -140,7 +140,7 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget> {
                       padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
                       child: FFButtonWidget(
                         onPressed: () async {
-                          Navigator.pushNamed(context, '/dataTypes');
+                          Navigator.pushNamed(context, '/');
                         },
                         text: 'Sign Up with Phone',
                         options: FFButtonOptions(

@@ -16,7 +16,6 @@ class _DashboardWidgetState extends State<DashboardWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBarWidget(context),
       body: MaplibreMap(
         styleString: "$styleUrl?api_key=$apiKey",
         myLocationEnabled: true,

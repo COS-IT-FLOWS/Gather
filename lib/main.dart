@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       routes: AppRoutes.routes(),
-      initialRoute: '/',
+      initialRoute: '/initialRoute',
       //       scaffoldMessengerKey: globalMessengerKey,
     );
   }

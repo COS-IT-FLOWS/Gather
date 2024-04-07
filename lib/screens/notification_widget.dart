@@ -5,8 +5,7 @@ class NotificationWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBarWidget(context),
-      body: Container(
+      body: Center(
         child: Text('You have 0 notifications'),
       ),
     );

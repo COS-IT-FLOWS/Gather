@@ -3,7 +3,6 @@ import 'package:gather/components/data_text_form_widget.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:gather/components/floating_camera_widget.dart';
 import 'package:gather/models/list_view_model.dart';
 import 'package:gather/screens/dashboard_widget.dart';
 import 'package:gather/screens/notification_widget.dart';
@@ -37,19 +36,11 @@ class _ListViewWidgetState extends State<ListViewWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onHorizontalDragEnd: (dragDetails) {
-        if (dragDetails.primaryVelocity! > 0) {
-          Navigator.pushNamed(context, '/dashboard');
-        }
-      },
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
           : FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        floatingActionButton: FloatingCameraWidget(),
-        appBar: appBarWidget(context),
         body: SafeArea(
           top: true,
           child: Align(

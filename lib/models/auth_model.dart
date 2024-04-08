@@ -14,7 +14,16 @@ class AuthenticationModel extends FlutterFlowModel<AuthenticationWidget> {
   /// Initialization and disposal methods.
 
   @override
-  void initState(BuildContext context) {}
+  void initState(BuildContext context) {
+    textFieldFocusNode = FocusNode();
+    textController = TextEditingController();
+    textControllerValidator = (context, value) {
+      if (value == null || value.isEmpty) {
+        return 'Please enter a phone number';
+      }
+      return null;
+    };
+  }
 
   @override
   void dispose() {

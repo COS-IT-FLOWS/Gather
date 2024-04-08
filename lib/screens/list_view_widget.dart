@@ -6,7 +6,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gather/models/list_view_model.dart';
 import 'package:gather/screens/dashboard_widget.dart';
 import 'package:gather/screens/notification_widget.dart';
-import 'package:gather/components/appbar_widget.dart';
 
 class ListViewWidget extends StatefulWidget {
   const ListViewWidget({super.key});

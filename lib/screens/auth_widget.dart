@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:supabase_auth_ui/supabase_auth_ui.dart';
 import 'package:gather/routes/app_routes.dart';
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 import '../models/auth_model.dart';
 export '../models/auth_model.dart';
@@ -18,6 +19,9 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget> {
   late AuthenticationModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final _controller = TextEditingController();
+  bool _phoneNumberValid = false;
+  PhoneNumber? _phoneNumber;
 
   @override
   void initState() {
@@ -43,7 +47,7 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget> {
           : FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).secondary,
+        backgroundColor: Colors.blueGrey,
         appBar: AppBar(
           backgroundColor: Color(0xFFF1F4F8),
           automaticallyImplyLeading: false,
@@ -72,11 +76,26 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget> {
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                    TextFormField(
-                      controller: _model.textController,
-                      focusNode: _model.textFieldFocusNode,
-                      obscureText: false,
-                      decoration: InputDecoration(
+                    InternationalPhoneNumberInput(
+                      onInputChanged: (PhoneNumber number) {
+                        // Do something with the phone number
+                        setState(() {
+                          _phoneNumber = number;
+                        });
+                      },
+                      onInputValidated: (bool value) {
+                        // Do something when the phone number is validated
+                        _phoneNumberValid = value;
+                      },
+                      selectorConfig: SelectorConfig(
+                        selectorType: PhoneInputSelectorType.DIALOG,
+                      ),
+                      ignoreBlank: false,
+                      autoValidateMode: AutovalidateMode.onUserInteraction,
+                      initialValue: PhoneNumber(isoCode: 'IN'),
+                      textFieldController: _controller,
+                      keyboardType: TextInputType.phone,
+                      inputDecoration: InputDecoration(
                         floatingLabelBehavior: FloatingLabelBehavior.never,
                         labelText: 'Phone Number',
                         labelStyle: TextStyle(
@@ -125,23 +144,17 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget> {
                         contentPadding:
                             EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
                       ),
-                      style: TextStyle(
-                        fontFamily: 'Plus Jakarta Sans',
-                        color: Color(0xFF15161E),
-                        fontSize: 16,
-                        fontWeight: FontWeight.normal,
-                      ),
-                      textAlign: TextAlign.start,
-                      keyboardType: TextInputType.phone,
-                      validator:
-                          _model.textControllerValidator.asValidator(context),
+                      //  InputDecoration(
+                      //   labelText: 'Phone Number',
+                      //   border: OutlineInputBorder(),
+                      // ),
                     ),
                     Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
                       child: FFButtonWidget(
-                        onPressed: () async {
-                          Navigator.pushNamed(context, '/');
-                        },
+                        onPressed: _phoneNumberValid
+                            ? () => Navigator.pushNamed(context, '/')
+                            : null,
                         text: 'Sign Up with Phone',
                         options: FFButtonOptions(
                           width: double.infinity,
@@ -156,7 +169,7 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget> {
                             fontSize: 18,
                             fontWeight: FontWeight.w500,
                           ),
-                          elevation: 2,
+                          elevation: _phoneNumberValid ? 4 : 0,
                           borderRadius: BorderRadius.circular(12),
                         ),
                       ),

@@ -12,7 +12,7 @@ dependencies:
   provider: ^6.0.4
   cached_network_image: ^3.2.1
   flutter_svg: ^2.0.9
-  connectivity_plus: ^5.0.2
+  connectivity_plus: ^6.0.1
   shared_preferences: ^2.0.15
   intl: ^0.18.0
   maplibre_gl:
@@ -25,13 +25,15 @@ dependencies:
   badges: ^3.1.2
   flutterflow_ui: ^0.2.0
   supabase_auth_ui: ^0.3.0
-  image_picker: ^0.8.3+2
+  image_picker: ^1.0.7
   flutter_speed_dial: ^7.0.0
+  intl_phone_number_input: ^0.7.0+2
 
 
 dev_dependencies: 
   flutter_test: 
     sdk: flutter
+  test: ^1.24.9
 flutter: 
   uses-material-design: true
   assets: 

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:maplibre_gl/maplibre_gl.dart';
-import 'package:gather/components/appbar_widget.dart';
 
 class DashboardWidget extends StatefulWidget {
   @override

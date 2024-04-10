@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gather/screens/dashboard_widget.dart';
 import 'package:gather/screens/list_view_widget.dart';
-import 'package:gather/screens/tab_view.dart';
+import 'package:gather/screens/tab_view_widget.dart';
 
 import 'package:gather/screens/notification_widget.dart';
 import 'package:gather/screens/auth_widget.dart';

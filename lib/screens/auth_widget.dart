@@ -48,13 +48,13 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: Colors.blueGrey,
-        appBar: AppBar(
-          backgroundColor: Color(0xFFF1F4F8),
-          automaticallyImplyLeading: false,
-          actions: [],
-          centerTitle: false,
-          elevation: 0,
-        ),
+        // appBar: AppBar(
+        //   backgroundColor: Color(0xFFF1F4F8),
+        //   automaticallyImplyLeading: false,
+        //   actions: [],
+        //   centerTitle: false,
+        //   elevation: 0,
+        // ),
         body: SafeArea(
           top: true,
           child: Align(
@@ -153,7 +153,7 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget> {
                       padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
                       child: FFButtonWidget(
                         onPressed: _phoneNumberValid
-                            ? () => Navigator.pushNamed(context, '/')
+                            ? () => Navigator.pushReplacementNamed(context, '/')
                             : null,
                         text: 'Sign Up with Phone',
                         options: FFButtonOptions(

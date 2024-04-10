@@ -12,11 +12,23 @@ class TabViewWidget extends StatelessWidget {
       child: Scaffold(
         extendBodyBehindAppBar: true,
         appBar: AppBar(
+          leading: IconButton(
+            icon: Icon(Icons.logout),
+            onPressed: () async {
+              // handle logout
+              Navigator.pushReplacementNamed(context, '/initialRoute');
+            },
+          ),
           elevation: 0,
           backgroundColor: Colors.transparent,
-          bottom: const TabBar(
+          bottom: TabBar(
+            indicator: BoxDecoration(
+                borderRadius: BorderRadius.circular(50),
+                color: Colors.redAccent),
+            indicatorColor: Colors.red,
+            // indicatorWeight: 0,
             tabs: [
-              Tab(icon: Icon(Icons.data_array)),
+              Tab(icon: Icon(Icons.numbers)),
               Tab(icon: Icon(Icons.dashboard)),
               Tab(icon: Icon(Icons.notifications))
             ],

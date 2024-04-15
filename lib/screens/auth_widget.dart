@@ -1,8 +1,6 @@
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:supabase_auth_ui/supabase_auth_ui.dart';
-import 'package:gather/routes/app_routes.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 import '../models/auth_model.dart';

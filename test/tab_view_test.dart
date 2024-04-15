@@ -17,7 +17,7 @@ void main() {
     expect(find.byType(DefaultTabController), findsOneWidget);
     expect(find.byType(TabBar), findsOneWidget);
     expect(find.byType(TabBarView), findsOneWidget);
-    expect(find.byType(Tab), findsN(3));
+    expect(find.byType(Tab), findsNWidgets(3));
   });
 
   testWidgets('TabViewWidget renders correct widget for each tab',

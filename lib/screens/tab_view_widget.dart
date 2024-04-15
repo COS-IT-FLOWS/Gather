@@ -12,6 +12,7 @@ class TabViewWidget extends StatelessWidget {
       child: Scaffold(
         extendBodyBehindAppBar: true,
         appBar: AppBar(
+          // toolbarHeight: 50,
           leading: IconButton(
             icon: Icon(Icons.logout),
             onPressed: () async {
@@ -21,16 +22,34 @@ class TabViewWidget extends StatelessWidget {
           ),
           elevation: 0,
           backgroundColor: Colors.transparent,
-          bottom: TabBar(
+          title: TabBar(
+            dividerColor: Colors.transparent,
             indicator: BoxDecoration(
-                borderRadius: BorderRadius.circular(50),
-                color: Colors.redAccent),
-            indicatorColor: Colors.red,
-            // indicatorWeight: 0,
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.transparent),
+            indicatorWeight: 0,
             tabs: [
-              Tab(icon: Icon(Icons.numbers)),
-              Tab(icon: Icon(Icons.dashboard)),
-              Tab(icon: Icon(Icons.notifications))
+              Tab(
+                child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(color: Colors.redAccent, width: 1)),
+                    child: Icon(Icons.numbers)),
+              ),
+              Tab(
+                child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(color: Colors.redAccent, width: 1)),
+                    child: Icon(Icons.dashboard)),
+              ),
+              Tab(
+                child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(color: Colors.redAccent, width: 1)),
+                    child: Icon(Icons.notifications)),
+              ),
             ],
           ),
         ),

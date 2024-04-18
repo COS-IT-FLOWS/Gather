@@ -1,44 +1,41 @@
 # How to Contribute
 
-Thank you for your interest in contributing to our data gathering app! Your contributions help improve the accuracy and effectiveness of our forecasts, ultimately helping communities better prepare for and respond to flooding events.
+Thank you for your interest in contributing to our data gathering app! Your contributions enhance the recording of local weather data, ultimately helping communities better prepare for and respond to flooding events.
 
 ## Getting Started
 
-1. **Fork the Repository**: Start by forking the [gather repository](https://github.com/COS-IT-FLOWS/Gather) to your GitHub account.
+1. **Familiarize Yourself with the Project:** Understand the project's structure, coding conventions, and contribution guidelines. Identify areas where you can contribute, such as fixing bugs, adding features, or improving existing code.
 
-2. **Clone the Repository**: Clone the forked repository to your local machine using the following command:
+2. **Set Up Your Development Environment:** Ensure you have Flutter installed and set up on your machine. You'll also need a code editor and Git installed. Android Studio and VS Code allow Android Emulators for checking whether the application runs properly.
 
-        bash
+3. **Clone the Repository**: Use Git to clone the repository of the Flutter application.
 
-        git clone https://github.com/your-username/repository.git
+        git clone https://github.com/COS-IT-FLOWS/Gather.git
 
-3. **Set Up Your Environment**: Follow the setup instructions in the repository's README file to set up your development environment.
+4. **Create a New Branch**: Create a new branch for your changes to keep your work isolated from the main codebase.
 
-4. **Create a Branch**: Create a new branch for your work. Use a descriptive name that reflects the nature of your contribution.
+        git checkout -b feature-branch
 
-        bash
-        git checkout -b my-feature
+5. **Make Your Changes:** Implement your changes in the codebase. This could involve fixing bugs, adding new features, or improving existing functionality. Follow the project's coding standards and guidelines.
 
-5. **Make Changes**: Make your desired changes to the codebase. Ensure that your changes adhere to the project's coding standards and guidelines.
+6. **Test Your Changes**: Ensure that your changes work as expected and do not introduce any new issues. Run tests that are available in the project.
 
-6. **Test Your Changes**: Test your changes thoroughly to ensure they work as intended and do not introduce any new issues.
+7. **Update Documentation:** If your changes impact the user interface, functionality, or API, update the documentation to reflect these changes.
 
-7. **Commit Your Changes**: Once you are satisfied with your changes, commit them to your branch.
+8. **Commit Your Changes**: Once you're satisfied with your changes, commit them to your branch.
 
-        bash
         git add .
-        git commit -m "Add my feature"
+        git commit -m "Add feature X"
 
-8. **Push Your Changes**: Push your changes to your forked repository.
+9. **Push Your Changes**: Push your branch to the remote repository.
 
-        bash
-        git push origin my-feature
+        git push origin feature-branch
 
-9. **Create a Pull Request (PR)** : Go to the [original repository](https://github.com/COS-IT-FLOWS/Gather) and create a pull request from your forked repository. Provide a clear description of your changes and why they are beneficial.
+10. **Submit a Pull Request (PR):** Go to the repository on GitHub and create a pull request from your branch to the main branch of the project. Provide a clear description of your changes in the PR.
 
-10. **Participate in Code Review**: Participate in the code review process by addressing any feedback or suggestions provided by reviewers.
+11. **Review and Collaborate**: Participate in the review process by responding to feedback and making necessary revisions to your code.
 
-11. **Merge Your Pull Request**: Once your pull request has been approved, it will be merged into the main branch of the original repository.
+12. **Merge Your Changes:** Once your PR is approved, it will be merged into the main codebase, and your contributions will be part of the project.
 
 ## Contribution Guidelines
 

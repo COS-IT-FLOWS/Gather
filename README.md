@@ -23,7 +23,7 @@
 
 ## About
 
-This repository serves as the public source code repository of Gather, a community weather data collection application that is a component of the larger [CoS-IT-FloWS](https://cos-it-flows-documentation.readthedocs.io/en/latest/) system.
+This repository serves as the public source code repository of Gather, a community weather data collection application that is a component of the larger [CoS-IT-FloWS](https://cos-it-flows-documentation.readthedocs.io/en/latest/) system. You can read the Gather Documentation [here](https://gather-documentation.readthedocs.io/en/latest/).
 
 Gather as part of the [Community Sourced Impact Based Flood Forecast and Early Warning System](https://cos-it-flows-documentation.readthedocs.io/en/latest/), termed CoS-IT-FloWS that is being developed at EQUINOCT Community Sourced Modelling Solutions, hereafter referred to as EQUINOCT, under the UNICEF Office of Innovation's Venture Capital Fund that supports and guides their inaugural climate cohort of 8 startups from around the world to build Open Source technological solutions for sustainable climate action. All development activity for this application is coordinated through the [Gather github page](https://github.com/COS-IT-FLOWS/Gather), where you can also find all archived, current, beta, and development versions of the application.
 

@@ -1,0 +1,18 @@
+name: Run GAs on Standard Github Hosted Runner
+
+on:
+  push:
+    branches: [main, testing]
+  pull_request:
+    branches: [main, testing]
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Run GAs on Linux Runner
+    steps:
+    - name: Code Coverage Summary
+      uses: irongut/CodeCoverageSummary@v1.3.0
+            
+
+      

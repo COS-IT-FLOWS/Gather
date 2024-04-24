@@ -1,0 +1,29 @@
+name: Run GAs on Standard Github Hosted Runner
+
+on:
+  push:
+    branches: [main, testing]
+  pull_request:
+    branches: [main, testing]
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Run GAs on Linux Runner
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          ref: 'testing'
+    
+      - name: Code Coverage Summary
+        uses: irongut/CodeCoverageSummary@v1.3.0
+        with:
+          filename: coverage/**/coverage.cobertura.xml
+          output: both
+          badge: true
+          format: markdown
+          hide_complexity: true
+            
+
+      

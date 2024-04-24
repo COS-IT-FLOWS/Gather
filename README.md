@@ -91,7 +91,7 @@ By placing the original source code archive on GitHub, we hope to encourage a mo
 
 Gather is released under the [MIT License](./LICENSE.md). See the `License` file for more information.
 
-The Gather documentation content is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/).
+The Gather [documentation](https://gather-documentation.readthedocs.io/en/latest/) content is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/).
 
 ![CC BY-SA 4.0](https://i.creativecommons.org/l/by-sa/4.0/88x31.png)
 

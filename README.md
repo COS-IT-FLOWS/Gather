@@ -18,6 +18,7 @@
   - [Key Features](#key-features)
   - [Tech Stack](#tech-stack)
     - [Components](#components)
+  - [Testing Framework & Methodology](#testing)
   - [Open Source](#open-source)
   - [License](#license)
   - [Help and Support](#help-and-support)
@@ -66,6 +67,13 @@ Gather is a community weather data collection application. This app is developed
 5. Flutterflow - Rapid Application Prototyping
 
 ![diagram](./app_flow.png)
+
+## Testing Framework & Methodology
+
+Since this is a flutter application, we are utilising 2 techniques for testing:
+1. Widget Testing: Testing individual widgets, both big and small, using flutter's inbuilt testing framework
+2. Integration Testing: Using mobile.dev & maestro to perform end-to-end testing.
+The current widget testing test coverage can be viewed at the top of this page. We have integrated a GitHub Action to automate the process on every push. We are also looking into integrating the end-to-end testing into the CI/CD pipeline.
 
 ## Open Source
 

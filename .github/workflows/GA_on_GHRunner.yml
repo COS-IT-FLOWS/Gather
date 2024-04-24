@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Run GAs on Linux Runner
     permissions:
-      contents: read|write
+      contents: read
     steps:
     - name: List Files
       run: ls

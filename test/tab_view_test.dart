@@ -58,9 +58,23 @@ void main() {
 
   testWidgets('TabViewWidget renders FloatingCameraWidget',
       (WidgetTester tester) async {
+    Timer _timer;
+
     await tester.pumpWidget(MaterialApp(
       home: TabViewWidget(),
     ));
+
+    _timer = Timer(Duration(seconds: 5), () {
+      // Your timer logic here
+    });
+
+    // Perform some actions here
+
+    // Cancel the timer before disposing of the widget tree
+
+    if (_timer != null) {
+      _timer.cancel();
+    }
 
     // expect(find.byType(FloatingCameraWidget), findsOneWidget);
   });

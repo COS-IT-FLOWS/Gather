@@ -14,7 +14,7 @@ jobs:
       contents: read
     steps:
     - name: List Files
-      run: ls
+      run: ls coverage
     
     - name: Code Coverage Summary
       uses: irongut/CodeCoverageSummary@v1.3.0

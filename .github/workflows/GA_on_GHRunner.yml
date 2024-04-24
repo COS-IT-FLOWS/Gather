@@ -11,16 +11,21 @@ jobs:
     runs-on: ubuntu-latest
     name: Run GAs on Linux Runner
     steps:
-    - name: List Files
-      run: ls -la
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          ref: 'testing'
+      
+      - name: List Files
+        run: ls -la 
     
-    - name: Code Coverage Summary
-      uses: irongut/CodeCoverageSummary@v1.3.0
-      with:
-        filename: coverage/coverage.cobertura.xml
-        badge: true
-        format: markdown
-        hide_complexity: true
+    # - name: Code Coverage Summary
+    #   uses: irongut/CodeCoverageSummary@v1.3.0
+    #   with:
+    #     filename: coverage/coverage.cobertura.xml
+    #     badge: true
+    #     format: markdown
+    #     hide_complexity: true
             
 
       

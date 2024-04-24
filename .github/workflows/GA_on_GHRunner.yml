@@ -20,6 +20,7 @@ jobs:
         uses: irongut/CodeCoverageSummary@v1.3.0
         with:
           filename: coverage/**/coverage.cobertura.xml
+          output: both
           badge: true
           format: markdown
           hide_complexity: true

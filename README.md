@@ -79,11 +79,11 @@ The current widget testing test coverage can be viewed at the top of this page. 
 
 We encourage any users who have modified (or would like to modify) Gather, either to fix bugs or develop new features, to contact us and coordinate development work with us. The Gather App source code is archived in Git and is publicly available through GitHub. To access the source code, visit GitHub, create an account, and visit [github.com/COS-IT-FLOWS/Gather](https://github.com/COS-IT-FLOWS/Gather).
 
-Gather is an open source development application and is released under the terms of the [MIT License](./License.md).
+Gather is an open source development application and is released under the terms of the [MIT License](./LICENSE.md).
 
 Instructions for using Git and GitHub to access the Gather code and contribute changes are here:
 
-[Working with GIT and GitHub](./UserGuide.md)
+[Working with GIT and GitHub](https://gather-documentation.readthedocs.io/en/latest/UserGuide/)
 
 By placing the original source code archive on GitHub, we hope to encourage a more collaborative development environment. A guide on [how to contribute](./Contribute.md) your changes to the application can be found on the git page. The most stable version of the system is in the main branch, while beta versions of releases under development can be obtained from the development branches of this repository.
 

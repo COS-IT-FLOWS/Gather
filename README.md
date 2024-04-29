@@ -85,7 +85,7 @@ Instructions for using Git and GitHub to access the Gather code and contribute c
 
 [Working with GIT and GitHub](https://gather-documentation.readthedocs.io/en/latest/UserGuide/)
 
-By placing the original source code archive on GitHub, we hope to encourage a more collaborative development environment. A guide on [how to contribute](./Contribute.md) your changes to the application can be found on the git page. The most stable version of the system is in the main branch, while beta versions of releases under development can be obtained from the development branches of this repository.
+By placing the original source code archive on GitHub, we hope to encourage a more collaborative development environment. A guide on [how to contribute](./CONTRIBUTING.md) your changes to the application can be found on the git page. The most stable version of the system is in the main branch, while beta versions of releases under development can be obtained from the development branches of this repository.
 
 ## License
 

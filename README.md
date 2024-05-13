@@ -33,7 +33,7 @@ Gather as part of the [Community Sourced Impact Based Flood Forecast and Early W
 
 EQUINOCT is an early stage tech start-up formed in July 2020, that aims at building community data portals in data scarce regions that can facilitate real-time visualization, analysis,monitoring, and impact-based early warnings of climate change impacts using data sourced from communities through building local community partnerships.
 
-Gather is a community weather data collection application. This app is developed for community members to conveniently enter and record the weather data (such as rainfall and groundwater levels) of their locality. This then serves as hyper local input data used in       CoS-IT-FLoWS, for enhanced reliability and accuracy in the flood forecast and early warning system.Gather is a user-centered application with features developed to increase the ease of data recording.
+[Gather](https://github.com/COS-IT-FLOWS/Gather/tree/main) is a community weather data collection application. This app is developed for community members to conveniently enter and record the weather data (such as rainfall and groundwater levels) of their locality. This then serves as hyper local input data used in       CoS-IT-FLoWS, for enhanced reliability and accuracy in the flood forecast and early warning system.Gather is a user-centered application with features developed to increase the ease of data recording.
 
 ## Key Features
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gather/components/floating_camera_widget.dart';
-import 'package:gather/screens/list_view_widget.dart';
+import 'package:gather/screens/home_page_widget.dart';
 import 'package:gather/screens/dashboard_widget.dart';
 import 'package:gather/screens/notification_widget.dart';
 

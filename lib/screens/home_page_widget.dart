@@ -7,14 +7,14 @@ import 'package:gather/models/list_view_model.dart';
 import 'package:gather/screens/dashboard_widget.dart';
 import 'package:gather/screens/notification_widget.dart';
 
-class ListViewWidget extends StatefulWidget {
-  const ListViewWidget({super.key});
+class HomePageWidget extends StatefulWidget {
+  const HomePageWidget({super.key});
 
   @override
-  State<ListViewWidget> createState() => _ListViewWidgetState();
+  State<HomePageWidget> createState() => _HomePageWidgetState();
 }
 
-class _ListViewWidgetState extends State<ListViewWidget> {
+class _HomePageWidgetState extends State<HomePageWidget> {
   late ListViewModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -39,6 +39,7 @@ class _ListViewWidgetState extends State<ListViewWidget> {
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
           : FocusScope.of(context).unfocus(),
       child: Scaffold(
+        appBar: AppBar(),
         key: scaffoldKey,
         body: SafeArea(
           top: true,

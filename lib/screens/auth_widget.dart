@@ -76,7 +76,7 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                     child: InternationalPhoneNumberInput(
                       onInputChanged: (PhoneNumber number) {
                         // Do something with the phone number

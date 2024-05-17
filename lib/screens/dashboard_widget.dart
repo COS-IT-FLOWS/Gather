@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:maplibre_gl/maplibre_gl.dart';
+import 'package:gather/components/floating_camera_widget.dart';
 
 class DashboardWidget extends StatefulWidget {
   @override
@@ -21,6 +22,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
         initialCameraPosition: const CameraPosition(target: LatLng(0.0, 0.0)),
         trackCameraPosition: true,
       ),
+      floatingActionButton: FloatingCameraWidget(),
     );
   }
 }

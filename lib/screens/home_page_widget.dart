@@ -3,9 +3,12 @@ import 'package:gather/components/data_text_form_widget.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:gather/components/floating_camera_widget.dart';
 import 'package:gather/models/list_view_model.dart';
 import 'package:gather/screens/dashboard_widget.dart';
 import 'package:gather/screens/notification_widget.dart';
+import 'package:gather/components/appbar_original_widget.dart';
+import 'package:gather/components/drawer_widget.dart';
 
 class HomePageWidget extends StatefulWidget {
   const HomePageWidget({super.key});
@@ -15,14 +18,14 @@ class HomePageWidget extends StatefulWidget {
 }
 
 class _HomePageWidgetState extends State<HomePageWidget> {
-  late ListViewModel _model;
+  late HomePageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => ListViewModel());
+    _model = createModel(context, () => HomePageModel());
   }
 
   @override
@@ -39,7 +42,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
           : FocusScope.of(context).unfocus(),
       child: Scaffold(
-        appBar: AppBar(),
+        appBar: appBarWidget(context, 'Enter Data'),
+        drawer: DrawerWidget(),
         key: scaffoldKey,
         body: SafeArea(
           top: true,
@@ -180,6 +184,10 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       ).then((value) => safeSetState(() {}));
                     },
                     child: ListTile(
+                      leading: Image.asset(
+                        'assets/images/data_param_well.png',
+                        height: 27,
+                      ),
                       title: Text(
                         'Well Water',
                         style: FlutterFlowTheme.of(context).titleLarge,
@@ -227,6 +235,10 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       ).then((value) => safeSetState(() {}));
                     },
                     child: ListTile(
+                      leading: Image.asset(
+                        'assets/images/data_param_tide.png',
+                        height: 27,
+                      ),
                       title: Text(
                         'Tidal Level',
                         style: FlutterFlowTheme.of(context).titleLarge,
@@ -250,6 +262,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
             ),
           ),
         ),
+        floatingActionButton: FloatingCameraWidget(),
       ),
     );
   }

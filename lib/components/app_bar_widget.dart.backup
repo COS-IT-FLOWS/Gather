@@ -1,0 +1,64 @@
+import 'package:flutter/material.dart';
+
+class AppBarWidget extends PreferredSizeWidget {
+  @override
+  State<AppBarWidget> createState() => _AppBarWidgetState();
+}
+
+class _AppBarWidgetState extends State<AppBarWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      title: Text("Hello Appbar"),
+      leading: GestureDetector(
+        onTap: () {
+          // Open the drawer
+          Scaffold.of(context).openDrawer();
+        },
+        child: Icon(Icons.menu),
+      ),
+      actions: <Widget>[
+        Padding(
+          padding: EdgeInsets.only(right: 20.0),
+          child: GestureDetector(
+            onTap: () {
+              // Exit the app
+              Navigator.pop(context);
+            },
+            child: Icon(Icons.exit_to_app),
+          ),
+        ),
+      ],
+    );
+  }
+}
+//     drawer: Drawer(
+//       child: ListView(
+//         padding: EdgeInsets.zero,
+//         children: [
+//           DrawerHeader(
+//             child: Text('Drawer Header'),
+//           ),
+//           ListTile(
+//             title: Text('Item 1'),
+//             onTap: () {
+//               // Update the state of the app
+//               // ...
+//               // Then close the drawer
+//               Navigator.pop(context);
+//             },
+//           ),
+//           ListTile(
+//             title: Text('Item 2'),
+//             onTap: () {
+//               // Update the state of the app
+//               // ...
+//               // Then close the drawer
+//               Navigator.pop(context);
+//             },
+//           ),
+//         ],
+//       ),
+//     ),
+//   )
+// }

@@ -4,7 +4,7 @@
 |------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | GATHER Documentation      | [![Documentation Status](https://readthedocs.org/projects/gather-documentation/badge/?version=latest)](https://gather-documentation.readthedocs.io/en/latest/?badge=latest)      |
 | License                | [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/UW-Hydro/VIC/master/LICENSE.txt)                                                              |
-| Testing                   | ![Testing Status](https://img.shields.io/badge/Code%20Coverage-41%25-critical?style=flat) |
+| Widget Testing                   | ![Testing Status](https://img.shields.io/badge/Code%20Coverage-41%25-critical?style=flat) |
 <!-- | Current Release DOI    | [![DOI](https://zenodo.org/badge/7766/UW-Hydro/VIC.svg)](https://zenodo.org/badge/latestdoi/7766/UW-Hydro/VIC) | -->
 
 ----------
@@ -18,6 +18,7 @@
   - [Key Features](#key-features)
   - [Tech Stack](#tech-stack)
     - [Components](#components)
+  - [Testing Framework & Methodology](#testing)
   - [Open Source](#open-source)
   - [License](#license)
   - [Help and Support](#help-and-support)
@@ -67,23 +68,30 @@ Gather is a community weather data collection application. This app is developed
 
 ![diagram](./app_flow.png)
 
+## Testing Framework & Methodology
+
+Since this is a flutter application, we are utilising 2 techniques for testing:
+1. Widget Testing: Testing individual widgets, both big and small, using flutter's inbuilt testing framework
+2. Integration Testing: Using mobile.dev & maestro to perform end-to-end testing.
+The current widget testing test coverage can be viewed at the top of this page. We have integrated a GitHub Action to automate the process on every push. We are also looking into integrating the end-to-end testing into the CI/CD pipeline.
+
 ## Open Source
 
 We encourage any users who have modified (or would like to modify) Gather, either to fix bugs or develop new features, to contact us and coordinate development work with us. The Gather App source code is archived in Git and is publicly available through GitHub. To access the source code, visit GitHub, create an account, and visit [github.com/COS-IT-FLOWS/Gather](https://github.com/COS-IT-FLOWS/Gather).
 
-Gather is an open source development application and is released under the terms of the [MIT License](./License.md).
+Gather is an open source development application and is released under the terms of the [MIT License](./LICENSE.md).
 
 Instructions for using Git and GitHub to access the Gather code and contribute changes are here:
 
-[Working with GIT and GitHub](./UserGuide.md)
+[Working with GIT and GitHub](https://gather-documentation.readthedocs.io/en/latest/UserGuide/)
 
-By placing the original source code archive on GitHub, we hope to encourage a more collaborative development environment. A guide on [how to contribute](./Contribute.md) your changes to the application can be found on the git page. The most stable version of the system is in the main branch, while beta versions of releases under development can be obtained from the development branches of this repository.
+By placing the original source code archive on GitHub, we hope to encourage a more collaborative development environment. A guide on [how to contribute](./CONTRIBUTING.md) your changes to the application can be found on the git page. The most stable version of the system is in the main branch, while beta versions of releases under development can be obtained from the development branches of this repository.
 
 ## License
 
-Gather is released under the [MIT License](./License.md). See the `License` file for more information.
+Gather is released under the [MIT License](./LICENSE.md). See the `License` file for more information.
 
-The Gather documentation content is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/).
+The Gather [documentation](https://gather-documentation.readthedocs.io/en/latest/) content is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/).
 
 ![CC BY-SA 4.0](https://i.creativecommons.org/l/by-sa/4.0/88x31.png)
 

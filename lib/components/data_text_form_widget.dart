@@ -184,7 +184,11 @@ class _DataTextFormWidgetState extends State<DataTextFormWidget> {
                         alignment: AlignmentDirectional(0, 0),
                         child: FFButtonWidget(
                           onPressed: () {
-                            print('Button pressed ...');
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
+                              content: Text("Data Submitted Successfully"),
+                            ));
+                            Navigator.of(context).pop();
                           },
                           text: 'Submit',
                           options: FFButtonOptions(

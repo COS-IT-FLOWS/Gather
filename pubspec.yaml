@@ -30,6 +30,7 @@ dependencies:
   intl_phone_number_input: ^0.7.0+2
   dev: ^1.0.0
   mockito: ^5.4.4
+  record: ^5.0.5
 
 
 dev_dependencies: 

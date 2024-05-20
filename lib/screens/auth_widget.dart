@@ -15,7 +15,6 @@ class AuthenticationWidget extends StatefulWidget {
 
 class _AuthenticationWidgetState extends State<AuthenticationWidget> {
   late AuthenticationModel _model;
-
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final _controller = TextEditingController();
   bool _phoneNumberValid = false;
@@ -59,13 +58,14 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget> {
             alignment: AlignmentDirectional(0, 0),
             child: Padding(
               padding: EdgeInsetsDirectional.fromSTEB(24, 150, 24, 150),
-              child: Expanded(
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
                       'Sign Up',
                       style: TextStyle(
                         fontFamily: 'Outfit',
@@ -74,7 +74,10 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget> {
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                    InternationalPhoneNumberInput(
+                  ),
+                  Padding(
+                    padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                    child: InternationalPhoneNumberInput(
                       onInputChanged: (PhoneNumber number) {
                         // Do something with the phone number
                         setState(() {
@@ -147,100 +150,101 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget> {
                       //   border: OutlineInputBorder(),
                       // ),
                     ),
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
-                      child: FFButtonWidget(
-                        onPressed: _phoneNumberValid
-                            ? () => Navigator.pushReplacementNamed(context, '/')
-                            : null,
-                        text: 'Sign Up with Phone',
-                        options: FFButtonOptions(
-                          width: double.infinity,
-                          height: 50,
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                          iconPadding:
-                              EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                          color: FlutterFlowTheme.of(context).primary,
-                          textStyle: TextStyle(
-                            fontFamily: 'Plus Jakarta Sans',
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.w500,
-                          ),
-                          elevation: _phoneNumberValid ? 4 : 0,
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
-                      child: Text(
-                        'OR',
-                        textAlign: TextAlign.center,
-                        style: FlutterFlowTheme.of(context).labelLarge.override(
-                              fontFamily: 'Outfit',
-                              color: Color(0xFF606A85),
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                            ),
-                      ),
-                    ),
-                    FFButtonWidget(
-                      onPressed: () async {},
-                      text: 'Continue with Google',
-                      icon: FaIcon(
-                        FontAwesomeIcons.google,
-                        size: 24,
-                      ),
+                  ),
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
+                    child: FFButtonWidget(
+                      // Commented out the check for valid phone number for ease of testing
+                      // onPressed: _phoneNumberValid
+                      // ? () => Navigator.pushReplacementNamed(context, '/')
+                      // : null,
+                      onPressed: () =>
+                          Navigator.pushReplacementNamed(context, '/'),
+                      text: 'Sign Up with Phone',
                       options: FFButtonOptions(
                         width: double.infinity,
                         height: 50,
                         padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                         iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                        color: Colors.white,
+                        color: FlutterFlowTheme.of(context).primary,
                         textStyle: TextStyle(
                           fontFamily: 'Plus Jakarta Sans',
-                          color: Colors.black,
+                          color: Colors.white,
                           fontSize: 18,
                           fontWeight: FontWeight.w500,
                         ),
-                        elevation: 2,
+                        elevation: _phoneNumberValid ? 4 : 0,
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Already have an account? ',
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'Plus Jakarta Sans',
-                                  color: Color(0xFF15161E),
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.normal,
-                                ),
+                  ),
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
+                    child: Text(
+                      'OR',
+                      textAlign: TextAlign.center,
+                      style: FlutterFlowTheme.of(context).labelLarge.override(
+                            fontFamily: 'Outfit',
+                            color: Color(0xFF606A85),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
                           ),
-                          Text(
-                            'Sign In',
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'Plus Jakarta Sans',
-                                  color: FlutterFlowTheme.of(context).tertiary,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.normal,
-                                ),
-                          ),
-                        ],
-                      ),
                     ),
-                  ],
-                ),
+                  ),
+                  FFButtonWidget(
+                    onPressed: () async {},
+                    text: 'Continue with Google',
+                    icon: FaIcon(
+                      FontAwesomeIcons.google,
+                      size: 24,
+                    ),
+                    options: FFButtonOptions(
+                      width: double.infinity,
+                      height: 50,
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                      iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                      color: Colors.white,
+                      textStyle: TextStyle(
+                        fontFamily: 'Plus Jakarta Sans',
+                        color: Colors.black,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      elevation: 2,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Already have an account? ',
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    fontFamily: 'Plus Jakarta Sans',
+                                    color: Color(0xFF15161E),
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                        ),
+                        Text(
+                          'Sign In',
+                          style: FlutterFlowTheme.of(context)
+                              .bodyMedium
+                              .override(
+                                fontFamily: 'Plus Jakarta Sans',
+                                color: FlutterFlowTheme.of(context).tertiary,
+                                fontSize: 14,
+                                fontWeight: FontWeight.normal,
+                              ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ),
           ),

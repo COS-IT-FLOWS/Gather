@@ -6,8 +6,8 @@ environment:
 dependencies: 
   flutter: 
     sdk: flutter
-  flutter_localizations: 
-    sdk: flutter
+  # flutter_localizations: 
+  #   sdk: flutter
   flutter_lints: ^3.0.1
   provider: ^6.0.4
   cached_network_image: ^3.2.1
@@ -15,11 +15,11 @@ dependencies:
   connectivity_plus: ^6.0.1
   shared_preferences: ^2.0.15
   intl: ^0.18.0
-  maplibre_gl:
-    git:
-      url: https://github.com/maplibre/flutter-maplibre-gl.git
-      ref: main
-      publish_to: none
+  # maplibre_gl:
+  #   git:
+  #     url: https://github.com/maplibre/flutter-maplibre-gl.git
+  #     ref: main
+  #     publish_to: none
   font_awesome_flutter:  ^10.1.0
   google_fonts: ^4.0.3
   badges: ^3.1.2
@@ -31,6 +31,7 @@ dependencies:
   dev: ^1.0.0
   mockito: ^5.4.4
   record: ^5.0.5
+  maplibre_gl:
 
 
 dev_dependencies: 

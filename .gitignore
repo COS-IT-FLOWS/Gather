@@ -8,3 +8,10 @@
 /pubspec.lock
 .git.zip
 .git
+
+assets/cfg/**/*.json
+assets/cfg/**/*.yaml
+
+supabase/**/*
+
+

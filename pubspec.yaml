@@ -37,18 +37,27 @@ dependencies:
   maplibre_gl:
 
 
+
 dev_dependencies: 
   flutter_test: 
     sdk: flutter
   test: ^1.24.9
+  flutter_native_splash: ^2.4.1
 flutter: 
   uses-material-design: true
   assets: 
     - assets/
     - assets/images/
     - assets/cfg/
+    - assets/logos/
   fonts: 
     - family: Roboto
       fonts: 
         - asset: assets/fonts/RobotoRegular.ttf
           weight: 400
+
+flutter_native_splash:
+  color: "#FFFFFF"
+  image: assets/logos/gather_splash.png
+  android: true
+  ios: true

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutterflow_ui/flutterflow_ui.dart';
 
 class DrawerWidget extends StatelessWidget {
   @override
@@ -35,7 +33,7 @@ class DrawerWidget extends StatelessWidget {
             title: Text('Logout'),
             onTap: () {
               // Handle tap here
-              Navigator.pushReplacementNamed(context, '/initialRoute');
+              Navigator.pushReplacementNamed(context, '/authentication');
             },
           ),
         ],

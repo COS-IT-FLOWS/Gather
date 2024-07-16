@@ -1,0 +1,66 @@
+// signin_provider.dart
+import 'package:flutter/material.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:gather/screens/otp_input_widget.dart';
+import 'package:provider/provider.dart';
+
+class SignInProvider with ChangeNotifier {
+  final SupabaseClient _supabaseClient;
+
+  SignInProvider(this._supabaseClient);
+  String _otpValue = '';
+  String get otpValue => _otpValue;
+
+  void updateOtpValue(String otp) {
+    _otpValue = otp;
+    notifyListeners();
+  }
+
+  Future<void> signInOtp(String phoneNumber, BuildContext context) async {
+    print('Just printing that user is Signing Up');
+    await _supabaseClient.auth.signInWithOtp(
+      phone: phoneNumber,
+    );
+
+    // if (error != null) {
+    //   print('Error: ${error.message}');
+    //   return;
+    // }
+
+    // OtpProvider otpProvider = Provider.of<OtpProvider>(context, listen: false);
+    print('Navigating to OTP Screen');
+
+    final otp = otpProvider.otpValue;
+
+    print('Verifying OTP');
+    if (otp != null) {
+      await _supabaseClient.auth
+          .verifyOTP(phone: phoneNumber, token: otp, type: OtpType.signup);
+
+      // if (error != null) {
+      //   print('Error: ${error.message}');
+      //   return;
+      // }
+
+      // User is signed in, update UI accordingly
+      // notifyListeners();
+    }
+  }
+}
+
+//   Future _showOtpInputForm(BuildContext context) async {
+//     // Implement OTP input form here
+//     Navigator.push(
+//         context, MaterialPageRoute(builder: (context) => OtpInputWidget()));
+//     // Return the OTP input by the user
+//   }
+
+// class OtpProvider with ChangeNotifier {
+//   String _otpValue = '';
+//   String get otpValue => _otpValue;
+
+//   void updateOtpValue(String otp) {
+//     _otpValue = otp;
+//     notifyListeners();
+//   }
+// }

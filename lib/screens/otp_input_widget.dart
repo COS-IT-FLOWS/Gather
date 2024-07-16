@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-// import 'package:gather/providers.dart.backup';
+import 'package:gather/providers.dart';
 import 'package:provider/provider.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class OtpInputWidget extends StatefulWidget {
   @override
@@ -8,64 +9,76 @@ class OtpInputWidget extends StatefulWidget {
 }
 
 class _OtpInputWidgetState extends State<OtpInputWidget> {
-  final _otpController = TextEditingController();
-  final _focusNodes = List<FocusNode>.generate(7, (_) => FocusNode());
-
-  @override
-  void initState() {
-    super.initState();
-    _otpController.addListener(() {
-      final text = _otpController.text;
-      if (text.length == 6) {
-        // Provider.of<OtpProvider>(context, listen: false).updateOtpValue(text);
-      }
-    });
-  }
+  final _otpControllers =
+      List<TextEditingController>.generate(6, (_) => TextEditingController());
+  final _focusNodes = List<FocusNode>.generate(6, (_) => FocusNode());
+  // SignInProvider? _signInProvider;
 
   @override
   void dispose() {
-    _otpController.dispose();
+    for (final controller in _otpControllers) {
+      controller.dispose();
+    }
     for (final focusNode in _focusNodes) {
       focusNode.dispose();
     }
     super.dispose();
   }
 
-  void _moveFocus(int index) {
-    if (index < 6 && _otpController.text.length > index) {
-      _focusNodes[index].requestFocus();
+  void _moveFocus(int index, bool forward) {
+    if (forward && index < 5) {
+      _focusNodes[index + 1].requestFocus();
+    } else if (!forward && index > 0) {
+      _focusNodes[index - 1].requestFocus();
+    }
+  }
+
+  void _updateOtpValue() async {
+    // if (_signInProvider == null) return;
+    print(_otpControllers);
+    final otp = _otpControllers.map((controller) => controller.text).join();
+    print(otp.length);
+    if (otp.length == 6) {
+      await Provider.of<SignInProvider>(context, listen: false).verifyOtp(otp);
+      if (Provider.of<SignInProvider>(context, listen: false).isLoggedIn ??
+          false) {
+        if (!mounted) return;
+        Navigator.pushReplacementNamed(context, '/home');
+      }
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: List<Widget>.generate(6, (index) {
-        return SizedBox(
-          width: 50,
-          child: TextFormField(
-            controller: _otpController,
-            focusNode: _focusNodes[index],
-            onChanged: (value) {
-              if (value.length == 1) {
-                _moveFocus(index + 1);
-              }
-              if (value.isEmpty && index > 0) {
-                _moveFocus(index - 1);
-              }
-              // Provider.of<OtpProvider>(context, listen: false)
-              // .updateOtpValue(value);
-            },
-            keyboardType: TextInputType.number,
-            textInputAction: TextInputAction.next,
-            decoration: InputDecoration(
-              counterText: '',
-              border: OutlineInputBorder(),
+    return Scaffold(
+      appBar: AppBar(),
+      body: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: List<Widget>.generate(6, (index) {
+          return SizedBox(
+            width: 50,
+            child: TextFormField(
+              controller: _otpControllers[index],
+              focusNode: _focusNodes[index],
+              onChanged: (value) {
+                if (value.length == 1) {
+                  _moveFocus(index, true);
+                } else if (value.isEmpty) {
+                  _moveFocus(index, false);
+                }
+                print(value);
+                _updateOtpValue();
+              },
+              keyboardType: TextInputType.number,
+              textInputAction: TextInputAction.next,
+              decoration: InputDecoration(
+                counterText: '',
+                border: OutlineInputBorder(),
+              ),
             ),
-          ),
-        );
-      }),
+          );
+        }),
+      ),
     );
   }
 }

@@ -14,8 +14,8 @@ dependencies:
   flutter_svg: ^2.0.9
   connectivity_plus: ^6.0.1
   shared_preferences: ^2.0.15
-  intl: ^0.18.0
-  # maplibre_gl:
+  intl: ^0.18.1
+  # maplibre_gl_workspace:
   #   git:
   #     url: https://github.com/maplibre/flutter-maplibre-gl.git
   #     ref: main
@@ -23,14 +23,17 @@ dependencies:
   font_awesome_flutter:  ^10.1.0
   google_fonts: ^4.0.3
   badges: ^3.1.2
-  flutterflow_ui: ^0.2.0
+  flutterflow_ui: ^0.2.0+1
   supabase_auth_ui: ^0.3.0
   image_picker: ^1.0.7
   flutter_speed_dial: ^7.0.0
   intl_phone_number_input: ^0.7.0+2
   dev: ^1.0.0
   mockito: ^5.4.4
-  record: ^5.0.5
+  global_configuration: ^2.0.0-nullsafety.1
+  supabase_flutter: ^2.5.3
+  phone_number: ^2.1.0
+  libphonenumber: ^2.0.2
   maplibre_gl:
 
 
@@ -43,6 +46,7 @@ flutter:
   assets: 
     - assets/
     - assets/images/
+    - assets/cfg/
   fonts: 
     - family: Roboto
       fonts: 

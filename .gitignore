@@ -15,3 +15,5 @@ assets/cfg/**/*.yaml
 supabase/**/*
 
 
+
+/assets/cfg/*.json

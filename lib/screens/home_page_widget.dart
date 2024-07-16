@@ -1,12 +1,9 @@
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:gather/components/data_text_form_widget.dart';
-import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gather/components/floating_camera_widget.dart';
 import 'package:gather/models/list_view_model.dart';
-import 'package:gather/screens/dashboard_widget.dart';
-import 'package:gather/screens/notification_widget.dart';
 import 'package:gather/components/appbar_original_widget.dart';
 import 'package:gather/components/drawer_widget.dart';
 

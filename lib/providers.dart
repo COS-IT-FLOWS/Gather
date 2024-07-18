@@ -1,5 +1,9 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:global_configuration/global_configuration.dart';
 import 'package:supabase/supabase.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class SignInProvider with ChangeNotifier {
   final SupabaseClient _supabaseClient;
@@ -49,9 +53,42 @@ class SignInProvider with ChangeNotifier {
     }
   }
 
+  Future<void> signInWithGoogle() async {
+    final GoogleSignIn googleSignIn = GoogleSignIn(
+        serverClientId:
+            GlobalConfiguration().get('SUPABASE_GOOGLE_AUTH_WEB_CLIENT_ID'));
+    final googleUser = await googleSignIn.signIn();
+    final googleAuth = await googleUser!.authentication;
+    final accessToken = googleAuth.accessToken;
+    final idToken = googleAuth.idToken;
+    if (accessToken == null) {
+      throw Exception('No Access Token found');
+    }
+    if (idToken == null) {
+      throw Exception('No ID Token found');
+    }
+    try {
+      AuthResponse response = await _supabaseClient.auth.signInWithIdToken(
+        provider: OAuthProvider.google,
+        idToken: idToken,
+        accessToken: accessToken,
+      );
+      print(response);
+      _isLoggedIn = true;
+      notifyListeners();
+    } catch (e) {
+      if (e is AuthException) {
+        print('Auth error: ${e.message}');
+      } else {
+        print('Error: $e');
+      }
+    }
+  }
+
   Future<void> signOut() async {
     await _supabaseClient.auth.signOut();
     _isLoggedIn = false;
+    print(_isLoggedIn);
     notifyListeners();
   }
 

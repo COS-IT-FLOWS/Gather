@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -5,6 +7,8 @@ import 'package:gather/providers.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 // import 'package:phone_number/phone_number.dart' as phone_lib;
 import 'package:provider/provider.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:flutter/foundation.dart';
 
 // import 'package:supabase_auth_ui/supabase_auth_ui.dart';
 // import 'package:gather/services/supabase_service.dart';
@@ -52,13 +56,20 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget> {
   //   }
   // }
 
-  void _signIn() async {
+  void _signInWithPhone() async {
     if (_signInProvider == null) return;
     FocusScope.of(context).requestFocus(FocusNode());
     late var _phoneNumberStr = _phoneNumber.phoneNumber.toString();
     await _signInProvider!.signInWithPhoneNumber(_phoneNumberStr);
     if (!mounted) return;
     Navigator.pushNamed(context, '/otpscreen');
+  }
+
+  void _signInWithGoogleAuth() async {
+    if (_signInProvider == null) return;
+    await _signInProvider!.signInWithGoogle();
+    if (!mounted) return;
+    Navigator.pushNamed(context, '/home');
   }
 
   @override
@@ -197,7 +208,7 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget> {
                         // onPressed: () =>
                         // Provider.of<SignInProvider>(context, listen: false)
                         // .signInOtp(_phoneNumber.phoneNumber.toString()),
-                        onPressed: () => _signIn(),
+                        onPressed: () => _signInWithPhone(),
                         text: 'Sign Up with Phone',
                         options: FFButtonOptions(
                           width: double.infinity,
@@ -231,7 +242,11 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget> {
                       ),
                     ),
                     FFButtonWidget(
-                      onPressed: () async {},
+                      onPressed: () async {
+                        if (!kIsWeb && (Platform.isAndroid || Platform.isIOS)) {
+                          _signInWithGoogleAuth();
+                        }
+                      },
                       text: 'Continue with Google',
                       icon: FaIcon(
                         FontAwesomeIcons.google,

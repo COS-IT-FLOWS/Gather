@@ -35,6 +35,8 @@ dependencies:
   phone_number: ^2.1.0
   libphonenumber: ^2.0.2
   maplibre_gl:
+  app_links: ^6.1.4
+  google_sign_in: ^6.2.1
 
 
 

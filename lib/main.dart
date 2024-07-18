@@ -12,8 +12,9 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GlobalConfiguration().loadFromAsset("app_settings");
   await Supabase.initialize(
-      url: GlobalConfiguration().get('SUPABASE_URL'),
-      anonKey: GlobalConfiguration().get('SUPABASE_ANON_KEY'));
+    url: GlobalConfiguration().get('SUPABASE_URL'),
+    anonKey: GlobalConfiguration().get('SUPABASE_ANON_KEY'),
+  );
 
   runApp(
     MultiProvider(providers: [

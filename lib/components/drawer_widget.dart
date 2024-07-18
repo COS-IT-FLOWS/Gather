@@ -1,43 +1,64 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'package:gather/providers.dart';
+
+final signOutSnackBar = SnackBar(
+  content: Text('You have successfully logged out'),
+);
 
 class DrawerWidget extends StatelessWidget {
+  SignInProvider? _signInProvider;
+
   @override
   Widget build(BuildContext context) {
-    return Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: <Widget>[
-          DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.white,
-              ),
-              child: Text('Gather Menu')),
-          ListTile(
-            leading: Icon(Icons.dashboard),
-            title: Text('Weather Dashboard'),
-            onTap: () {
-              // Handle tap here
-              Navigator.pushNamed(context, '/dashboard');
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.person_2),
-            title: Text('Profile'),
-            onTap: () {
-              // Handle tap here
-              Navigator.pushNamed(context, '/profile');
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.logout),
-            title: Text('Logout'),
-            onTap: () {
-              // Handle tap here
-              Navigator.pushReplacementNamed(context, '/authentication');
-            },
-          ),
-        ],
-      ),
-    );
+    return Consumer<SignInProvider>(builder: (context, signInProvider, child) {
+      _signInProvider = signInProvider;
+      return Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                ),
+                child: Text('Gather Menu')),
+            ListTile(
+              leading: Icon(Icons.dashboard),
+              title: Text('Weather Dashboard'),
+              onTap: () {
+                // Handle tap here
+                Navigator.pushNamed(context, '/dashboard');
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.person_2),
+              title: Text('Profile'),
+              onTap: () {
+                // Handle tap here
+                Navigator.pushNamed(context, '/profile');
+              },
+            ),
+            ListTile(
+                leading: Icon(Icons.info),
+                title: Text('About Us'),
+                onTap: () {
+                  Navigator.pushNamed(context, '/about');
+                }),
+            ListTile(
+              leading: Icon(Icons.logout),
+              title: Text('Logout'),
+              onTap: () async {
+                // Handle tap here
+                await _signInProvider!.signOut();
+                // if (!mounted) return;
+                Navigator.pushReplacementNamed(context, '/authentication');
+                ScaffoldMessenger.of(context).showSnackBar(signOutSnackBar);
+              },
+            ),
+          ],
+        ),
+      );
+    });
   }
 }

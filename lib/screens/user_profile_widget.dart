@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gather/components/appbar_original_widget.dart';
+import 'package:gather/components/appbar_widget.dart';
 import 'package:gather/components/floating_camera_widget.dart';
 // import 'package:cloud_firestore/cloud_firestore.dart';
 

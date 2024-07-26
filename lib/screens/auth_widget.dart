@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:gather/providers.dart';
+import 'package:gather/providers/auth_provider.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 // import 'package:phone_number/phone_number.dart' as phone_lib;
 import 'package:provider/provider.dart';

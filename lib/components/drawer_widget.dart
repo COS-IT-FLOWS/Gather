@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:gather/providers.dart';
+import 'package:gather/providers/auth_provider.dart';
 
 final signOutSnackBar = SnackBar(
   content: Text('You have successfully logged out'),
@@ -43,7 +43,7 @@ class DrawerWidget extends StatelessWidget {
                 leading: Icon(Icons.info),
                 title: Text('About Us'),
                 onTap: () {
-                  Navigator.pushNamed(context, '/about');
+                  Navigator.pushNamed(context, '/about-us');
                 }),
             ListTile(
               leading: Icon(Icons.logout),

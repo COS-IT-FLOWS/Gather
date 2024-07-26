@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 
+import 'package:gather/components/appbar_widget.dart';
 // import 'package:gather/models/StationPrefsModel';
 
 class StationPrefsPage extends StatefulWidget {
@@ -18,6 +19,7 @@ class _StationPrefsPageState extends State<StationPrefsPage> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Scaffold();
+    return Scaffold(
+        appBar: appBarWidget(context, 'Select Stations'), body: Container());
   }
 }

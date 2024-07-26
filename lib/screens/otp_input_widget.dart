@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gather/providers.dart';
+import 'package:gather/providers/auth_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 

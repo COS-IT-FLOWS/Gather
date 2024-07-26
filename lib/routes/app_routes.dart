@@ -6,12 +6,12 @@ import 'package:gather/screens/event_report_widget.dart';
 import 'package:gather/screens/otp_input_widget.dart';
 import 'package:gather/screens/user_profile_widget.dart';
 import 'package:gather/screens/notification_widget.dart';
-import 'package:gather/screens/about_us_page.dart';
+import 'package:gather/screens/about_us_widget.dart';
 // import 'package:gather/screens/tab_view_widget.dart.backup';
 import 'package:provider/provider.dart';
 import 'package:gather/screens/notification_widget.dart';
 import 'package:gather/screens/auth_widget.dart';
-import 'package:gather/providers.dart';
+import 'package:gather/providers/auth_provider.dart';
 
 class AppRoutes {
   static Map<String, WidgetBuilder> routes() => {

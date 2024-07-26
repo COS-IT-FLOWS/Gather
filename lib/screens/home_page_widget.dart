@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gather/components/floating_camera_widget.dart';
 import 'package:gather/models/list_view_model.dart';
-import 'package:gather/components/appbar_original_widget.dart';
+import 'package:gather/components/appbar_widget.dart';
 import 'package:gather/components/drawer_widget.dart';
 
 class HomePageWidget extends StatefulWidget {
@@ -72,7 +72,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             child: Padding(
                               padding: MediaQuery.viewInsetsOf(context),
                               child: DataTextFormWidget(
-                                paramType: 'Rainfall',
+                                paramType: 'RAINFALL',
                                 unitType: 'mm',
                               ),
                             ),
@@ -88,10 +88,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         'Rainfall',
                         style: FlutterFlowTheme.of(context).titleLarge,
                       ),
-                      subtitle: Text(
-                        'Select Mode',
-                        style: FlutterFlowTheme.of(context).labelMedium,
-                      ),
                       trailing: Icon(
                         Icons.arrow_forward_ios,
                         color: FlutterFlowTheme.of(context).secondaryText,
@@ -122,7 +118,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             child: Padding(
                               padding: MediaQuery.viewInsetsOf(context),
                               child: DataTextFormWidget(
-                                paramType: 'River Level',
+                                paramType: 'RIVER',
                                 unitType: 'm',
                               ),
                             ),
@@ -138,10 +134,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         'River Level',
                         style: FlutterFlowTheme.of(context).titleLarge,
                       ),
-                      subtitle: Text(
-                        'Select Mode',
-                        style: FlutterFlowTheme.of(context).labelMedium,
-                      ),
                       trailing: Icon(
                         Icons.arrow_forward_ios,
                         color: FlutterFlowTheme.of(context).secondaryText,
@@ -172,7 +164,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             child: Padding(
                               padding: MediaQuery.viewInsetsOf(context),
                               child: DataTextFormWidget(
-                                paramType: 'Well Water',
+                                paramType: 'GROUNDWATER',
                                 unitType: 'm',
                               ),
                             ),
@@ -189,10 +181,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         'Well Water',
                         style: FlutterFlowTheme.of(context).titleLarge,
                       ),
-                      subtitle: Text(
-                        'Select Mode',
-                        style: FlutterFlowTheme.of(context).labelMedium,
-                      ),
                       trailing: Icon(
                         Icons.arrow_forward_ios,
                         color: FlutterFlowTheme.of(context).secondaryText,
@@ -223,7 +211,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             child: Padding(
                               padding: MediaQuery.viewInsetsOf(context),
                               child: DataTextFormWidget(
-                                paramType: 'Tidal Level',
+                                paramType: 'TIDAL',
                                 unitType: 'm',
                               ),
                             ),
@@ -239,10 +227,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       title: Text(
                         'Tidal Level',
                         style: FlutterFlowTheme.of(context).titleLarge,
-                      ),
-                      subtitle: Text(
-                        'Select Mode',
-                        style: FlutterFlowTheme.of(context).labelMedium,
                       ),
                       trailing: Icon(
                         Icons.arrow_forward_ios,

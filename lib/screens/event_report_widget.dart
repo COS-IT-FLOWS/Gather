@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:gather/components/appbar_original_widget.dart';
+import 'package:gather/components/appbar_widget.dart';
 import 'package:image_picker/image_picker.dart';
 // import 'package:record/record.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';

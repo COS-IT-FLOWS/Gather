@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:gather/providers.dart';
+import 'package:gather/providers/auth_provider.dart';
+import 'package:gather/providers/datetime_provider.dart';
+import 'package:gather/providers/database_provider.dart';
 import 'package:gather/routes/app_routes.dart';
 import 'package:global_configuration/global_configuration.dart';
 import 'package:provider/provider.dart';
@@ -20,6 +22,10 @@ Future<void> main() async {
     MultiProvider(providers: [
       ChangeNotifierProvider<SignInProvider>(
           create: (_) => SignInProvider(supabase)),
+      ChangeNotifierProvider<DatabaseProvider>(
+          create: (_) => DatabaseProvider(supabase)),
+      ChangeNotifierProvider<DateTimeProvider>(
+          create: (_) => DateTimeProvider())
     ], child: GatherApp()),
   );
 }

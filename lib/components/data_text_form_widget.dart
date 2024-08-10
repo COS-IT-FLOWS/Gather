@@ -296,11 +296,28 @@ class _DataTextFormWidgetState extends State<DataTextFormWidget> {
                                     'RAIN0001',
                                     _parameterValue);
 
+                                await showDialog<String>(
+                                  context: context,
+                                  builder: (BuildContext context) =>
+                                      AlertDialog(
+                                    title: const Text(
+                                        'Data Submitted Successfully'),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.pop(context, 'OK'),
+                                        child: const Text('OK'),
+                                      ),
+                                    ],
+                                  ),
+                                );
+
                                 // ScaffoldMessenger.of(context)
                                 //     .showSnackBar(const SnackBar(
                                 //   content: Text("Data Submitted Successfully"),
                                 // ));
-                                // Navigator.of(context).pop();
+
+                                Navigator.of(context).pop();
                               }
                             },
                             text: 'Submit',

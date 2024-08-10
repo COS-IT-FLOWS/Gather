@@ -243,7 +243,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
             ),
           ),
         ),
-        floatingActionButton: FloatingCameraWidget(),
+        // floatingActionButton: FloatingCameraWidget(),
       ),
     );
   }

@@ -92,6 +92,7 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget> {
         child: Scaffold(
           key: scaffoldKey,
           backgroundColor: Colors.grey.shade300,
+          resizeToAvoidBottomInset: false,
           // appBar: AppBar(
           //   backgroundColor: Color(0xFFF1F4F8),
           //   automaticallyImplyLeading: false,

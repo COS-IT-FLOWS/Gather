@@ -50,7 +50,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
           //   return Container();
           // },
           ),
-      floatingActionButton: FloatingCameraWidget(),
+      // floatingActionButton: FloatingCameraWidget(),
     );
   }
 }

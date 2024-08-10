@@ -10,7 +10,7 @@ class AboutUsPage extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             child: Column(children: [
               Text(
-                  'Gather is an application to enter data on various weather conditions such as rainfall, river level, groundwater level and tidal levels for the community, as part of the Gather weather data network, built and maintained by EQUINOCT Community Sourced Modelling Solutions'),
+                  'Gather is an open source application (under MIT License) to enter data on various weather conditions such as rainfall, river level, groundwater level and tidal levels for the community, as part of the Gather weather data network, built and maintained by EQUINOCT Community Sourced Modelling Solutions'),
               Image.asset("assets/logos/equinoct_logo.png")
             ])));
   }

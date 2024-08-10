@@ -91,7 +91,8 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget> {
             : FocusScope.of(context).unfocus(),
         child: Scaffold(
           key: scaffoldKey,
-          backgroundColor: Colors.blueGrey,
+          backgroundColor: Colors.grey.shade300,
+          resizeToAvoidBottomInset: false,
           // appBar: AppBar(
           //   backgroundColor: Color(0xFFF1F4F8),
           //   automaticallyImplyLeading: false,

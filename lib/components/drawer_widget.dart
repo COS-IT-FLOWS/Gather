@@ -26,9 +26,20 @@ class DrawerWidget extends StatelessWidget {
             ListTile(
               leading: Icon(Icons.dashboard),
               title: Text('Weather Dashboard'),
+              trailing: const DecoratedBox(
+                  decoration: const BoxDecoration(
+                    color: Colors.amber,
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.all(5),
+                    child: const Text(
+                      'Launching Soon',
+                    ),
+                  )),
               onTap: () {
                 // Handle tap here
-                Navigator.pushNamed(context, '/dashboard');
+                // Navigator.pushNamed(context, '/dashboard');
               },
             ),
             ListTile(

@@ -300,7 +300,7 @@ class _DataTextFormWidgetState extends State<DataTextFormWidget> {
                                 //     .showSnackBar(const SnackBar(
                                 //   content: Text("Data Submitted Successfully"),
                                 // ));
-                                Navigator.of(context).pop();
+                                // Navigator.of(context).pop();
                               }
                             },
                             text: 'Submit',

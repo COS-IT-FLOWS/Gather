@@ -17,3 +17,6 @@ supabase/**/*
 
 
 /assets/cfg/*.json
+
+ios/Runner/**/*
+android/app/src/main/res/**/*

@@ -1,24 +1,26 @@
 import 'dart:ffi';
 
-import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+// import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 class UserDataModel {
   final String? firstName;
   final String? lastName;
-  final PhoneNumber? phoneNumber;
+  final String? phoneNumber;
   final String? emailAddress;
   final String? occupation;
-  final Int? userAge;
+  final int? userAge;
   final String? gender;
-  final Array? stationIds;
+  // final bool? ifGatherer;
+  final String? stationIds;
 
   UserDataModel(
       {required this.firstName,
       required this.lastName,
-      required this.phoneNumber,
+      this.phoneNumber,
       this.emailAddress,
       this.occupation,
       this.userAge,
       this.gender,
-      required this.stationIds});
+      // this.ifGatherer,
+      this.stationIds});
 }

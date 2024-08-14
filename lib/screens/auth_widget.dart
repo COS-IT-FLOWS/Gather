@@ -93,13 +93,6 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget> {
           key: scaffoldKey,
           backgroundColor: Colors.grey.shade300,
           resizeToAvoidBottomInset: false,
-          // appBar: AppBar(
-          //   backgroundColor: Color(0xFFF1F4F8),
-          //   automaticallyImplyLeading: false,
-          //   actions: [],
-          //   centerTitle: false,
-          //   elevation: 0,
-          // ),
           body: SafeArea(
             top: true,
             child: Align(

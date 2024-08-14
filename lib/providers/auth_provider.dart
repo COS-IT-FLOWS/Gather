@@ -8,11 +8,13 @@ import 'package:google_sign_in/google_sign_in.dart';
 class SignInProvider with ChangeNotifier {
   final SupabaseClient _supabaseClient;
   bool _isLoggedIn = false;
+  late String _userId;
   late String _phoneNumber;
   String _otpValue = '';
   String get otpValue => _otpValue;
 
   bool get isLoggedIn => _isLoggedIn;
+  String get userId => _userId;
 
   SignInProvider(this._supabaseClient) {
     final authSubscription =
@@ -25,8 +27,6 @@ class SignInProvider with ChangeNotifier {
     });
   }
 
-  // bool get isLoggedIn => _isLoggedIn;
-
   Future<void> signInWithPhoneNumber(String phoneNumber) async {
     _phoneNumber = phoneNumber;
     await _supabaseClient.auth
@@ -37,12 +37,13 @@ class SignInProvider with ChangeNotifier {
   Future<void> verifyOtp(String otp) async {
     print(_phoneNumber + otp);
     try {
-      await _supabaseClient.auth.verifyOTP(
+      AuthResponse response = await _supabaseClient.auth.verifyOTP(
         phone: _phoneNumber,
         token: otp,
         type: OtpType.sms,
       );
       _isLoggedIn = true;
+      _userId = response.user!.id;
       notifyListeners();
     } catch (e) {
       if (e is AuthException) {
@@ -73,7 +74,7 @@ class SignInProvider with ChangeNotifier {
         idToken: idToken,
         accessToken: accessToken,
       );
-      print(response);
+      _userId = response.user!.id;
       _isLoggedIn = true;
       notifyListeners();
     } catch (e) {

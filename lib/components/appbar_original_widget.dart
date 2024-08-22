@@ -2,16 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:badges/badges.dart' as badges;
 
-PreferredSizeWidget appBarWidget(context) {
+PreferredSizeWidget appBarWidget(context, title) {
+  // final String title;
+
   return AppBar(
     backgroundColor: FlutterFlowTheme.of(context).primary,
-    automaticallyImplyLeading: false,
+    // automaticallyImplyLeading: false,
     title: Align(
       alignment: AlignmentDirectional(-1, -1),
       child: Padding(
         padding: EdgeInsetsDirectional.fromSTEB(24, 0, 0, 0),
         child: Text(
-          'Enter Data',
+          title,
           style: FlutterFlowTheme.of(context).headlineMedium.override(
                 fontFamily: 'Outfit',
                 color: Colors.white,
@@ -45,11 +47,6 @@ PreferredSizeWidget appBarWidget(context) {
           },
         ),
       ),
-      ElevatedButton(
-          onPressed: () async {
-            Navigator.pushNamed(context, '/dashboard');
-          },
-          child: Icon(Icons.dashboard))
     ],
     centerTitle: false,
     elevation: 2,

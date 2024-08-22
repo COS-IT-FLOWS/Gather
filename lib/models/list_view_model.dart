@@ -1,8 +1,8 @@
 import 'package:flutterflow_ui/flutterflow_ui.dart';
-import 'package:gather/screens/list_view_widget.dart' show ListViewWidget;
+import 'package:gather/screens/home_page_widget.dart' show HomePageWidget;
 import 'package:flutter/material.dart';
 
-class ListViewModel extends FlutterFlowModel<ListViewWidget> {
+class HomePageModel extends FlutterFlowModel<HomePageWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();

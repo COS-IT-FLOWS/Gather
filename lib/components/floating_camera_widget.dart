@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -35,22 +34,37 @@ class FloatingCameraWidgetState extends State<FloatingCameraWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return SpeedDial(
-        icon: Icons.camera,
-        backgroundColor: FlutterFlowTheme.of(context).tertiary,
-        children: [
-          SpeedDialChild(
-              shape: CircleBorder(),
-              backgroundColor: FlutterFlowTheme.of(context).tertiary,
-              child: Icon(Icons.camera_alt),
-              label: 'Camera',
-              onTap: openCamera),
-          SpeedDialChild(
-              shape: CircleBorder(),
-              backgroundColor: FlutterFlowTheme.of(context).tertiary,
-              child: Icon(Icons.photo),
-              label: 'Gallery',
-              onTap: openGallery),
-        ]);
+    return ElevatedButton(
+      onPressed: () {
+        Navigator.pushNamed(context, '/eventreport');
+      },
+      style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all<Color>(
+              FlutterFlowTheme.of(context).tertiary)),
+      child: Text(
+        'Report Hazard Event',
+        style: TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    );
+    // return SpeedDial(
+    //     icon: Icons.camera,
+    //     backgroundColor: FlutterFlowTheme.of(context).tertiary,
+    //     children: [
+    //       SpeedDialChild(
+    //           shape: CircleBorder(),
+    //           backgroundColor: FlutterFlowTheme.of(context).tertiary,
+    //           child: Icon(Icons.camera_alt),
+    //           label: 'Camera',
+    //           onTap: openCamera),
+    //       SpeedDialChild(
+    //           shape: CircleBorder(),
+    //           backgroundColor: FlutterFlowTheme.of(context).tertiary,
+    //           child: Icon(Icons.photo),
+    //           label: 'Gallery',
+    //           onTap: openGallery),
+    //     ]);
   }
 }

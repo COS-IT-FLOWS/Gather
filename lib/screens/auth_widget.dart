@@ -41,9 +41,9 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget> {
     _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
     // late PhoneNumber _phoneNumber;
-    // late SignInProvider _signInProvider;
+    late SignInProvider _signInProvider;
     // _otpProvider = Provider.of<OtpProvider>(context, listen: false);
-    // _signInProvider = Provider.of<SignInProvider>(context, listen: false);
+    _signInProvider = Provider.of<SignInProvider>(context, listen: false);
   }
 
   // @override
@@ -82,7 +82,7 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget> {
   @override
   Widget build(BuildContext context) {
     // _otpProvider = Provider.of<OtpProvider>(context, listen: );
-    // _signInProvider = Provider.of<SignInProvider>(context, listen: true);
+    _signInProvider = Provider.of<SignInProvider>(context, listen: true);
     return Consumer<SignInProvider>(builder: (context, signInProvider, child) {
       _signInProvider = signInProvider;
       return GestureDetector(
@@ -196,12 +196,9 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget> {
                       padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
                       child: FFButtonWidget(
                         // Commented out the check for valid phone number for ease of testing
-                        // onPressed: _phoneNumberValid
-                        // ? () => Navigator.pushReplacementNamed(context, '/')
-                        // : null,
                         // onPressed: () =>
-                        // Provider.of<SignInProvider>(context, listen: false)
-                        // .signInOtp(_phoneNumber.phoneNumber.toString()),
+                        //     Provider.of<SignInProvider>(context, listen: false)
+                        //         .signInOtp(_phoneNumber.phoneNumber.toString()),
                         onPressed: () => _signInWithPhone(),
                         text: 'Sign Up with Phone',
                         options: FFButtonOptions(

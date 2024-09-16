@@ -10,6 +10,7 @@ PreferredSizeWidget appBarWidget(context, title) {
   // final String title;
 
   return AppBar(
+    iconTheme: IconThemeData(color: Colors.white),
     backgroundColor: FlutterFlowTheme.of(context).primary,
     // automaticallyImplyLeading: false,
     title: Align(

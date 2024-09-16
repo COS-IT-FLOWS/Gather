@@ -116,6 +116,77 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget> {
                         ),
                       ),
                     ),
+                    FFButtonWidget(
+                      onPressed: () async {
+                        if (!kIsWeb && (Platform.isAndroid || Platform.isIOS)) {
+                          _signInWithGoogleAuth();
+                        }
+                      },
+                      text: 'Continue with Google',
+                      icon: FaIcon(
+                        FontAwesomeIcons.google,
+                        size: 24,
+                      ),
+                      options: FFButtonOptions(
+                        width: double.infinity,
+                        height: 50,
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                        iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                        color: Colors.white,
+                        textStyle: TextStyle(
+                          fontFamily: 'Plus Jakarta Sans',
+                          color: Colors.black,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        elevation: 2,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Already have an account? ',
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Plus Jakarta Sans',
+                                  color: Color(0xFF15161E),
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                          ),
+                          Text(
+                            'Sign In',
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Plus Jakarta Sans',
+                                  color: FlutterFlowTheme.of(context).tertiary,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
+                      child: Text(
+                        'OR',
+                        textAlign: TextAlign.center,
+                        style: FlutterFlowTheme.of(context).labelLarge.override(
+                              fontFamily: 'Outfit',
+                              color: Color(0xFF606A85),
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                            ),
+                      ),
+                    ),
                     Padding(
                       padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                       child: InternationalPhoneNumberInput(
@@ -217,77 +288,6 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget> {
                           elevation: _phoneNumberValid ? 4 : 0,
                           borderRadius: BorderRadius.circular(12),
                         ),
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
-                      child: Text(
-                        'OR',
-                        textAlign: TextAlign.center,
-                        style: FlutterFlowTheme.of(context).labelLarge.override(
-                              fontFamily: 'Outfit',
-                              color: Color(0xFF606A85),
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                            ),
-                      ),
-                    ),
-                    FFButtonWidget(
-                      onPressed: () async {
-                        if (!kIsWeb && (Platform.isAndroid || Platform.isIOS)) {
-                          _signInWithGoogleAuth();
-                        }
-                      },
-                      text: 'Continue with Google',
-                      icon: FaIcon(
-                        FontAwesomeIcons.google,
-                        size: 24,
-                      ),
-                      options: FFButtonOptions(
-                        width: double.infinity,
-                        height: 50,
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                        iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                        color: Colors.white,
-                        textStyle: TextStyle(
-                          fontFamily: 'Plus Jakarta Sans',
-                          color: Colors.black,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
-                        ),
-                        elevation: 2,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Already have an account? ',
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'Plus Jakarta Sans',
-                                  color: Color(0xFF15161E),
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.normal,
-                                ),
-                          ),
-                          Text(
-                            'Sign In',
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'Plus Jakarta Sans',
-                                  color: FlutterFlowTheme.of(context).tertiary,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.normal,
-                                ),
-                          ),
-                        ],
                       ),
                     ),
                   ],

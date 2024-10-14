@@ -38,33 +38,23 @@ class FloatingCameraWidgetState extends State<FloatingCameraWidget> {
       onPressed: () {
         Navigator.pushNamed(context, '/eventreport');
       },
-      style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all<Color>(
-              FlutterFlowTheme.of(context).tertiary)),
+      style: ElevatedButton.styleFrom(
+          backgroundColor: FlutterFlowTheme.of(context).secondary,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15),
+              side: BorderSide(color: FlutterFlowTheme.of(context).secondary))),
+      // style: ButtonStyle(
+
+      //     backgroundColor: MaterialStateProperty.all<Color>(
+      //         FlutterFlowTheme.of(context).secondary)),
       child: Text(
-        'Report Hazard Event',
+        'Report Hazard',
         style: TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.bold,
+          color: FlutterFlowTheme.of(context).primary,
         ),
       ),
     );
-    // return SpeedDial(
-    //     icon: Icons.camera,
-    //     backgroundColor: FlutterFlowTheme.of(context).tertiary,
-    //     children: [
-    //       SpeedDialChild(
-    //           shape: CircleBorder(),
-    //           backgroundColor: FlutterFlowTheme.of(context).tertiary,
-    //           child: Icon(Icons.camera_alt),
-    //           label: 'Camera',
-    //           onTap: openCamera),
-    //       SpeedDialChild(
-    //           shape: CircleBorder(),
-    //           backgroundColor: FlutterFlowTheme.of(context).tertiary,
-    //           child: Icon(Icons.photo),
-    //           label: 'Gallery',
-    //           onTap: openGallery),
-    //     ]);
   }
 }

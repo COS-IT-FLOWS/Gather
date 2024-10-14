@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-// import 'package:gather/screens/dashboard_widget.dart.backup';
-// import 'package:gather/screens/dashboard_widget.dart.backup';
 import 'package:gather/screens/home_page_widget.dart';
 import 'package:gather/screens/event_report_widget.dart';
 import 'package:gather/screens/otp_input_widget.dart';

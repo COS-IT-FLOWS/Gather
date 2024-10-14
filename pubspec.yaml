@@ -37,6 +37,10 @@ dependencies:
   maplibre_gl:
   app_links: ^6.1.4
   google_sign_in: ^6.2.1
+  record: ^5.1.2
+  path_provider: ^2.0.2
+  audioplayers: ^6.1.0
+  another_flushbar: ^1.12.30
 
 
 

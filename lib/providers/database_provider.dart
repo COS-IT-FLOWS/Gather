@@ -47,4 +47,15 @@ class DatabaseProvider with ChangeNotifier {
       'age': userDataWriteModel.userAge
     });
   }
+
+  Future<void> insertHazardEventData(UserDataModel userDataWriteModel) async {
+    await _supabaseClient.from('profiles').upsert({
+      'first_name': userDataWriteModel.firstName,
+      'last_name': userDataWriteModel.lastName,
+      'phone_number': userDataWriteModel.phoneNumber,
+      'email': userDataWriteModel.emailAddress,
+      'occupation': userDataWriteModel.occupation,
+      'age': userDataWriteModel.userAge
+    });
+  }
 }

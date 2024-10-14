@@ -1,6 +1,7 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:provider/provider.dart';
 
 import 'package:gather/components/appbar_widget.dart';
@@ -9,6 +10,8 @@ import 'package:gather/models/user_data_model.dart';
 import 'package:gather/providers/database_provider.dart';
 import 'package:gather/providers/auth_provider.dart';
 import 'package:gather/providers/profile_provider.dart';
+
+import 'package:gather/components/confirmation_dialog_widget.dart';
 
 class ProfileWidget extends StatefulWidget {
   @override
@@ -33,8 +36,10 @@ class _ProfileWidgetState extends State<ProfileWidget> {
     return Scaffold(
         // appBar: appBarWidget(context, 'User Profile'),
         appBar: AppBar(
-          title: Text('User Profile'),
-          backgroundColor: Colors.blue,
+          iconTheme:
+              IconThemeData(color: Colors.white), // Set icon color to white
+          title: Text(style: TextStyle(color: Colors.white), 'User Profile'),
+          backgroundColor: FlutterFlowTheme.of(context).primary,
           actions: [
             IconButton(
                 icon: !_profileProvider.isEditProfileDetails
@@ -74,57 +79,96 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                       userDataReadModel.occupation ?? '';
                   _userAgeController.text =
                       userDataReadModel.userAge.toString();
-                  return ListView(shrinkWrap: true, children: [
-                    ListTile(
-                        leading: SizedBox(
-                          width: 80,
-                          child: Text('First Name',
-                              style: TextStyle(fontSize: 14)),
-                        ),
-                        title: TextFormField(
-                            style: TextStyle(fontSize: 15),
-                            readOnly: !_profileProvider.isEditProfileDetails,
-                            controller: _firstNameController)),
-                    ListTile(
-                        leading: SizedBox(
-                            width: 80,
-                            child: Text('Last Name',
-                                style: TextStyle(fontSize: 14))),
-                        title: TextFormField(
-                            readOnly: !_profileProvider.isEditProfileDetails,
-                            controller: _lastNameController)),
-                    ListTile(
-                        leading: SizedBox(
-                            width: 80,
-                            child:
-                                Text('Phone', style: TextStyle(fontSize: 14))),
-                        title: TextFormField(
-                            readOnly: !_profileProvider.isEditProfileDetails,
-                            controller: _phoneNumberController)),
-                    ListTile(
-                        leading: SizedBox(
-                            width: 80,
-                            child:
-                                Text('Email', style: TextStyle(fontSize: 14))),
-                        title: TextFormField(
-                            readOnly: !_profileProvider.isEditProfileDetails,
-                            controller: _emailController)),
-                    ListTile(
-                        leading: SizedBox(
-                            width: 80,
-                            child: Text('Occupation',
-                                style: TextStyle(fontSize: 14))),
-                        title: TextFormField(
-                            readOnly: !_profileProvider.isEditProfileDetails,
-                            controller: _occupationController)),
-                    ListTile(
-                        leading: SizedBox(
-                            width: 80,
-                            child: Text('Age', style: TextStyle(fontSize: 14))),
-                        title: TextFormField(
-                            readOnly: !_profileProvider.isEditProfileDetails,
-                            controller: _userAgeController)),
-                  ]);
+                  return Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        ListView(shrinkWrap: true, children: [
+                          ListTile(
+                              leading: SizedBox(
+                                width: 80,
+                                child: Text('First Name',
+                                    style: TextStyle(fontSize: 14)),
+                              ),
+                              title: TextFormField(
+                                  style: TextStyle(fontSize: 15),
+                                  readOnly:
+                                      !_profileProvider.isEditProfileDetails,
+                                  controller: _firstNameController)),
+                          ListTile(
+                              leading: SizedBox(
+                                  width: 80,
+                                  child: Text('Last Name',
+                                      style: TextStyle(fontSize: 14))),
+                              title: TextFormField(
+                                  readOnly:
+                                      !_profileProvider.isEditProfileDetails,
+                                  controller: _lastNameController)),
+                          ListTile(
+                              leading: SizedBox(
+                                  width: 80,
+                                  child: Text('Phone',
+                                      style: TextStyle(fontSize: 14))),
+                              title: TextFormField(
+                                  readOnly:
+                                      !_profileProvider.isEditProfileDetails,
+                                  controller: _phoneNumberController)),
+                          ListTile(
+                              leading: SizedBox(
+                                  width: 80,
+                                  child: Text('Email',
+                                      style: TextStyle(fontSize: 14))),
+                              title: TextFormField(
+                                  readOnly:
+                                      !_profileProvider.isEditProfileDetails,
+                                  controller: _emailController)),
+                          ListTile(
+                              leading: SizedBox(
+                                  width: 80,
+                                  child: Text('Occupation',
+                                      style: TextStyle(fontSize: 14))),
+                              title: TextFormField(
+                                  readOnly:
+                                      !_profileProvider.isEditProfileDetails,
+                                  controller: _occupationController)),
+                          ListTile(
+                              leading: SizedBox(
+                                  width: 80,
+                                  child: Text('Age',
+                                      style: TextStyle(fontSize: 14))),
+                              title: TextFormField(
+                                  readOnly:
+                                      !_profileProvider.isEditProfileDetails,
+                                  controller: _userAgeController)),
+                        ]),
+                        ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15),
+                                    side: BorderSide(
+                                        color: FlutterFlowTheme.of(context)
+                                            .tertiary))),
+                            onPressed: () {
+                              showConfirmationDialog(
+                                context: context,
+                                question:
+                                    "Are you sure you want to delete your account?",
+                                cancelButtonText: "Cancel",
+                                confirmButtonText: "Delete",
+                                onCancel: () {},
+                                onConfirm: () {
+                                  // Perform the delete action here
+
+                                  print("Delete confirmed");
+                                },
+                              );
+                            },
+                            child: Text(
+                                style: TextStyle(
+                                    color: Colors.red.shade500,
+                                    fontWeight: FontWeight.bold),
+                                'Delete Account'))
+                      ]);
                 } else if (snapshot.hasError) {
                   return Center(child: Text('Data unavailable'));
                 } else {

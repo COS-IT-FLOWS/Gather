@@ -36,14 +36,14 @@ class _EventReportWidgetState extends State<EventReportWidget> {
     });
   }
 
-  // Future<void> takePhoto() async {
-  //   final pickedFile = await _picker.pickImage(source: ImageSource.camera);
-  //   if (pickedFile != null) {
-  //     setState(() {
-  //       _image = File(pickedFile.path);
-  //     });
-  //   }
-  // }
+  Future<void> takePhoto() async {
+    final pickedFile = await _picker.pickImage(source: ImageSource.camera);
+    if (pickedFile != null) {
+      setState(() {
+        _pickedImages!.add(File(pickedFile.path));
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -90,7 +90,9 @@ class _EventReportWidgetState extends State<EventReportWidget> {
                                   color:
                                       FlutterFlowTheme.of(context).secondary))),
                       // onPressed: takePhoto,
-                      onPressed: () {},
+                      onPressed: () {
+                        takePhoto();
+                      },
                       child: Center(
                           child: Text(
                               style: TextStyle(fontWeight: FontWeight.bold),

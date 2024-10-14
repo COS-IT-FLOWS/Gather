@@ -23,16 +23,15 @@ class DatabaseProvider with ChangeNotifier {
   Future<UserDataModel> readUserData(userId) async {
     final userData =
         await _supabaseClient.from('profiles').select('*').eq('id', userId);
-
+    print(userData[0]['station_id'].runtimeType);
     UserDataModel userDataModel = UserDataModel(
         firstName: userData[0]['first_name'],
         lastName: userData[0]['last_name'],
         phoneNumber: userData[0]['phone_number'],
         emailAddress: userData[0]['email'],
         occupation: userData[0]['occupation'],
-        userAge: userData[0]['age']
-        // stationIds: userData[0]['station_id']
-        );
+        userAge: userData[0]['age'],
+        stationIds: userData[0]['station_id']);
     return userDataModel;
     // UserDataModel userDataModel = UserDataModel()
   }

@@ -50,12 +50,13 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                     _profileProvider.setProfileEditFlag(true);
                   } else {
                     UserDataModel userDataWriteModel = UserDataModel(
-                        firstName: _firstNameController.text,
-                        lastName: _lastNameController.text,
-                        phoneNumber: _phoneNumberController.text,
-                        emailAddress: _emailController.text,
-                        occupation: _occupationController.text,
-                        userAge: int.tryParse(_userAgeController.text) ?? 0);
+                      firstName: _firstNameController.text,
+                      lastName: _lastNameController.text,
+                      phoneNumber: _phoneNumberController.text,
+                      emailAddress: _emailController.text,
+                      occupation: _occupationController.text,
+                      userAge: int.tryParse(_userAgeController.text) ?? 0,
+                    );
                     _databaseProvider.insertUserData(userDataWriteModel);
                     _profileProvider.setProfileEditFlag(false);
                   }
@@ -140,6 +141,14 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                   readOnly:
                                       !_profileProvider.isEditProfileDetails,
                                   controller: _userAgeController)),
+                          ListTile(
+                              leading: SizedBox(
+                                  width: 80,
+                                  child: Text('Station IDs:',
+                                      style: TextStyle(fontSize: 14))),
+                              title: Text(
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                  userDataReadModel.stationIds!.join(', '))),
                         ]),
                         ElevatedButton(
                             style: ElevatedButton.styleFrom(

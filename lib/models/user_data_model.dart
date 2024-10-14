@@ -11,7 +11,7 @@ class UserDataModel {
   final int? userAge;
   final String? gender;
   // final bool? ifGatherer;
-  final String? stationIds;
+  final List<dynamic>? stationIds;
 
   UserDataModel(
       {required this.firstName,

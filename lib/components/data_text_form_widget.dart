@@ -291,7 +291,8 @@ class _DataTextFormWidgetState extends State<DataTextFormWidget> {
                                 double _parameterValue =
                                     double.parse(_model.textController.text);
                                 await _databaseProvider.insertWeatherData(
-                                    'RAINFALL',
+                                    GlobalConfiguration().getDeepValue(
+                                        'DATABASE_CONFIG:${widget.paramType}'),
                                     _timeStamp,
                                     'RAIN0001',
                                     _parameterValue);

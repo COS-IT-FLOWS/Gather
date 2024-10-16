@@ -57,6 +57,12 @@ class DrawerWidget extends StatelessWidget {
                   Navigator.pushNamed(context, '/about-us');
                 }),
             ListTile(
+                leading: Icon(Icons.phone),
+                title: Text('Contact Us'),
+                onTap: () {
+                  Navigator.pushNamed(context, '/contact-us');
+                }),
+            ListTile(
               leading: Icon(Icons.logout),
               title: Text('Logout'),
               onTap: () async {

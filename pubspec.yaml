@@ -41,6 +41,8 @@ dependencies:
   path_provider: ^2.0.2
   audioplayers: ^6.1.0
   another_flushbar: ^1.12.30
+  flutter_local_notifications: ^17.2.3
+  url_launcher: ^6.3.1
 
 
 

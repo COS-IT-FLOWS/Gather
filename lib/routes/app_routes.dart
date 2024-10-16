@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gather/screens/contact_us_widget.dart';
 import 'package:gather/screens/home_page_widget.dart';
 import 'package:gather/screens/event_report_widget.dart';
 import 'package:gather/screens/otp_input_widget.dart';
@@ -21,6 +22,7 @@ class AppRoutes {
         '/notifications': (BuildContext context) => NotificationWidget(),
         '/eventreport': (BuildContext context) => EventReportWidget(),
         '/profile': (BuildContext context) => ProfileWidget(),
-        '/about-us': (BuildContext context) => AboutUsPage()
+        '/about-us': (BuildContext context) => AboutUsPage(),
+        '/contact-us': (BuildContext context) => ContactUsPage()
       };
 }

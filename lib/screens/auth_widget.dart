@@ -73,6 +73,7 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget> {
   // }
 
   void _signInWithGoogleAuth() async {
+    final String userId;
     if (_signInProvider == null) return;
     showDialog(
       context: context,
@@ -104,14 +105,31 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget> {
     );
 
     try {
-      await _signInProvider!.signInWithGoogle();
+      userId = await _signInProvider!.signInWithGoogle();
       if (!mounted) return;
       Navigator.of(context).pop(); // Close the dialog
       Navigator.pushReplacementNamed(context, '/home');
     } catch (e) {
-      Navigator.of(context).pop(); // Close the dialog
+      Navigator.of(context).pop();
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Error"),
+            content: Text("Invalid Gmail ID"),
+            actions: <Widget>[
+              ElevatedButton(
+                child: Text("OK"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      ); // Close the dialog
       // Handle the error here, e.g., show an error message
-      print("Error signing in: $e");
+      // throw ("Error signing in: $e");
     }
   }
 

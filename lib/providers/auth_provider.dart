@@ -8,7 +8,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 class SignInProvider with ChangeNotifier {
   final SupabaseClient _supabaseClient;
   bool _isLoggedIn = false;
-  late String _userId;
+  late String _userId = '';
   late String _phoneNumber;
   String _otpValue = '';
   String get otpValue => _otpValue;
@@ -54,7 +54,7 @@ class SignInProvider with ChangeNotifier {
     }
   }
 
-  Future<void> signInWithGoogle() async {
+  Future<String> signInWithGoogle() async {
     final GoogleSignIn googleSignIn = GoogleSignIn(
         serverClientId:
             GlobalConfiguration().get('SUPABASE_GOOGLE_AUTH_WEB_CLIENT_ID'));
@@ -77,11 +77,12 @@ class SignInProvider with ChangeNotifier {
       _userId = response.user!.id;
       _isLoggedIn = true;
       notifyListeners();
+      return _userId;
     } catch (e) {
       if (e is AuthException) {
-        print('Auth error: ${e.message}');
+        throw ('Auth error: ${e.message}');
       } else {
-        print('Error: $e');
+        throw ('Error: $e');
       }
     }
   }

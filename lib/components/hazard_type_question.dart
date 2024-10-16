@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:global_configuration/global_configuration.dart';
 
 class HazardTypeQuestion extends StatefulWidget {
+  final Function(String) onOptionSelected;
+
+  HazardTypeQuestion({required this.onOptionSelected});
+
   @override
   _HazardTypeQuestionState createState() => _HazardTypeQuestionState();
 }
@@ -49,6 +53,7 @@ class _HazardTypeQuestionState extends State<HazardTypeQuestion> {
               setState(() {
                 _selectedOption = value.toString();
               });
+              widget.onOptionSelected(_selectedOption);
             },
           );
         })

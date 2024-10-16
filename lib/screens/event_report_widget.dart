@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:gather/components/appbar_widget.dart';
+import 'package:gather/models/hazard_data_model.dart';
+import 'package:gather/providers/database_provider.dart';
 import 'package:image_picker/image_picker.dart';
 // import 'package:record/record.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
@@ -10,6 +12,7 @@ import 'package:flutterflow_ui/flutterflow_ui.dart';
 
 import 'package:gather/components/audio_recorder.dart';
 import 'package:gather/components/hazard_type_question.dart';
+import 'package:provider/provider.dart';
 
 class EventReportWidget extends StatefulWidget {
   @override
@@ -20,9 +23,13 @@ class _EventReportWidgetState extends State<EventReportWidget> {
   final ImagePicker _picker = ImagePicker();
 
   List<File>? _pickedImages = [];
-  String? _audioPath;
-  // final _recorder = AudioRecorder();
-  bool _isRecording = false;
+  String? _savedAudioFilePath = '';
+
+  void _updateSavedAudioFilePath(String filePath) {
+    setState(() {
+      _savedAudioFilePath = filePath;
+    });
+  }
 
   Future<void> getImage() async {
     final ImagePicker picker = ImagePicker();
@@ -46,7 +53,10 @@ class _EventReportWidgetState extends State<EventReportWidget> {
   }
 
   @override
+  HazardDataModel hazardDataWriteModel = HazardDataModel(hazardType: '');
+  final hazardDescriptionController = TextEditingController();
   Widget build(BuildContext context) {
+    DatabaseProvider databaseProvider = context.read<DatabaseProvider>();
     return Scaffold(
       appBar: appBarWidget(context, 'Report Hazard'),
       body: SingleChildScrollView(
@@ -60,7 +70,11 @@ class _EventReportWidgetState extends State<EventReportWidget> {
                 style: TextStyle(fontSize: 20),
                 'Report extreme weather phenomena such as floods, flash floods, landslides, heatwaves, etc.'),
             SizedBox(height: 30),
-            HazardTypeQuestion(),
+            HazardTypeQuestion(
+              onOptionSelected: (selectedOption) {
+                hazardDataWriteModel.hazardType = selectedOption;
+              },
+            ),
             SizedBox(height: 30),
             Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -165,11 +179,12 @@ class _EventReportWidgetState extends State<EventReportWidget> {
               ),
             ),
             SizedBox(height: 30),
-            VoiceRecorder(),
+            VoiceRecorder(onSavedAudioFilePath: _updateSavedAudioFilePath),
             SizedBox(height: 30),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextField(
+                controller: hazardDescriptionController,
                 maxLines: null,
                 keyboardType: TextInputType.multiline,
                 decoration: InputDecoration(
@@ -181,10 +196,27 @@ class _EventReportWidgetState extends State<EventReportWidget> {
             Align(
               alignment: AlignmentDirectional(0, 0),
               child: FFButtonWidget(
-                onPressed: () {
-                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                    content: Text("Event Report Completed"),
-                  ));
+                onPressed: () async {
+                  hazardDataWriteModel.hazardDescription =
+                      hazardDescriptionController.text;
+                  final hazardId = await databaseProvider
+                      .insertHazardEventDataAndGetHazardId(
+                          hazardDataWriteModel);
+                  // final hazardId = await databaseProvider.readHazardId();
+                  await databaseProvider.uploadFiles(
+                      hazardId, _pickedImages, _savedAudioFilePath);
+                  await showDialog<String>(
+                    context: context,
+                    builder: (BuildContext context) => AlertDialog(
+                      title: const Text('Data Submitted Successfully'),
+                      actions: <Widget>[
+                        TextButton(
+                          onPressed: () => Navigator.pop(context, 'OK'),
+                          child: const Text('OK'),
+                        ),
+                      ],
+                    ),
+                  );
                   Navigator.of(context).pop();
                 },
                 text: 'Submit',

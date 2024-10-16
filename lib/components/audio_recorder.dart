@@ -7,6 +7,9 @@ import 'dart:io';
 import 'package:another_flushbar/flushbar.dart';
 
 class VoiceRecorder extends StatefulWidget {
+  final Function(String) onSavedAudioFilePath;
+  VoiceRecorder({required this.onSavedAudioFilePath});
+
   @override
   _VoiceRecorderState createState() => _VoiceRecorderState();
 }
@@ -140,6 +143,8 @@ class _VoiceRecorderState extends State<VoiceRecorder> {
                                         setState(() {
                                           savedAudioFilePath = saveFilePath;
                                         });
+                                        widget.onSavedAudioFilePath(
+                                            savedAudioFilePath);
                                       }
                                       Navigator.of(context)
                                           .pop(); // Close the dialog
@@ -173,7 +178,6 @@ class _VoiceRecorderState extends State<VoiceRecorder> {
 
   Future<void> _playRecording() async {
     if (savedAudioFilePath.isNotEmpty) {
-      print(savedAudioFilePath);
       await _audioPlayer.play(DeviceFileSource(savedAudioFilePath));
     } else {
       Flushbar(

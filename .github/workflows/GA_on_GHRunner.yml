@@ -28,7 +28,7 @@ jobs:
 
       - name: Update README.md with Coverage Badge
         run: |
-          echo "${{steps}}";
+          echo "${{steps.coverage}}";
       #     # Define the badge URL (adjust the URL according to your badge)
       #     BADGE_URL="${{ steps.coverage.output }}"
       #     # Update README.md

@@ -24,6 +24,23 @@ jobs:
           badge: true
           format: markdown
           hide_complexity: true
+
+      - name: Update README.md with Coverage Badge
+        run: |
+          # Define the badge URL (adjust the URL according to your badge)
+          BADGE_URL="https://img.shields.io/badge/Coverage-${{ steps.coverage.outputs.coverage_percent }}%25-brightgreen"
+          # Update README.md
+          echo "![Coverage]($BADGE_URL)" >> README.md
+
+      - name: Commit and Push Changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add README.md
+          git commit -m "Update README.md with coverage badge"
+          git push
+        env:  
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             
 
       

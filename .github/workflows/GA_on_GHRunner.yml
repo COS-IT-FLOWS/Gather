@@ -31,7 +31,7 @@ jobs:
           # Extract the URL using a regex
           # url=$(echo "${{ steps.coverage.outputs.stdout }}" | grep -oP '(?<=\!\[Code Coverage\]\().*?(?=\))')
           # Output the extracted URL
-          echo "{{ steps.coverage.outputs.* }}"
+          echo "${{ steps.coverage.outputs.* }}"
       #     # Define the badge URL (adjust the URL according to your badge)
       #     BADGE_URL="${{ steps.coverage.output }}"
       #     # Update README.md

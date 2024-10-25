@@ -29,7 +29,7 @@ jobs:
       - name: Update README.md with Coverage Badge
         run: |
           # Extract the URL using a regex
-          url=$(echo "$log_output" | grep -oP '(?<=\!\[Code Coverage\]\().*?(?=\))')
+          url=$(echo "${{ steps.coverage.outputs.* }}" | grep -oP '(?<=\!\[Code Coverage\]\().*?(?=\))')
           # Output the extracted URL
           echo "Extracted URL: $url"
       #     # Define the badge URL (adjust the URL according to your badge)

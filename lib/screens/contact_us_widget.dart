@@ -5,10 +5,16 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:global_configuration/global_configuration.dart';
 
 class ContactUsPage extends StatelessWidget {
+  final Future<Map<String, dynamic>> Function()? loadContactDetails;
+
+  ContactUsPage({this.loadContactDetails});
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<Map<String, dynamic>>(
-      future: _loadContactDetails(),
+      future: loadContactDetails != null
+          ? loadContactDetails!()
+          : _loadContactDetails(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Scaffold(

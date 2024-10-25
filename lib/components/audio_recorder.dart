@@ -8,7 +8,10 @@ import 'package:another_flushbar/flushbar.dart';
 
 class VoiceRecorder extends StatefulWidget {
   final Function(String) onSavedAudioFilePath;
-  VoiceRecorder({required this.onSavedAudioFilePath});
+  final bool showSaveDiscardButtons;
+  VoiceRecorder(
+      {required this.onSavedAudioFilePath,
+      required this.showSaveDiscardButtons});
 
   @override
   _VoiceRecorderState createState() => _VoiceRecorderState();
@@ -17,7 +20,7 @@ class VoiceRecorder extends StatefulWidget {
 class _VoiceRecorderState extends State<VoiceRecorder> {
   final record = AudioRecorder();
   bool _isRecording = false;
-  bool _showSaveDiscardButtons = false;
+  bool showSaveDiscardButtons = false;
   String _recordedFilePath = '';
   String savedAudioFilePath = '';
   AudioPlayer _audioPlayer = AudioPlayer();
@@ -73,7 +76,7 @@ class _VoiceRecorderState extends State<VoiceRecorder> {
                                     final path = await record.stop();
                                     setState(() {
                                       _isRecording = false;
-                                      _showSaveDiscardButtons = true;
+                                      showSaveDiscardButtons = true;
                                     });
                                   }
                                 },
@@ -82,7 +85,7 @@ class _VoiceRecorderState extends State<VoiceRecorder> {
                                     final path = await record.stop();
                                     setState(() {
                                       _isRecording = false;
-                                      _showSaveDiscardButtons = true;
+                                      showSaveDiscardButtons = true;
                                     });
                                   }
                                 },
@@ -107,12 +110,13 @@ class _VoiceRecorderState extends State<VoiceRecorder> {
                                         size: 100,
                                       )),
                                 )),
-                            if (_showSaveDiscardButtons) // Conditionally display buttons
+                            if (showSaveDiscardButtons) // Conditionally display buttons
                               Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceEvenly,
                                 children: [
                                   ElevatedButton(
+                                    key: Key('discard'),
                                     onPressed: () async {
                                       // Handle discard action
                                       if (await File(_recordedFilePath)
@@ -128,6 +132,7 @@ class _VoiceRecorderState extends State<VoiceRecorder> {
                                     child: Icon(Icons.close),
                                   ),
                                   ElevatedButton(
+                                    key: Key('save'),
                                     onPressed: () async {
                                       // Handle save action
                                       DateTime now = DateTime.now();

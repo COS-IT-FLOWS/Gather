@@ -70,11 +70,11 @@ class _EventReportWidgetState extends State<EventReportWidget> {
                 style: TextStyle(fontSize: 20),
                 'Report extreme weather phenomena such as floods, flash floods, landslides, heatwaves, etc.'),
             SizedBox(height: 30),
-            HazardTypeQuestion(
-              onOptionSelected: (selectedOption) {
-                hazardDataWriteModel.hazardType = selectedOption;
-              },
-            ),
+            // HazardTypeQuestion(
+            //   onOptionSelected: (selectedOption) {
+            //     hazardDataWriteModel.hazardType = selectedOption;
+            //   },
+            // ),
             SizedBox(height: 30),
             Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -179,7 +179,9 @@ class _EventReportWidgetState extends State<EventReportWidget> {
               ),
             ),
             SizedBox(height: 30),
-            VoiceRecorder(onSavedAudioFilePath: _updateSavedAudioFilePath),
+            VoiceRecorder(
+                showSaveDiscardButtons: false,
+                onSavedAudioFilePath: _updateSavedAudioFilePath),
             SizedBox(height: 30),
             Padding(
               padding: const EdgeInsets.all(8.0),

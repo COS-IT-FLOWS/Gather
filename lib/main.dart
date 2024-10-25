@@ -25,7 +25,7 @@ Future<void> main() async {
       ChangeNotifierProvider<SignInProvider>(
           create: (_) => SignInProvider(supabase)),
       ChangeNotifierProvider<DatabaseProvider>(
-          create: (_) => DatabaseProvider(supabase)),
+          create: (_) => DatabaseProvider(supabase, 'testUserId')),
       ChangeNotifierProvider<DateTimeProvider>(
           create: (_) => DateTimeProvider()),
       ChangeNotifierProvider<ProfileProvider>(create: (_) => ProfileProvider())

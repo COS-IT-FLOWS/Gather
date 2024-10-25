@@ -40,8 +40,8 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget> {
     _model = AuthenticationModel();
     _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
-    // late PhoneNumber _phoneNumber;
-    // late SignInProvider _signInProvider;
+    late PhoneNumber _phoneNumber;
+    late SignInProvider _signInProvider;
     // _otpProvider = Provider.of<OtpProvider>(context, listen: false);
     // _signInProvider = Provider.of<SignInProvider>(context, listen: false);
   }
@@ -65,13 +65,6 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget> {
     Navigator.pushNamed(context, '/otpscreen');
   }
 
-  // void _signInWithGoogleAuth() async {
-  //   if (_signInProvider == null) return;
-  //   await _signInProvider!.signInWithGoogle();
-  //   if (!mounted) return;
-  //   Navigator.pushNamed(context, '/home');
-  // }
-
   void _signInWithGoogleAuth() async {
     final String userId;
     if (_signInProvider == null) return;
@@ -83,16 +76,16 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget> {
         return AlertDialog(
           backgroundColor: Colors.white,
           shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
           content: SizedBox(
-            width: 100,
-            height: 150,
+            width: 101,
+            height: 151,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 CircularProgressIndicator(),
-                SizedBox(height: 20),
+                SizedBox(height: 21),
                 Text(
                     style:
                         TextStyle(color: FlutterFlowTheme.of(context).primary),

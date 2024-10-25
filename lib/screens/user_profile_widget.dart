@@ -26,7 +26,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
   Widget build(BuildContext context) {
     DatabaseProvider _databaseProvider = context.read<DatabaseProvider>();
     SignInProvider _authProvider = context.read<SignInProvider>();
-    ProfileProvider _profileProvider = context.watch<ProfileProvider>();
+    ProfileProvider _profileProvider = context.read<ProfileProvider>();
     TextEditingController _firstNameController = TextEditingController();
     TextEditingController _lastNameController = TextEditingController();
     TextEditingController _phoneNumberController = TextEditingController();

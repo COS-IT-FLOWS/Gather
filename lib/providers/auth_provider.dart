@@ -1,20 +1,20 @@
+import 'dart:ffi';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:global_configuration/global_configuration.dart';
-import 'package:supabase/supabase.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class SignInProvider with ChangeNotifier {
   final SupabaseClient _supabaseClient;
   bool _isLoggedIn = false;
-  late String _userId = '';
-  late String _phoneNumber;
+  String _userId = '';
+  String get userId => _userId;
+  bool get isLoggedIn => _isLoggedIn;
+  String _phoneNumber = '';
   String _otpValue = '';
   String get otpValue => _otpValue;
-
-  bool get isLoggedIn => _isLoggedIn;
-  String get userId => _userId;
 
   SignInProvider(this._supabaseClient) {
     final authSubscription =
@@ -26,6 +26,13 @@ class SignInProvider with ChangeNotifier {
       }
     });
   }
+
+  // Method to set userId
+
+  // void setUserId(String userId) {
+  //   _userId = userId;
+  //   notifyListeners(); // Notify listeners about the change
+  // }
 
   Future<void> signInWithPhoneNumber(String phoneNumber) async {
     _phoneNumber = phoneNumber;

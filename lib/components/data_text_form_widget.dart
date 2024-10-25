@@ -58,16 +58,22 @@ class _DataTextFormWidgetState extends State<DataTextFormWidget> {
 
   @override
   Widget build(BuildContext context) {
-    DateTimeProvider _dateTimeProvider = context.read<DateTimeProvider>();
-    DatabaseProvider _databaseProvider = context.read<DatabaseProvider>();
+    DateTimeProvider dateTimeProvider = context.read<DateTimeProvider>();
+    DatabaseProvider databaseProvider = context.read<DatabaseProvider>();
     ProfileProvider profileProvider = context.read<ProfileProvider>();
+    // if (dateTimeProvider.initialDate != null) {
     _dateTextController.text =
-        _dateTimeProvider.getDateString(_dateTimeProvider.initialDate);
+        dateTimeProvider.getDateString(dateTimeProvider.initialDate);
+    // }
     _timeTextController.text =
-        _dateTimeProvider.getTimeString(context, _dateTimeProvider.initialTime);
+        dateTimeProvider.getTimeString(context, dateTimeProvider.initialTime);
     String? parameterType = widget.paramType;
-    String? stationIdPrefix = GlobalConfiguration()
-        .getDeepValue('STATION_ID_TEMPLATE:$parameterType');
+    String? stationIdPrefix = (GlobalConfiguration()
+                .getDeepValue('STATION_ID_TEMPLATE:$parameterType') !=
+            null)
+        ? GlobalConfiguration()
+            .getDeepValue('STATION_ID_TEMPLATE:$parameterType')
+        : 'TEST';
     String? selectedStationId = profileProvider.stationIds!
         .firstWhere((id) => id.contains(stationIdPrefix), orElse: () => null);
     if (selectedStationId == null) {
@@ -268,14 +274,13 @@ class _DataTextFormWidgetState extends State<DataTextFormWidget> {
                                                           lastDate:
                                                               DateTime.now());
                                                   if (_selectedDate != null) {
-                                                    _dateTimeProvider
-                                                        .selectDate(
-                                                            _selectedDate!);
+                                                    dateTimeProvider.selectDate(
+                                                        _selectedDate!);
                                                     _dateTextController.text =
-                                                        _dateTimeProvider
+                                                        dateTimeProvider
                                                             .getDateString(
-                                                                _dateTimeProvider
-                                                                    .selectedDate);
+                                                                dateTimeProvider
+                                                                    .selectedDate!);
                                                   }
                                                 })
                                           ])))),
@@ -296,17 +301,16 @@ class _DataTextFormWidgetState extends State<DataTextFormWidget> {
                                                       await showTimePicker(
                                                           context: context,
                                                           initialTime:
-                                                              _dateTimeProvider
-                                                                  .selectedTime);
+                                                              dateTimeProvider
+                                                                  .selectedTime!);
                                                   if (_selectedTime != null) {
-                                                    _dateTimeProvider
-                                                        .selectTime(
-                                                            _selectedTime!);
+                                                    dateTimeProvider.selectTime(
+                                                        _selectedTime!);
                                                     _timeTextController.text =
-                                                        _dateTimeProvider
+                                                        dateTimeProvider
                                                             .getTimeString(
                                                                 context,
-                                                                _dateTimeProvider
+                                                                dateTimeProvider
                                                                     .selectedTime);
                                                   }
                                                 })
@@ -319,30 +323,32 @@ class _DataTextFormWidgetState extends State<DataTextFormWidget> {
                               onPressed: () async {
                                 if (_formKey.currentState!.validate()) {
                                   DateTime _timeStamp =
-                                      _dateTimeProvider.getSelectedDateTime();
+                                      dateTimeProvider.getSelectedDateTime();
                                   double _parameterValue =
                                       double.parse(_model.textController.text);
-                                  await _databaseProvider.insertWeatherData(
-                                      parameterType,
-                                      _timeStamp,
-                                      selectedStationId,
-                                      _parameterValue);
-
-                                  await showDialog<String>(
-                                    context: context,
-                                    builder: (BuildContext context) =>
-                                        AlertDialog(
-                                      title: const Text(
-                                          'Data Submitted Successfully'),
-                                      actions: <Widget>[
-                                        TextButton(
-                                          onPressed: () =>
-                                              Navigator.pop(context, 'OK'),
-                                          child: const Text('OK'),
-                                        ),
-                                      ],
-                                    ),
-                                  );
+                                  bool ifSuccess =
+                                      await databaseProvider.insertWeatherData(
+                                          parameterType,
+                                          _timeStamp,
+                                          selectedStationId,
+                                          _parameterValue);
+                                  if (ifSuccess) {
+                                    await showDialog<String>(
+                                      context: context,
+                                      builder: (BuildContext context) =>
+                                          AlertDialog(
+                                        title: const Text(
+                                            'Data Submitted Successfully'),
+                                        actions: <Widget>[
+                                          TextButton(
+                                            onPressed: () =>
+                                                Navigator.pop(context, 'OK'),
+                                            child: const Text('OK'),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  }
 
                                   // ScaffoldMessenger.of(context)
                                   //     .showSnackBar(const SnackBar(

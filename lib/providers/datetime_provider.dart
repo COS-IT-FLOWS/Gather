@@ -34,7 +34,7 @@ class DateTimeProvider with ChangeNotifier {
     }
   }
 
-  String getTimeString(BuildContext context, TimeOfDay time) {
+  String getTimeString(TimeOfDay time) {
     final timeFormatter = DateFormat('hh:mm a');
     DateTime today = DateTime.now();
     DateTime selectedTime = DateTime(

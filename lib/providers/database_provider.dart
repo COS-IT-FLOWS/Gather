@@ -14,8 +14,10 @@ class DatabaseProvider with ChangeNotifier {
       parameter, timeStamp, stationId, parameterValue) async {
     String dataTable =
         GlobalConfiguration().getDeepValue('DATABASE_CONFIG:$parameter');
-    await _supabaseClient.from(dataTable).insert(
-        {'collected_at': timeStamp.toString(), stationId: parameterValue});
+    await _supabaseClient.from(dataTable).insert({
+      'collected_at': timeStamp.toString(),
+      stationId: parameterValue
+    }).select();
     return true;
   }
 
@@ -74,7 +76,7 @@ class DatabaseProvider with ChangeNotifier {
     return hazardId;
   }
 
-  Future<void> uploadFiles(hazardId, pickedImages, savedFilePath) async {
+  Future<bool> uploadFiles(hazardId, pickedImages, savedFilePath) async {
     // final storage = _supabaseClient.storage;
     for (var filePath in pickedImages) {
       final fileName = filePath.path.split('/').last;
@@ -90,5 +92,6 @@ class DatabaseProvider with ChangeNotifier {
           .from('hazard_event_media')
           .upload('$hazardId/$fileName', savedFile);
     }
+    return true;
   }
 } // End of DatabaseProvider

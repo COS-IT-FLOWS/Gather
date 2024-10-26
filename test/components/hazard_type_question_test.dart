@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:global_configuration/global_configuration.dart';
 import 'package:gather/components/hazard_type_question.dart'; // Adjust the import based on your file structure
+import 'package:global_configuration/global_configuration.dart';
 
 void main() {
+  late GlobalConfiguration configuration;
   // Mock data for the global configuration
   const mockHazardTypes = {
     'QUESTION': 'What type of hazard is this?',
@@ -16,7 +18,8 @@ void main() {
 
   setUpAll(() {
     // Set up the global configuration before all tests
-    GlobalConfiguration().loadFromMap({'HAZARD_TYPES': mockHazardTypes});
+    configuration =
+        GlobalConfiguration().loadFromMap({'HAZARD_TYPES': mockHazardTypes});
   });
 
   testWidgets('displays the question and options', (WidgetTester tester) async {
@@ -29,6 +32,7 @@ void main() {
             onOptionSelected: (value) {
               selectedOption = value;
             },
+            config: configuration,
           ),
         ),
       ),
@@ -51,10 +55,10 @@ void main() {
       MaterialApp(
         home: Scaffold(
           body: HazardTypeQuestion(
-            onOptionSelected: (value) {
-              selectedOption = value;
-            },
-          ),
+              onOptionSelected: (value) {
+                selectedOption = value;
+              },
+              config: configuration),
         ),
       ),
     );

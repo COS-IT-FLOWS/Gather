@@ -4,8 +4,9 @@ import 'package:global_configuration/global_configuration.dart';
 
 class HazardTypeQuestion extends StatefulWidget {
   final Function(String) onOptionSelected;
+  final GlobalConfiguration config;
 
-  HazardTypeQuestion({required this.onOptionSelected});
+  HazardTypeQuestion({required this.onOptionSelected, required this.config});
 
   @override
   _HazardTypeQuestionState createState() => _HazardTypeQuestionState();
@@ -20,12 +21,12 @@ class _HazardTypeQuestionState extends State<HazardTypeQuestion> {
   @override
   void initState() {
     super.initState();
-    _loadOptionsFromConfig();
+    _loadOptionsFromConfig(widget.config);
   }
 
-  Future<void> _loadOptionsFromConfig() async {
+  void _loadOptionsFromConfig(GlobalConfiguration configuration) {
     Map<String, dynamic> hazardTypeData =
-        GlobalConfiguration().getValue('HAZARD_TYPES');
+        configuration.getValue('HAZARD_TYPES');
     setState(() {
       _hazardTypeData = hazardTypeData;
     });

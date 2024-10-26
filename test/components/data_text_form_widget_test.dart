@@ -5,6 +5,7 @@ import 'package:gather/providers/auth_provider.dart';
 import 'package:gather/providers/database_provider.dart';
 import 'package:gather/providers/datetime_provider.dart';
 import 'package:gather/providers/profile_provider.dart';
+import 'package:gather/screens/home_page_widget.dart';
 import 'package:mockito/mockito.dart';
 import 'package:provider/provider.dart';
 // import 'package:provider/provider.dart';
@@ -23,17 +24,9 @@ void main() {
       mockDatabaseProvider = MockDatabaseProvider();
       mockProfileProvider = MockProfileProvider();
       mockAuthProvider = MockAuthProvider();
-
-      // Set up mock behavior
-      // when(mockDateTimeProvider.initialDate).thenReturn(DateTime.now());
-      // when(mockDateTimeProvider.initialTime).thenReturn(TimeOfDay.now());
-      // when(mockProfileProvider.stationIds)
-      //     .thenReturn(['Station_1', 'Station_2']);
-      // when(mockDateTimeProvider.getDateString(any)).thenReturn('01/01/2023');
-      // when(mockDateTimeProvider.getTimeString(any, any)).thenReturn('12:00 PM');
     });
 
-    testWidgets('renders correctly and validates input',
+    testWidgets('does not render for non gatherers',
         (WidgetTester tester) async {
       await tester.pumpWidget(
         MultiProvider(
@@ -48,11 +41,57 @@ void main() {
                 create: (_) => mockAuthProvider)
           ],
           builder: (context, child) {
-            return MaterialApp(
-              home: Scaffold(
-                body: DataTextFormWidget(paramType: 'RAINFALL', unitType: 'mm'),
-              ),
-            );
+            return MaterialApp(home: HomePageWidget());
+          },
+        ),
+      );
+      String userId = 'nontestUserId';
+      mockAuthProvider.logIn(userId);
+      mockProfileProvider.setStationIdsForUser(userId);
+      await tester.pumpAndSettle();
+
+      expect(find.text('Rainfall'), findsOneWidget);
+
+      await tester.tap(find.text('Rainfall'));
+      await tester.pumpAndSettle();
+
+      expect(find.byType(TextFormField),
+          findsNothing); // Adjust based on number of text fields
+      expect(find.text('Submit'), findsNothing);
+
+      // Check if the initial UI is rendered
+      expect(find.text('No Station ID Found'), findsOneWidget);
+      expect(find.text('Please select a valid station ID'), findsOneWidget);
+      expect(find.text('OK'), findsOneWidget);
+      await tester.tap(find.text('OK'));
+      await tester.pumpAndSettle();
+
+      // Try submitting the form without filling it
+
+      // Check for validation error message
+      expect(find.text('Enter Data'), findsOneWidget);
+      expect(find.text('Rainfall'), findsOneWidget);
+      expect(find.text('River'), findsOneWidget);
+      expect(find.text('Groundwater'), findsOneWidget);
+      expect(find.text('Tidal'), findsOneWidget);
+    });
+
+    testWidgets('renders correctly and validates input for gatherer',
+        (WidgetTester tester) async {
+      await tester.pumpWidget(
+        MultiProvider(
+          providers: [
+            ChangeNotifierProvider<DateTimeProvider>(
+                create: (_) => mockDateTimeProvider),
+            ChangeNotifierProvider<DatabaseProvider>(
+                create: (_) => mockDatabaseProvider),
+            ChangeNotifierProvider<ProfileProvider>(
+                create: (_) => mockProfileProvider),
+            ChangeNotifierProvider<SignInProvider>(
+                create: (_) => mockAuthProvider)
+          ],
+          builder: (context, child) {
+            return MaterialApp(home: HomePageWidget());
           },
         ),
       );
@@ -60,9 +99,14 @@ void main() {
       mockAuthProvider.logIn(userId);
       mockProfileProvider.setStationIdsForUser(userId);
       await tester.pumpAndSettle();
+
+      expect(find.text('Rainfall'), findsOneWidget);
+
+      await tester.tap(find.text('Rainfall'));
+      await tester.pumpAndSettle();
       // Check if the initial UI is rendered
-      // expect(
-      //     find.text('Rainfall'), findsOneWidget); // Adjust based on your logic
+      expect(
+          find.text('Rainfall'), findsOneWidget); // Adjust based on your logic
       expect(find.byType(TextFormField),
           findsNWidgets(3)); // Adjust based on number of text fields
 
@@ -84,16 +128,23 @@ void main() {
                 create: (_) => mockDatabaseProvider),
             ChangeNotifierProvider<ProfileProvider>(
                 create: (_) => mockProfileProvider),
+            ChangeNotifierProvider<SignInProvider>(
+                create: (_) => mockAuthProvider)
           ],
           builder: (context, child) {
-            return MaterialApp(
-              home: Scaffold(
-                body: DataTextFormWidget(paramType: 'RAINFALL', unitType: 'mm'),
-              ),
-            );
+            return MaterialApp(home: HomePageWidget());
           },
         ),
       );
+      String userId = 'testUserId';
+      mockAuthProvider.logIn(userId);
+      mockProfileProvider.setStationIdsForUser(userId);
+      await tester.pumpAndSettle();
+
+      expect(find.text('Rainfall'), findsOneWidget);
+
+      await tester.tap(find.text('Rainfall'));
+      await tester.pumpAndSettle();
       // expect(find.byType())
       // Fill in the text field
       await tester.enterText(find.byType(TextFormField).first,

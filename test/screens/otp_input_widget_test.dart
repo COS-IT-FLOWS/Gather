@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:gather/screens/home_page_widget.dart';
 import 'package:mockito/mockito.dart';
 import 'package:provider/provider.dart';
 import 'package:gather/providers/auth_provider.dart';
@@ -9,14 +10,17 @@ import '../mock_classes.dart'; // Import the mock classes
 void main() {
   testWidgets('OtpInputWidget test with Mockito', (WidgetTester tester) async {
     // Create a mock SignInProvider
-    final mockSignInProvider = MockAuthProvider();
+    final mockAuthProvider = MockAuthProvider();
     // when(mockSignInProvider.signInWithPhoneNumber('1234567890')).thenAnswer((_) => );
 
     // Build the OtpInputWidget within a Provider
     await tester.pumpWidget(ChangeNotifierProvider<SignInProvider>(
-        create: (_) => mockSignInProvider,
+        create: (_) => mockAuthProvider,
         builder: (context, child) {
-          return MaterialApp(home: OtpInputWidget());
+          return MaterialApp(initialRoute: '/', routes: {
+            '/': (context) => OtpInputWidget(),
+            '/home': (context) => Center(child: Text('HomePage'))
+          });
         }));
 
     // Verify that six input fields are rendered
@@ -44,10 +48,10 @@ void main() {
     await tester.pump(); // Rebuild the widget
 
     // Verify that the verifyOtp method was called with the correct OTP
-    // verify(mockSignInProvider.verifyOtp('123456')).called(1);
+    // verify(mockAuthProvider.verifyOtp('123456')).called(1);
 
     // Verify that the user is logged in
-    expect(mockSignInProvider.isLoggedIn, isTrue);
+    expect(mockAuthProvider.isLoggedIn, isTrue);
 
     // Verify that navigation occurs (you can check for the route if needed)
     // This part may require additional setup to verify navigation

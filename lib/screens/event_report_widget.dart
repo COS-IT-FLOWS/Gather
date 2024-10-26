@@ -15,13 +15,16 @@ import 'package:gather/components/hazard_type_question.dart';
 import 'package:provider/provider.dart';
 
 class EventReportWidget extends StatefulWidget {
+  final ImagePicker picker;
+  final GlobalConfiguration config;
+
+  EventReportWidget({required this.picker, required this.config});
+
   @override
   _EventReportWidgetState createState() => _EventReportWidgetState();
 }
 
 class _EventReportWidgetState extends State<EventReportWidget> {
-  final ImagePicker _picker = ImagePicker();
-
   List<File>? _pickedImages = [];
   String? _savedAudioFilePath = '';
 
@@ -32,8 +35,8 @@ class _EventReportWidgetState extends State<EventReportWidget> {
   }
 
   Future<void> getImage() async {
-    final ImagePicker picker = ImagePicker();
-    final pickedFiles = await picker.pickMultiImage();
+    // final Ipicker = ImagePicker();
+    final pickedFiles = await widget.picker.pickMultiImage();
     setState(() {
       if (pickedFiles != null) {
         _pickedImages = pickedFiles.map((file) => File(file.path)).toList();
@@ -44,7 +47,8 @@ class _EventReportWidgetState extends State<EventReportWidget> {
   }
 
   Future<void> takePhoto() async {
-    final pickedFile = await _picker.pickImage(source: ImageSource.camera);
+    final pickedFile =
+        await widget.picker.pickImage(source: ImageSource.camera);
     if (pickedFile != null) {
       setState(() {
         _pickedImages!.add(File(pickedFile.path));
@@ -70,17 +74,19 @@ class _EventReportWidgetState extends State<EventReportWidget> {
                 style: TextStyle(fontSize: 20),
                 'Report extreme weather phenomena such as floods, flash floods, landslides, heatwaves, etc.'),
             SizedBox(height: 30),
-            // HazardTypeQuestion(
-            //   onOptionSelected: (selectedOption) {
-            //     hazardDataWriteModel.hazardType = selectedOption;
-            //   },
-            // ),
+            HazardTypeQuestion(
+              onOptionSelected: (selectedOption) {
+                hazardDataWriteModel.hazardType = selectedOption;
+              },
+              config: widget.config,
+            ),
             SizedBox(height: 30),
             Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   ElevatedButton(
+                      key: Key('photo-upload'),
                       style: ElevatedButton.styleFrom(
                           minimumSize: Size(0, 50),
                           shape: RoundedRectangleBorder(
@@ -96,6 +102,7 @@ class _EventReportWidgetState extends State<EventReportWidget> {
                               style: TextStyle(fontWeight: FontWeight.bold),
                               'Upload Photo'))),
                   ElevatedButton(
+                      key: Key('camera-upload'),
                       style: ElevatedButton.styleFrom(
                           minimumSize: Size(0, 50),
                           shape: RoundedRectangleBorder(
@@ -198,6 +205,7 @@ class _EventReportWidgetState extends State<EventReportWidget> {
             Align(
               alignment: AlignmentDirectional(0, 0),
               child: FFButtonWidget(
+                key: Key('submit-report'),
                 onPressed: () async {
                   hazardDataWriteModel.hazardDescription =
                       hazardDescriptionController.text;
@@ -205,21 +213,36 @@ class _EventReportWidgetState extends State<EventReportWidget> {
                       .insertHazardEventDataAndGetHazardId(
                           hazardDataWriteModel);
                   // final hazardId = await databaseProvider.readHazardId();
-                  await databaseProvider.uploadFiles(
+                  bool ifFilesUploaded = await databaseProvider.uploadFiles(
                       hazardId, _pickedImages, _savedAudioFilePath);
-                  await showDialog<String>(
-                    context: context,
-                    builder: (BuildContext context) => AlertDialog(
-                      title: const Text('Data Submitted Successfully'),
-                      actions: <Widget>[
-                        TextButton(
-                          onPressed: () => Navigator.pop(context, 'OK'),
-                          child: const Text('OK'),
-                        ),
-                      ],
-                    ),
-                  );
-                  Navigator.of(context).pop();
+                  if (ifFilesUploaded == true) {
+                    await showDialog<String>(
+                      context: context,
+                      builder: (BuildContext context) => AlertDialog(
+                        title: const Text('Data Submitted Successfully'),
+                        actions: <Widget>[
+                          TextButton(
+                            onPressed: () => Navigator.pop(context, 'OK'),
+                            child: const Text('OK'),
+                          ),
+                        ],
+                      ),
+                    );
+                    Navigator.of(context).pop();
+                  } else {
+                    await showDialog<String>(
+                      context: context,
+                      builder: (BuildContext context) => AlertDialog(
+                        title: const Text('Unable to Submit Data'),
+                        actions: <Widget>[
+                          TextButton(
+                            onPressed: () => Navigator.pop(context, 'Retry'),
+                            child: const Text('Retry'),
+                          ),
+                        ],
+                      ),
+                    );
+                  }
                 },
                 text: 'Submit',
                 options: FFButtonOptions(

@@ -66,7 +66,7 @@ class _DataTextFormWidgetState extends State<DataTextFormWidget> {
         dateTimeProvider.getDateString(dateTimeProvider.initialDate);
     // }
     _timeTextController.text =
-        dateTimeProvider.getTimeString(context, dateTimeProvider.initialTime);
+        dateTimeProvider.getTimeString(dateTimeProvider.initialTime);
     String? parameterType = widget.paramType;
     String? stationIdPrefix = (GlobalConfiguration()
                 .getDeepValue('STATION_ID_TEMPLATE:$parameterType') !=
@@ -309,7 +309,6 @@ class _DataTextFormWidgetState extends State<DataTextFormWidget> {
                                                     _timeTextController.text =
                                                         dateTimeProvider
                                                             .getTimeString(
-                                                                context,
                                                                 dateTimeProvider
                                                                     .selectedTime);
                                                   }

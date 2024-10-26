@@ -34,7 +34,7 @@ jobs:
           if [ -f code-coverage-results.md ]; then
           badge_url=$(cat code-coverage-results.md | grep -oP '(?<=\!\[Code Coverage\]\().*?(?=\))')
           echo "$badge_url" # Set the output as an environment variable
-          sed -i "s|\$badge_url|$badge_url|g" README.md  # Use '|' as delimiter to avoid issues with '/'
+          sed -i "s|https://img.shields.io/badge/[^ ]*|$badge_url|g"
           else
           echo "Coverage output file not found!"
           exit 1

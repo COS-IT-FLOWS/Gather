@@ -3,8 +3,8 @@
 | GATHER Links & Badges              |                                                                             |
 |------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | GATHER Documentation      | [![Documentation Status](https://readthedocs.org/projects/gather-documentation/badge/?version=latest)](https://gather-documentation.readthedocs.io/en/latest/?badge=latest)      |
-| License                | [![GitHub license](https://img.shields.io/badge/Code%20Coverage-64%25-yellow?style=flat                                                              |
-| Widget Testing                   | ![Testing Status](https://img.shields.io/badge/Code%20Coverage-64%25-yellow?style=flat |
+| License                | [![GitHub license](https://img.shields.io/badge/Code%20Coverage-64%25-yellow?style=flat
+| Widget Testing                   | ![Testing Status](https://img.shields.io/badge/Code%20Coverage-64%25-yellow?style=flat
 <!-- | Current Release DOI    | [![DOI](https://zenodo.org/badge/7766/UW-Hydro/VIC.svg)](https://zenodo.org/badge/latestdoi/7766/UW-Hydro/VIC) | -->
 
 ----------

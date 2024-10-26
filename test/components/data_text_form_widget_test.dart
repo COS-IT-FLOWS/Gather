@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gather/components/data_text_form_widget.dart'; // Adjust the import based on your file structure
+import 'package:gather/providers/auth_provider.dart';
 import 'package:gather/providers/database_provider.dart';
 import 'package:gather/providers/datetime_provider.dart';
 import 'package:gather/providers/profile_provider.dart';
@@ -14,12 +15,14 @@ void main() {
     late MockDateTimeProvider mockDateTimeProvider;
     late MockDatabaseProvider mockDatabaseProvider;
     late MockProfileProvider mockProfileProvider;
+    late MockAuthProvider mockAuthProvider;
 
     setUp(() {
       // Initialize mock providers
       mockDateTimeProvider = MockDateTimeProvider();
       mockDatabaseProvider = MockDatabaseProvider();
       mockProfileProvider = MockProfileProvider();
+      mockAuthProvider = MockAuthProvider();
 
       // Set up mock behavior
       // when(mockDateTimeProvider.initialDate).thenReturn(DateTime.now());
@@ -41,6 +44,8 @@ void main() {
                 create: (_) => mockDatabaseProvider),
             ChangeNotifierProvider<ProfileProvider>(
                 create: (_) => mockProfileProvider),
+            ChangeNotifierProvider<SignInProvider>(
+                create: (_) => mockAuthProvider)
           ],
           builder: (context, child) {
             return MaterialApp(
@@ -51,19 +56,22 @@ void main() {
           },
         ),
       );
-
+      String userId = 'testUserId';
+      mockAuthProvider.logIn(userId);
+      mockProfileProvider.setStationIdsForUser(userId);
+      await tester.pumpAndSettle();
       // Check if the initial UI is rendered
-      // expect(find.text('Enter Data'),
-      //     findsOneWidget); // Adjust based on your logic
-      // expect(find.byType(TextFormField),
-      //     findsNWidgets(3)); // Adjust based on number of text fields
+      // expect(
+      //     find.text('Rainfall'), findsOneWidget); // Adjust based on your logic
+      expect(find.byType(TextFormField),
+          findsNWidgets(3)); // Adjust based on number of text fields
 
       // Try submitting the form without filling it
-      // await tester.tap(find.text('Submit'));
-      // await tester.pumpAndSettle();
+      await tester.tap(find.text('Submit'));
+      await tester.pumpAndSettle();
 
       // Check for validation error message
-      // expect(find.text('Please enter a value'), findsOneWidget);
+      expect(find.text('Please enter a value'), findsOneWidget);
     });
 
     testWidgets('submits data successfully', (WidgetTester tester) async {
@@ -86,7 +94,7 @@ void main() {
           },
         ),
       );
-
+      // expect(find.byType())
       // Fill in the text field
       await tester.enterText(find.byType(TextFormField).first,
           '25'); // Assuming this is the first field

@@ -57,17 +57,28 @@ class MockDatabaseProvider extends Mock implements DatabaseProvider {
   }
 
   @override
-  Future<UserDataModel> readUserData(any) async {
-    return UserDataModel(
-      firstName: 'John',
-      lastName: 'Doe',
-      phoneNumber: '+1234567890',
-      emailAddress: 'john.doe@example.com',
-      occupation: 'Developer',
-      userAge: 30,
-      gender: 'Male',
-      stationIds: ['TEST9999'],
-    );
+  Future<UserDataModel> readUserData(userId) async {
+    if (userId == 'testUserId') {
+      return UserDataModel(
+        firstName: 'John',
+        lastName: 'Doe',
+        phoneNumber: '+1234567890',
+        emailAddress: 'john.doe@example.com',
+        occupation: 'Developer',
+        userAge: 30,
+        gender: 'Male',
+        stationIds: ['TEST9999'],
+      );
+    } else {
+      return UserDataModel(
+          firstName: '',
+          lastName: '',
+          phoneNumber: '',
+          emailAddress: '',
+          occupation: '',
+          userAge: 0,
+          stationIds: []);
+    }
   }
 
   @override
@@ -77,18 +88,41 @@ class MockDatabaseProvider extends Mock implements DatabaseProvider {
 }
 
 class MockProfileProvider extends Mock implements ProfileProvider {
-  @override
-  // TODO: implement stationIds
-  List? get stationIds => ['TEST9999'];
+  List _stationIds = [];
+  bool _isEditProfileDetails = false;
 
   @override
-  bool get isEditProfileDetails => false;
+  List? get stationIds => _stationIds;
+
+  @override
+  bool get isEditProfileDetails => _isEditProfileDetails;
+
+  void setStationIdsForUser(String userId) {
+    if (userId == 'testUserId') {
+      _stationIds = ['TEST9999'];
+    } else {
+      _stationIds = [];
+    }
+  }
 }
 
 class MockAuthProvider extends Mock implements SignInProvider {
-  @override
-  String get userId => 'testUserId';
+  String _userId = '';
+  bool _isLoggedIn = false;
 
   @override
-  bool get isLoggedIn => false;
+  String get userId => _userId;
+
+  @override
+  bool get isLoggedIn => _isLoggedIn;
+
+  void logIn(String userId) {
+    _userId = userId;
+    _isLoggedIn = true;
+  }
+
+  void logOut() {
+    _userId = '';
+    _isLoggedIn = false;
+  }
 }

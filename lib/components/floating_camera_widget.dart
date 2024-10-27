@@ -10,28 +10,6 @@ class FloatingCameraWidget extends StatefulWidget {
 }
 
 class FloatingCameraWidgetState extends State<FloatingCameraWidget> {
-  File? _image;
-
-  Future<void> openCamera() async {
-    final picker = ImagePicker();
-    final pickedFile = await picker.pickImage(source: ImageSource.camera);
-    setState(() {
-      if (pickedFile != null) {
-        _image = File(pickedFile.path);
-      }
-    });
-  }
-
-  Future<void> openGallery() async {
-    final picker = ImagePicker();
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
-    setState(() {
-      if (pickedFile != null) {
-        _image = File(pickedFile.path);
-      }
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(

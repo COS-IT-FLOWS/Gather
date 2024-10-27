@@ -32,7 +32,7 @@ void main() {
 
     // Change the mock to simulate a logged-in user
     // // when(mockSignInProvider.isLoggedIn).thenReturn(true);
-    // await tester.pumpAndSettle(); // Rebuild the widget
+    await tester.pumpAndSettle(); // Rebuild the widget
 
     // // Verify that the initial route changes to '/home' when logged in
     // expect(find.text('Home Screen'),

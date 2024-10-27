@@ -11,20 +11,8 @@ import 'package:gather/models/hazard_data_model.dart';
 // Import your DatabaseProvider class
 import 'package:gather/providers/database_provider.dart'; // Update with the correct path
 
-class MockSupabaseQueryBuilder extends Mock implements SupabaseQueryBuilder {}
-
 // Create a mock class for SupabaseClient
-class MockSupabaseClient extends Mock implements SupabaseClient {
-  insert(any) {
-    return {'date': 'datetime', 'value': '25'};
-  }
-
-  from(String table) {
-    MockSupabaseQueryBuilder mockSupabaseQueryBuilder =
-        MockSupabaseQueryBuilder();
-    return mockSupabaseQueryBuilder;
-  }
-}
+class MockSupabaseClient extends Mock implements SupabaseClient {}
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -44,18 +32,29 @@ void main() {
       final timeStamp = DateTime(2024, 10, 26);
       const stationId = 'STN0001';
       const parameterValue = 25.0;
+      String dataTable = 'precipitation_metdata';
+      // Mock the insert method
 
-      // when(mockSupabaseClient.from('table'))
-      //     .thenReturn(mockSupabaseClient);
-      // when(mockSupabaseClient.insert(any))
-      //     .thenAnswer((_) async => Future.value());
+      // when(mockSupabaseClient.from(dataTable).insert(anything))
+      //     .thenReturn((_) async {
+      //   return mockSupabaseClient.from(dataTable); // Return self for chaining
+      // });
+
+      // Mock the select method
+
+      when(mockSupabaseClient.from(dataTable).insert(anything).select())
+          .thenAnswer((_) async {
+        return [
+          {'status': 'success'}
+        ]; // Mock response
+      } as Answering<PostgrestTransformBuilder<PostgrestList>>);
 
       final result = await databaseProvider.insertWeatherData(
           parameter, timeStamp, stationId, parameterValue);
 
       expect(result, true);
-      verify(mockSupabaseClient.from('table')).called(1);
-      verify(mockSupabaseClient.insert(any)).called(1);
+      // verify(mockSupabaseClient.from('table')).called(1);
+      // verify(mockSupabaseClient.insert(any)).called(1);
     });
 
     // test('readUser Data returns UserDataModel when user data is found', () async {

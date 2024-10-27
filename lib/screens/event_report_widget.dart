@@ -186,9 +186,7 @@ class _EventReportWidgetState extends State<EventReportWidget> {
               ),
             ),
             SizedBox(height: 30),
-            VoiceRecorder(
-                showSaveDiscardButtons: false,
-                onSavedAudioFilePath: _updateSavedAudioFilePath),
+            VoiceRecorder(onSavedAudioFilePath: _updateSavedAudioFilePath),
             SizedBox(height: 30),
             Padding(
               padding: const EdgeInsets.all(8.0),

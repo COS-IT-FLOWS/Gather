@@ -29,7 +29,6 @@ void main() {
         home: Scaffold(
           body: Center(
             child: VoiceRecorder(
-              showSaveDiscardButtons: true,
               onSavedAudioFilePath: (path) {
                 savedFilePath = path;
               },
@@ -55,7 +54,7 @@ void main() {
     expect(find.byIcon(Icons.mic_rounded), findsOneWidget);
 
     // Simulate the microphone tap down event to start recording
-    when(mockRecord.hasPermission()).thenAnswer((_) async => true);
+    // when(mockRecord.hasPermission()).thenAnswer((_) async => true);
 
     await tester.longPress(find.byIcon(Icons.mic_rounded));
     await tester.pump(); // Allow the recording to start
@@ -65,13 +64,9 @@ void main() {
     await tester.pump(); // Stop recording
 
     // Verify that save/discard buttons appear after recording
-    // expect(find.byIcon(IconData(0xe156, fontFamily: 'MaterialIcons')),
-    //     findsOneWidget);
-    // expect(find.byIcon(IconData(0xe16a, fontFamily: 'MaterialIcons')),
-    //     findsOneWidget);
-    expect(find.byType(ElevatedButton), findsNWidgets(5));
-    // expect(find.byIcon(IconData(983200)), findsOneWidget);
-    // expect(find.byIcon(IconData(63677)), findsOneWidget);
+    expect(find.byIcon(Icons.check), findsOneWidget);
+    expect(find.byIcon(Icons.close), findsOneWidget);
+    expect(find.byType(ElevatedButton), findsNWidgets(3));
 
     // Simulate pressing the save button
     when(mockDirectory.path).thenReturn('/mock/directory');
@@ -89,7 +84,6 @@ void main() {
       MaterialApp(
         home: Scaffold(
           body: VoiceRecorder(
-            showSaveDiscardButtons: true,
             onSavedAudioFilePath: (_) {},
           ),
         ),

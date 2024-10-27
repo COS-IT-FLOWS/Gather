@@ -96,11 +96,10 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget> {
         );
       },
     );
-
     try {
       userId = await _signInProvider!.signInWithGoogle();
       if (!mounted) return;
-      Navigator.of(context).pop(); // Close the dialog
+      Navigator.of(context).pop();
       Navigator.pushReplacementNamed(context, '/home');
     } catch (e) {
       Navigator.of(context).pop();
@@ -121,8 +120,6 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget> {
           );
         },
       ); // Close the dialog
-      // Handle the error here, e.g., show an error message
-      // throw ("Error signing in: $e");
     }
   }
 
@@ -172,9 +169,9 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget> {
                     ),
                     FFButtonWidget(
                       onPressed: () async {
-                        if (!kIsWeb && (Platform.isAndroid || Platform.isIOS)) {
-                          _signInWithGoogleAuth();
-                        }
+                        // if (!kIsWeb && (Platform.isAndroid || Platform.isIOS)) {
+                        _signInWithGoogleAuth();
+                        // }
                       },
                       text: 'Continue with Google',
                       icon: FaIcon(

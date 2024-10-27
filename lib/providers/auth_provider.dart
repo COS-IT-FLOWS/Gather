@@ -34,11 +34,12 @@ class SignInProvider with ChangeNotifier {
   //   notifyListeners(); // Notify listeners about the change
   // }
 
-  Future<void> signInWithPhoneNumber(String phoneNumber) async {
+  Future<bool> signInWithPhoneNumber(String phoneNumber) async {
     _phoneNumber = phoneNumber;
     await _supabaseClient.auth
         .signInWithOtp(phone: phoneNumber, channel: OtpChannel.sms);
     notifyListeners();
+    return true;
   }
 
   Future<void> verifyOtp(String otp) async {

@@ -8,10 +8,7 @@ import 'package:another_flushbar/flushbar.dart';
 
 class VoiceRecorder extends StatefulWidget {
   final Function(String) onSavedAudioFilePath;
-  final bool showSaveDiscardButtons;
-  VoiceRecorder(
-      {required this.onSavedAudioFilePath,
-      required this.showSaveDiscardButtons});
+  VoiceRecorder({required this.onSavedAudioFilePath});
 
   @override
   _VoiceRecorderState createState() => _VoiceRecorderState();

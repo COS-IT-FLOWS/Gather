@@ -123,6 +123,51 @@ class MockProfileProvider extends Mock implements ProfileProvider {
 class MockAuthProvider extends Mock implements SignInProvider {
   String _userId = '';
   bool _isLoggedIn = false;
+  String _phoneNumber = '9999999999';
+
+  @override
+  String get userId => _userId;
+
+  @override
+  bool get isLoggedIn => _isLoggedIn;
+
+  // @override
+  String get phoneNumber => _phoneNumber;
+
+  void logIn(String userId) {
+    _userId = userId;
+    _isLoggedIn = true;
+  }
+
+  void logOut() {
+    _userId = '';
+    _isLoggedIn = false;
+  }
+
+  @override
+  verifyOtp(String otp) async {
+    _userId = userId;
+    _isLoggedIn = true;
+  }
+
+  @override
+  Future<String> signInWithGoogle() async {
+    String inputUserId = 'testUserId';
+    _userId = inputUserId;
+    _isLoggedIn = true;
+    return inputUserId;
+  }
+
+  @override
+  Future<bool> signInWithPhoneNumber(phoneNumber) async {
+    // _isLoggedIn = true;
+    return true;
+  }
+}
+
+class MockAuthFailedProvider extends Mock implements SignInProvider {
+  String _userId = '';
+  bool _isLoggedIn = false;
 
   @override
   String get userId => _userId;
@@ -144,6 +189,14 @@ class MockAuthProvider extends Mock implements SignInProvider {
   verifyOtp(String otp) async {
     _userId = userId;
     _isLoggedIn = true;
+  }
+
+  @override
+  Future<String> signInWithGoogle() async {
+    String inputUserId = '';
+    _userId = inputUserId;
+    _isLoggedIn = false;
+    return inputUserId;
   }
 }
 

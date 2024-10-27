@@ -14,7 +14,7 @@ class DatabaseProvider with ChangeNotifier {
       parameter, timeStamp, stationId, parameterValue) async {
     String dataTable =
         GlobalConfiguration().getDeepValue('DATABASE_CONFIG:$parameter');
-    await _supabaseClient.from(dataTable).insert({
+    final data = await _supabaseClient.from(dataTable).insert({
       'collected_at': timeStamp.toString(),
       stationId: parameterValue
     }).select();

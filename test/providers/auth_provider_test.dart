@@ -1,29 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:provider/provider.dart';
+import 'package:supabase_auth_ui/supabase_auth_ui.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-
+import 'package:mockito/mockito.dart';
 // Import your SignInProvider class
 import 'package:gather/providers/auth_provider.dart'; // Update with the correct path
+// import '../mock_classes.dart';
+
+import 'database_provider_test.dart';
 
 // Create a mock class for SupabaseClient
-class MockSupabaseClient extends Mock implements SupabaseClient {}
+// class MockSupabaseClient extends Mock implements SupabaseClient {}
 
-class MockGoogleSignIn extends Mock implements GoogleSignIn {}
+// class MockGoogleSignIn extends Mock implements GoogleSignIn {}
+
+@GenerateNiceMocks(
+    [MockSpec<SupabaseClient>(), MockSpec<GoTrueClient>(), MockSpec<Session>()])
+import 'auth_provider_test.mocks.dart';
 
 void main() {
   late MockSupabaseClient mockSupabaseClient;
+  late MockGoTrueClient mockGoTrueClient;
   late SignInProvider signInProvider;
+  late MockSession mockSession;
 
   setUp(() {
     mockSupabaseClient = MockSupabaseClient();
+    mockGoTrueClient = MockGoTrueClient();
+    mockSession = MockSession();
     signInProvider = SignInProvider(mockSupabaseClient);
   });
 
   group('SignInProvider', () {
-    test('initial values are set correctly', () {
+    test('initial values are set correctly', () async {
       expect(signInProvider.isLoggedIn, false);
       expect(signInProvider.userId, '');
       expect(signInProvider.otpValue, '');
@@ -42,6 +55,16 @@ void main() {
 
       expect(signInProvider.isLoggedIn, false);
       expect(signInProvider.userId, '');
+    });
+
+    test('signing out', () async {
+      when(mockSupabaseClient.auth).thenReturn(mockGoTrueClient);
+      when(mockGoTrueClient.onAuthStateChange).thenAnswer((_) {
+        return Stream.value(AuthState(AuthChangeEvent.signedOut, mockSession));
+      });
+      when(mockGoTrueClient.signOut()).thenAnswer((_) async => Future.value());
+      await signInProvider.signOut();
+      expect(signInProvider.isLoggedIn, isFalse);
     });
 
 //     test('verifyOtp updates userId and isLoggedIn', () async {

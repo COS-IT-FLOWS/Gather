@@ -10,6 +10,8 @@ import 'package:gather/providers/profile_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import 'providers/database_provider_test.dart';
+
 class MockDateTimeProvider extends Mock implements DateTimeProvider {
   @override
   DateTime get initialDate => DateTime(2024, 5, 20);

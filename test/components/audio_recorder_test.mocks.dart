@@ -174,7 +174,7 @@ class MockAudioRecorder extends _i1.Mock implements _i4.AudioRecorder {
           #hasPermission,
           [],
         ),
-        returnValue: _i5.Future<bool>.value(true),
+        returnValue: _i5.Future<bool>.value(false),
       ) as _i5.Future<bool>);
 
   @override

@@ -98,7 +98,6 @@ class SignInProvider with ChangeNotifier {
   Future<void> signOut() async {
     await _supabaseClient.auth.signOut();
     _isLoggedIn = false;
-    print(_isLoggedIn);
     notifyListeners();
   }
 

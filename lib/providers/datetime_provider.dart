@@ -3,34 +3,38 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class DateTimeProvider with ChangeNotifier {
-  DateTime _initialDate = DateTime.now();
-  TimeOfDay _initialTime = TimeOfDay(hour: 8, minute: 30);
-  late DateTime _selectedDate = _initialDate;
-  late TimeOfDay _selectedTime = _initialTime;
+  final DateTime initialDate = DateTime(2024, 5, 20);
+  final TimeOfDay initialTime = TimeOfDay(hour: 8, minute: 30);
+  DateTime selectedDate = DateTime.now();
+  TimeOfDay selectedTime = TimeOfDay(hour: 8, minute: 30);
 
-  DateTime get initialDate => _initialDate;
-  TimeOfDay get initialTime => _initialTime;
-  DateTime get selectedDate => _selectedDate;
-  TimeOfDay get selectedTime => _selectedTime;
+  // DateTime get initialDate => _initialDate!;
+  // TimeOfDay get initialTime => _initialTime!;
+  // DateTime get selectedDate => _selectedDate!;
+  // TimeOfDay get selectedTime => _selectedTime!;
   // DateTime get initialDate => _initialDate;
   // TimeOfDay get initialTime => _initialTime;
 
   void selectDate(DateTime date) {
-    _selectedDate = date;
+    selectedDate = date;
     notifyListeners();
   }
 
   void selectTime(TimeOfDay time) {
-    _selectedTime = time;
+    selectedTime = time;
     notifyListeners();
   }
 
-  String getDateString(date) {
+  String getDateString(DateTime date) {
     final dateFormatter = DateFormat('MMM d');
-    return dateFormatter.format(date).toString();
+    if (date != null) {
+      return dateFormatter.format(date).toString();
+    } else {
+      return '';
+    }
   }
 
-  String getTimeString(context, time) {
+  String getTimeString(TimeOfDay time) {
     final timeFormatter = DateFormat('hh:mm a');
     DateTime today = DateTime.now();
     DateTime selectedTime = DateTime(
@@ -40,17 +44,12 @@ class DateTimeProvider with ChangeNotifier {
       time.hour,
       time.minute,
     );
-    print(selectedTime);
     return timeFormatter.format(selectedTime).toString();
   }
 
   DateTime getSelectedDateTime() {
-    DateTime _selectedDateTime = DateTime(
-        _selectedDate.year,
-        _selectedDate.month,
-        _selectedDate.day,
-        _selectedTime.hour,
-        _selectedTime.minute);
+    DateTime _selectedDateTime = DateTime(selectedDate.year, selectedDate.month,
+        selectedDate.day, selectedTime.hour, selectedTime.minute);
     return _selectedDateTime;
   }
 }

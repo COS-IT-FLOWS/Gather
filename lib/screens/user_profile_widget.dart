@@ -1,6 +1,7 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:provider/provider.dart';
 
 import 'package:gather/components/appbar_widget.dart';
@@ -9,6 +10,8 @@ import 'package:gather/models/user_data_model.dart';
 import 'package:gather/providers/database_provider.dart';
 import 'package:gather/providers/auth_provider.dart';
 import 'package:gather/providers/profile_provider.dart';
+
+import 'package:gather/components/confirmation_dialog_widget.dart';
 
 class ProfileWidget extends StatefulWidget {
   @override
@@ -23,7 +26,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
   Widget build(BuildContext context) {
     DatabaseProvider _databaseProvider = context.read<DatabaseProvider>();
     SignInProvider _authProvider = context.read<SignInProvider>();
-    ProfileProvider _profileProvider = context.watch<ProfileProvider>();
+    ProfileProvider _profileProvider = context.read<ProfileProvider>();
     TextEditingController _firstNameController = TextEditingController();
     TextEditingController _lastNameController = TextEditingController();
     TextEditingController _phoneNumberController = TextEditingController();
@@ -33,8 +36,10 @@ class _ProfileWidgetState extends State<ProfileWidget> {
     return Scaffold(
         // appBar: appBarWidget(context, 'User Profile'),
         appBar: AppBar(
-          title: Text('User Profile'),
-          backgroundColor: Colors.blue,
+          iconTheme:
+              IconThemeData(color: Colors.white), // Set icon color to white
+          title: Text(style: TextStyle(color: Colors.white), 'User Profile'),
+          backgroundColor: FlutterFlowTheme.of(context).primary,
           actions: [
             IconButton(
                 icon: !_profileProvider.isEditProfileDetails
@@ -45,12 +50,13 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                     _profileProvider.setProfileEditFlag(true);
                   } else {
                     UserDataModel userDataWriteModel = UserDataModel(
-                        firstName: _firstNameController.text,
-                        lastName: _lastNameController.text,
-                        phoneNumber: _phoneNumberController.text,
-                        emailAddress: _emailController.text,
-                        occupation: _occupationController.text,
-                        userAge: int.tryParse(_userAgeController.text) ?? 0);
+                      firstName: _firstNameController.text,
+                      lastName: _lastNameController.text,
+                      phoneNumber: _phoneNumberController.text,
+                      emailAddress: _emailController.text,
+                      occupation: _occupationController.text,
+                      userAge: int.tryParse(_userAgeController.text) ?? 0,
+                    );
                     _databaseProvider.insertUserData(userDataWriteModel);
                     _profileProvider.setProfileEditFlag(false);
                   }
@@ -106,9 +112,8 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                             width: 80,
                             child:
                                 Text('Email', style: TextStyle(fontSize: 14))),
-                        title: TextFormField(
-                            readOnly: !_profileProvider.isEditProfileDetails,
-                            controller: _emailController)),
+                        title: TextField(
+                            readOnly: true, controller: _emailController)),
                     ListTile(
                         leading: SizedBox(
                             width: 80,
@@ -124,6 +129,16 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                         title: TextFormField(
                             readOnly: !_profileProvider.isEditProfileDetails,
                             controller: _userAgeController)),
+                    ListTile(
+                        leading: SizedBox(
+                            width: 80,
+                            child: Text('Station IDs:',
+                                style: TextStyle(fontSize: 14))),
+                        title: Text(
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                            userDataReadModel.stationIds != null
+                                ? userDataReadModel.stationIds!.join(', ')
+                                : 'None')),
                   ]);
                 } else if (snapshot.hasError) {
                   return Center(child: Text('Data unavailable'));

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gather/providers/auth_provider.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
-// import 'package:phone_number/phone_number.dart' as phone_lib;
+// import 'package:phone_number/phone_number.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:flutter/foundation.dart';
@@ -66,10 +66,61 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget> {
   }
 
   void _signInWithGoogleAuth() async {
+    final String userId;
     if (_signInProvider == null) return;
-    await _signInProvider!.signInWithGoogle();
-    if (!mounted) return;
-    Navigator.pushNamed(context, '/home');
+    showDialog(
+      context: context,
+      barrierDismissible:
+          false, // Prevent the user from tapping outside to dismiss
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.white,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+          content: SizedBox(
+            width: 101,
+            height: 151,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                CircularProgressIndicator(),
+                SizedBox(height: 21),
+                Text(
+                    style:
+                        TextStyle(color: FlutterFlowTheme.of(context).primary),
+                    "Logging in..."),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+    try {
+      userId = await _signInProvider!.signInWithGoogle();
+      if (!mounted) return;
+      Navigator.of(context).pop();
+      Navigator.pushReplacementNamed(context, '/home');
+    } catch (e) {
+      Navigator.of(context).pop();
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Error"),
+            content: Text("Invalid Gmail ID"),
+            actions: <Widget>[
+              ElevatedButton(
+                child: Text("OK"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      ); // Close the dialog
+    }
   }
 
   @override

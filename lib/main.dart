@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+// import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:gather/providers/auth_provider.dart';
 import 'package:gather/providers/datetime_provider.dart';
 import 'package:gather/providers/database_provider.dart';
@@ -24,7 +25,7 @@ Future<void> main() async {
       ChangeNotifierProvider<SignInProvider>(
           create: (_) => SignInProvider(supabase)),
       ChangeNotifierProvider<DatabaseProvider>(
-          create: (_) => DatabaseProvider(supabase)),
+          create: (_) => DatabaseProvider(supabase, 'testUserId')),
       ChangeNotifierProvider<DateTimeProvider>(
           create: (_) => DateTimeProvider()),
       ChangeNotifierProvider<ProfileProvider>(create: (_) => ProfileProvider())
@@ -49,4 +50,9 @@ class GatherApp extends StatelessWidget {
         //       scaffoldMessengerKey: globalMessengerKey,
         );
   }
+}
+
+Future<void> onSelectNotification(String payload) async {
+  // Handle notification tap
+  print('notifications');
 }

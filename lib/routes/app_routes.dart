@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-// import 'package:gather/screens/dashboard_widget.dart.backup';
-// import 'package:gather/screens/dashboard_widget.dart.backup';
+import 'package:image_picker/image_picker.dart';
+import 'package:global_configuration/global_configuration.dart';
+import 'package:gather/screens/contact_us_widget.dart';
 import 'package:gather/screens/home_page_widget.dart';
 import 'package:gather/screens/event_report_widget.dart';
 import 'package:gather/screens/otp_input_widget.dart';
@@ -21,8 +22,10 @@ class AppRoutes {
         // '/otp': (BuildContext context) => OtpInputWidget(onChanged:
         // '/dashboard': (BuildContext context) => DashboardWidget(),
         '/notifications': (BuildContext context) => NotificationWidget(),
-        '/eventreport': (BuildContext context) => EventReportWidget(),
+        '/eventreport': (BuildContext context) => EventReportWidget(
+            picker: ImagePicker(), config: GlobalConfiguration()),
         '/profile': (BuildContext context) => ProfileWidget(),
-        '/about-us': (BuildContext context) => AboutUsPage()
+        '/about-us': (BuildContext context) => AboutUsPage(),
+        '/contact-us': (BuildContext context) => ContactUsPage()
       };
 }

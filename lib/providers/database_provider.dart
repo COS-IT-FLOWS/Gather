@@ -1,3 +1,4 @@
+// coverage:ignore-file
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:global_configuration/global_configuration.dart';

@@ -1,3 +1,4 @@
+// coverage:ignore-file
 import 'dart:ffi';
 
 import 'package:flutter/foundation.dart';

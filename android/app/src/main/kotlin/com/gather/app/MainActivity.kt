@@ -1,4 +1,4 @@
-package com.gather.app
+package com.equinoct.gatherapp
 
 import io.flutter.embedding.android.FlutterActivity
 

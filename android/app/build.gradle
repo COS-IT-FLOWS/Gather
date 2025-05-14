@@ -26,6 +26,9 @@ apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
+
+    namespace 'com.equinoct.gatherapp' // Replace 'com.example.app' with your actual namespace
+
     compileSdkVersion flutter.compileSdkVersion
 
     ndkVersion = "25.1.8937393"
@@ -40,7 +43,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.gather.app"
+        applicationId "com.equinoct.gatherapp"
         minSdkVersion 26
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()

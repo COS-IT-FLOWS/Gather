@@ -42,7 +42,7 @@ class _DataTextFormWidgetState extends State<DataTextFormWidget> {
   @override
   void initState() {
     super.initState();
-    // _model = createModel(context, () => DataTextFormModel());
+    _model = DataTextFormModel();
 
     _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();

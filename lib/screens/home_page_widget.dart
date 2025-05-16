@@ -27,7 +27,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
   @override
   void initState() {
     super.initState();
-    // _model = createModel(context, () => HomePageModel());
+    _model = HomePageModel();
   }
 
   @override

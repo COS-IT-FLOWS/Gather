@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:flutterflow_ui/flutterflow_ui.dart';
+// import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gather/providers/auth_provider.dart';
@@ -9,6 +9,8 @@ import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:flutter/foundation.dart';
+
+import 'package:gather/themes/app_theme.dart';
 
 // import 'package:supabase_auth_ui/supabase_auth_ui.dart';
 // import 'package:gather/services/supabase_service.dart';
@@ -41,7 +43,7 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget> {
     _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
     // late PhoneNumber _phoneNumber;
-    late SignInProvider _signInProvider;
+    // late SignInProvider _signInProvider;
     // _otpProvider = Provider.of<OtpProvider>(context, listen: false);
     _signInProvider = Provider.of<SignInProvider>(context, listen: false);
   }
@@ -87,8 +89,7 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget> {
                 CircularProgressIndicator(),
                 SizedBox(height: 21),
                 Text(
-                    style:
-                        TextStyle(color: FlutterFlowTheme.of(context).primary),
+                    style: TextStyle(color: AppTheme.primaryColor(context)),
                     "Logging in..."),
               ],
             ),
@@ -98,10 +99,12 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget> {
     );
     try {
       userId = await _signInProvider!.signInWithGoogle();
+      print('This is the USER ID: $userId');
       if (!mounted) return;
       Navigator.of(context).pop();
       Navigator.pushReplacementNamed(context, '/home');
     } catch (e) {
+      print('This is the error: $e');
       Navigator.of(context).pop();
       showDialog(
         context: context,
@@ -167,31 +170,31 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget> {
                         ),
                       ),
                     ),
-                    FFButtonWidget(
+                    ElevatedButton.icon(
                       onPressed: () async {
                         if (!kIsWeb && (Platform.isAndroid || Platform.isIOS)) {
                           _signInWithGoogleAuth();
                         }
                       },
-                      text: 'Continue with Google',
                       icon: FaIcon(
                         FontAwesomeIcons.google,
                         size: 24,
                       ),
-                      options: FFButtonOptions(
-                        width: double.infinity,
-                        height: 50,
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                        iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                        color: Colors.white,
+                      label: Text('Continue with Google'),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.white,
+                        foregroundColor: Colors.black,
+                        minimumSize: Size(double.infinity, 50),
+                        padding: EdgeInsets.zero,
+                        elevation: 2,
                         textStyle: TextStyle(
                           fontFamily: 'Plus Jakarta Sans',
-                          color: Colors.black,
                           fontSize: 18,
                           fontWeight: FontWeight.w500,
                         ),
-                        elevation: 2,
-                        borderRadius: BorderRadius.circular(12),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                       ),
                     ),
                     Padding(
@@ -202,25 +205,21 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget> {
                         children: [
                           Text(
                             'Already have an account? ',
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'Plus Jakarta Sans',
-                                  color: Color(0xFF15161E),
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.normal,
-                                ),
+                            style: TextStyle(
+                              fontFamily: 'Plus Jakarta Sans',
+                              color: Color(0xFF15161E),
+                              fontSize: 14,
+                              fontWeight: FontWeight.normal,
+                            ),
                           ),
                           Text(
                             'Sign In',
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'Plus Jakarta Sans',
-                                  color: FlutterFlowTheme.of(context).tertiary,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.normal,
-                                ),
+                            style: TextStyle(
+                              fontFamily: 'Plus Jakarta Sans',
+                              color: AppTheme.tertiaryColor(context),
+                              fontSize: 14,
+                              fontWeight: FontWeight.normal,
+                            ),
                           ),
                         ],
                       ),
@@ -230,12 +229,12 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget> {
                       child: Text(
                         'OR',
                         textAlign: TextAlign.center,
-                        style: FlutterFlowTheme.of(context).labelLarge.override(
-                              fontFamily: 'Outfit',
-                              color: Color(0xFF606A85),
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                            ),
+                        style: TextStyle(
+                          fontFamily: 'Outfit',
+                          color: Color(0xFF606A85),
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     ),
                     Padding(
@@ -277,7 +276,7 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget> {
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).primary,
+                              color: AppTheme.primaryColor(context),
                               width: 2,
                             ),
                             borderRadius: BorderRadius.circular(12),
@@ -316,29 +315,24 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget> {
                     ),
                     Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
-                      child: FFButtonWidget(
-                        // Commented out the check for valid phone number for ease of testing
-                        // onPressed: () =>
-                        //     Provider.of<SignInProvider>(context, listen: false)
-                        //         .signInOtp(_phoneNumber.phoneNumber.toString()),
+                      child: ElevatedButton(
                         onPressed: () => _signInWithPhone(),
-                        text: 'Sign Up with Phone',
-                        options: FFButtonOptions(
-                          width: double.infinity,
-                          height: 50,
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                          iconPadding:
-                              EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                          color: FlutterFlowTheme.of(context).primary,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppTheme.primaryColor(context),
+                          foregroundColor: Colors.white,
+                          minimumSize: Size(double.infinity, 50),
+                          padding: EdgeInsets.zero,
+                          elevation: _phoneNumberValid ? 4 : 0,
                           textStyle: TextStyle(
                             fontFamily: 'Plus Jakarta Sans',
-                            color: Colors.white,
                             fontSize: 18,
                             fontWeight: FontWeight.w500,
                           ),
-                          elevation: _phoneNumberValid ? 4 : 0,
-                          borderRadius: BorderRadius.circular(12),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
                         ),
+                        child: Text('Sign Up with Phone'),
                       ),
                     ),
                   ],

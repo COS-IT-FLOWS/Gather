@@ -20,3 +20,4 @@ supabase/**/*
 
 ios/Runner/**/*
 android/app/src/main/res/**/*
+android/app/.cxx

@@ -1,4 +1,3 @@
-import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:gather/components/data_text_form_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -11,6 +10,7 @@ import 'package:gather/providers/auth_provider.dart';
 import 'package:gather/providers/database_provider.dart';
 import 'package:gather/providers/profile_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:gather/themes/app_theme.dart';
 
 class HomePageWidget extends StatefulWidget {
   const HomePageWidget({super.key});
@@ -27,7 +27,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => HomePageModel());
+    // _model = createModel(context, () => HomePageModel());
   }
 
   @override
@@ -101,7 +101,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                       ),
                                     );
                                   },
-                                ).then((value) => safeSetState(() {}));
+                                ).then((value) => setState(() {}));
                               },
                               child: Container(
                                 width: 150,
@@ -111,8 +111,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                     borderRadius: BorderRadius.circular(20),
                                     border: Border.all(
                                       width: 2,
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondary,
+                                      color: AppTheme.secondaryColor(context),
                                     )),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -158,7 +157,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                       ),
                                     );
                                   },
-                                ).then((value) => safeSetState(() {}));
+                                ).then((value) => setState(() {}));
                               },
                               child: Container(
                                 width: 150,
@@ -168,8 +167,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                     borderRadius: BorderRadius.circular(20),
                                     border: Border.all(
                                       width: 2,
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondary,
+                                      color: AppTheme.secondaryColor(context),
                                     )),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -215,7 +213,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                       ),
                                     );
                                   },
-                                ).then((value) => safeSetState(() {}));
+                                ).then((value) => setState(() {}));
                               },
                               child: Container(
                                 width: 150,
@@ -225,8 +223,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                     borderRadius: BorderRadius.circular(20),
                                     border: Border.all(
                                       width: 2,
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondary,
+                                      color: AppTheme.secondaryColor(context),
                                     )),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -272,7 +269,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                       ),
                                     );
                                   },
-                                ).then((value) => safeSetState(() {}));
+                                ).then((value) => setState(() {}));
                               },
                               child: Container(
                                 width: 150,
@@ -282,8 +279,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                     borderRadius: BorderRadius.circular(20),
                                     border: Border.all(
                                       width: 2,
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondary,
+                                      color: AppTheme.secondaryColor(context),
                                     )),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,

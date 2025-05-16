@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:record/record.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'dart:io';
 import 'package:another_flushbar/flushbar.dart';
+import 'package:gather/themes/app_theme.dart';
 
 class VoiceRecorder extends StatefulWidget {
   final Function(String) onSavedAudioFilePath;
@@ -33,8 +33,7 @@ class _VoiceRecorderState extends State<VoiceRecorder> {
               minimumSize: Size(0, 50),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15),
-                  side: BorderSide(
-                      color: FlutterFlowTheme.of(context).secondary))),
+                  side: BorderSide(color: AppTheme.secondaryColor(context)))),
           onPressed: () {
             showDialog(
                 context: context,
@@ -91,8 +90,7 @@ class _VoiceRecorderState extends State<VoiceRecorder> {
                                     shape: BoxShape.circle,
                                     border: Border.all(
                                       color: _isRecording
-                                          ? FlutterFlowTheme.of(context)
-                                              .secondary
+                                          ? AppTheme.secondaryColor(context)
                                           : Colors.transparent,
                                       width: 30.0,
                                     ),
@@ -170,8 +168,7 @@ class _VoiceRecorderState extends State<VoiceRecorder> {
                 minimumSize: Size(0, 50),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15),
-                    side: BorderSide(
-                        color: FlutterFlowTheme.of(context).secondary))),
+                    side: BorderSide(color: AppTheme.secondaryColor(context)))),
             onPressed: _playRecording,
             child: Icon(Icons.play_arrow_rounded)),
       ],

@@ -1,8 +1,7 @@
-import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:gather/screens/auth_widget.dart' show AuthenticationWidget;
 import 'package:flutter/material.dart';
 
-class AuthenticationModel extends FlutterFlowModel<AuthenticationWidget> {
+class AuthenticationModel {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();

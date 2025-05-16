@@ -38,7 +38,6 @@ android {
 
     compileSdkVersion flutter.compileSdkVersion
 
-    // ndkVersion = "25.1.8937393"
     ndkVersion = "27.0.12077973"
 
     sourceSets {
@@ -60,12 +59,13 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        coreLibraryDesugaringEnabled true
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "1.8"
     }
 
     buildTypes {
@@ -85,15 +85,16 @@ android {
     }
 }
 
+
 flutter {
     source '../..'
 }
 
-// dependencies {
+dependencies {
     // implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     // implementation 'com.android.tools:r8:3.0.73'
-    // coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
-// }
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.0.3'
+}
 
 configurations.all {
     resolutionStrategy {

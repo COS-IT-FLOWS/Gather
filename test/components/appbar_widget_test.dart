@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gather/components/appbar_widget.dart'; // Replace with the actual file path
-import 'package:flutterflow_ui/flutterflow_ui.dart';
+// import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:mockito/mockito.dart';
 

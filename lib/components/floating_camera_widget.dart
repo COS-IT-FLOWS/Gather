@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:gather/themes/app_theme.dart';
 
 class FloatingCameraWidget extends StatefulWidget {
   @override
@@ -17,20 +17,16 @@ class FloatingCameraWidgetState extends State<FloatingCameraWidget> {
         Navigator.pushNamed(context, '/eventreport');
       },
       style: ElevatedButton.styleFrom(
-          backgroundColor: FlutterFlowTheme.of(context).secondary,
+          backgroundColor: AppTheme.secondaryColor(context),
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15),
-              side: BorderSide(color: FlutterFlowTheme.of(context).secondary))),
-      // style: ButtonStyle(
-
-      //     backgroundColor: MaterialStateProperty.all<Color>(
-      //         FlutterFlowTheme.of(context).secondary)),
+              side: BorderSide(color: AppTheme.secondaryColor(context)))),
       child: Text(
         'Report Hazard',
         style: TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.bold,
-          color: FlutterFlowTheme.of(context).primary,
+          color: AppTheme.primaryBackground(context),
         ),
       ),
     );

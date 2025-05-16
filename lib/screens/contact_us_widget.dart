@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:gather/components/appbar_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:global_configuration/global_configuration.dart';

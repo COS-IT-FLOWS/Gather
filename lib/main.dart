@@ -10,6 +10,7 @@ import 'package:global_configuration/global_configuration.dart';
 import 'package:provider/provider.dart';
 // import 'package:supabase_auth_ui/supabase_auth_ui.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:gather/themes/app_theme.dart';
 
 var globalMessengerKey = GlobalKey<ScaffoldMessengerState>();
 
@@ -41,9 +42,12 @@ class GatherApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'Gather',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
+        // Apply the light theme
+        theme: AppTheme.lightTheme,
+        // Apply the dark theme if needed
+        darkTheme: AppTheme.darkTheme,
+        // Let the device control the theme based on system settings
+        themeMode: ThemeMode.system,
         routes: AppRoutes.routes(),
         initialRoute: Provider.of<SignInProvider>(context).isLoggedIn
             ? '/home'

@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:global_configuration/global_configuration.dart';
 import 'package:gather/screens/event_report_widget.dart'; // Adjust the import based on your file structure
 import '../mock_classes.dart'; // Import your mock classes
-import 'package:flutterflow_ui/flutterflow_ui.dart';
+// import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:gather/models/hazard_data_model.dart';
 
 void main() {
@@ -61,7 +61,7 @@ void main() {
     expect(find.text('Short description of hazard'), findsOneWidget);
     expect(find.byType(TextField), findsOneWidget);
     expect(find.text('Submit'), findsOneWidget);
-    expect(find.byType(FFButtonWidget), findsOneWidget);
+    expect(find.byType(ElevatedButton), findsOneWidget);
   });
 
   testWidgets('EventReportWidget handles image selection',

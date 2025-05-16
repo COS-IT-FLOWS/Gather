@@ -1,8 +1,7 @@
-import 'package:flutterflow_ui/flutterflow_ui.dart';
 import '../components/data_text_form_widget.dart' show DataTextFormWidget;
 import 'package:flutter/material.dart';
 
-class DataTextFormModel extends FlutterFlowModel<DataTextFormWidget> {
+class DataTextFormModel {
   ///  State fields for stateful widgets in this component.
 
   // State field(s) for TextField widget.

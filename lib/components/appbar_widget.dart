@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:badges/badges.dart' as badges;
+import 'package:gather/themes/app_theme.dart';
 
 PreferredSizeWidget appBarWidget(context, title) {
   bool _showButton(BuildContext context) {
@@ -11,7 +11,7 @@ PreferredSizeWidget appBarWidget(context, title) {
 
   return AppBar(
     iconTheme: IconThemeData(color: Colors.white),
-    backgroundColor: FlutterFlowTheme.of(context).primary,
+    backgroundColor: AppTheme.primaryColor(context),
     // automaticallyImplyLeading: false,
     title: Align(
       alignment: AlignmentDirectional(-1, -1),
@@ -19,11 +19,11 @@ PreferredSizeWidget appBarWidget(context, title) {
         padding: EdgeInsetsDirectional.fromSTEB(24, 0, 0, 0),
         child: Text(
           title,
-          style: FlutterFlowTheme.of(context).headlineMedium.override(
-                fontFamily: 'Outfit',
-                color: Colors.white,
-                fontSize: 22,
-              ),
+          style: TextStyle(
+            fontFamily: 'Outfit',
+            color: Colors.white,
+            fontSize: 22,
+          ),
         ),
       ),
     ),
@@ -32,16 +32,16 @@ PreferredSizeWidget appBarWidget(context, title) {
         badgeContent: Text(
           '1',
           textAlign: TextAlign.center,
-          style: FlutterFlowTheme.of(context).titleSmall.override(
-                fontFamily: 'Readex Pro',
-                color: Colors.white,
-              ),
+          style: TextStyle(
+            fontFamily: 'Readex Pro',
+            color: Colors.white,
+          ),
         ),
         // showBadge: _notificationProvider.showBadge,
         showBadge: false,
         badgeStyle: badges.BadgeStyle(
             shape: badges.BadgeShape.circle,
-            badgeColor: FlutterFlowTheme.of(context).tertiary,
+            badgeColor: AppTheme.tertiaryColor(context),
             elevation: 4,
             padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8)),
         position: badges.BadgePosition.topEnd(),

@@ -4,15 +4,12 @@ import 'package:gather/components/appbar_widget.dart';
 import 'package:gather/models/hazard_data_model.dart';
 import 'package:gather/providers/database_provider.dart';
 import 'package:image_picker/image_picker.dart';
-// import 'package:record/record.dart';
-import 'package:flutterflow_ui/flutterflow_ui.dart';
-// import 'package:fluttertoast/fluttertoast.dart';
 import 'package:global_configuration/global_configuration.dart';
-import 'package:flutterflow_ui/flutterflow_ui.dart';
 
 import 'package:gather/components/audio_recorder.dart';
 import 'package:gather/components/hazard_type_question.dart';
 import 'package:provider/provider.dart';
+import 'package:gather/themes/app_theme.dart';
 
 class EventReportWidget extends StatefulWidget {
   final ImagePicker picker;
@@ -92,8 +89,7 @@ class _EventReportWidgetState extends State<EventReportWidget> {
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15),
                               side: BorderSide(
-                                  color:
-                                      FlutterFlowTheme.of(context).secondary))),
+                                  color: AppTheme.secondaryColor(context)))),
                       onPressed: () {
                         getImage();
                       },
@@ -108,8 +104,7 @@ class _EventReportWidgetState extends State<EventReportWidget> {
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15),
                               side: BorderSide(
-                                  color:
-                                      FlutterFlowTheme.of(context).secondary))),
+                                  color: AppTheme.secondaryColor(context)))),
                       // onPressed: takePhoto,
                       onPressed: () {
                         takePhoto();
@@ -124,7 +119,7 @@ class _EventReportWidgetState extends State<EventReportWidget> {
               constraints: BoxConstraints(minHeight: 100),
               decoration: BoxDecoration(
                   border: Border.all(
-                      color: FlutterFlowTheme.of(context).primary, width: 2),
+                      color: AppTheme.primaryColor(context), width: 2),
                   borderRadius: BorderRadius.circular(5)),
               child: Center(
                 child: Wrap(children: [
@@ -202,7 +197,7 @@ class _EventReportWidgetState extends State<EventReportWidget> {
             SizedBox(height: 30),
             Align(
               alignment: AlignmentDirectional(0, 0),
-              child: FFButtonWidget(
+              child: ElevatedButton(
                 key: Key('submit-report'),
                 onPressed: () async {
                   hazardDataWriteModel.hazardDescription =
@@ -242,21 +237,18 @@ class _EventReportWidgetState extends State<EventReportWidget> {
                     );
                   }
                 },
-                text: 'Submit',
-                options: FFButtonOptions(
-                  width: MediaQuery.sizeOf(context).width * 0.6,
-                  height: 40,
-                  padding: EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
-                  iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                  color: FlutterFlowTheme.of(context).primary,
-                  textStyle: FlutterFlowTheme.of(context).titleMedium,
-                  elevation: 3,
-                  borderSide: BorderSide(
-                    color: Colors.transparent,
-                    width: 1,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppTheme.primaryColor(context),
+                  foregroundColor: Colors.white,
+                  minimumSize: Size(double.infinity, 50),
+                  padding: EdgeInsets.zero,
+                  textStyle: TextStyle(
+                    fontFamily: 'Plus Jakarta Sans',
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
                   ),
-                  borderRadius: BorderRadius.circular(8),
                 ),
+                child: Text('Submit'),
               ),
             ),
           ],

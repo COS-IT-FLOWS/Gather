@@ -1,7 +1,6 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
-import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:provider/provider.dart';
 
 import 'package:gather/components/appbar_widget.dart';
@@ -12,6 +11,7 @@ import 'package:gather/providers/auth_provider.dart';
 import 'package:gather/providers/profile_provider.dart';
 
 import 'package:gather/components/confirmation_dialog_widget.dart';
+import 'package:gather/themes/app_theme.dart';
 
 class ProfileWidget extends StatefulWidget {
   @override
@@ -39,7 +39,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
           iconTheme:
               IconThemeData(color: Colors.white), // Set icon color to white
           title: Text(style: TextStyle(color: Colors.white), 'User Profile'),
-          backgroundColor: FlutterFlowTheme.of(context).primary,
+          backgroundColor: AppTheme.primaryColor(context),
           actions: [
             IconButton(
                 icon: !_profileProvider.isEditProfileDetails

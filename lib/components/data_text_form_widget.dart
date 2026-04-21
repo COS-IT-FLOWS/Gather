@@ -62,7 +62,7 @@ class _DataTextFormWidgetState extends State<DataTextFormWidget> {
     ProfileProvider profileProvider = context.read<ProfileProvider>();
     // if (dateTimeProvider.initialDate != null) {
     _dateTextController.text =
-        dateTimeProvider.getDateString(dateTimeProvider.initialDate);
+        dateTimeProvider.getDateString(dateTimeProvider.selectedDate);
     // }
     _timeTextController.text =
         dateTimeProvider.getTimeString(dateTimeProvider.initialTime);

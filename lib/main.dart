@@ -16,7 +16,7 @@ var globalMessengerKey = GlobalKey<ScaffoldMessengerState>();
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await GlobalConfiguration().loadFromAsset("app_settings");
+  await GlobalConfiguration().loadFromAsset("app_settings_testing");
   await Supabase.initialize(
     url: GlobalConfiguration().get('SUPABASE_URL'),
     anonKey: GlobalConfiguration().get('SUPABASE_ANON_KEY'),

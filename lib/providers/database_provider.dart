@@ -11,15 +11,22 @@ class DatabaseProvider with ChangeNotifier {
   final SupabaseClient _supabaseClient;
   DatabaseProvider(this._supabaseClient, this.userId);
 
-  Future<bool> insertWeatherData(
-      parameter, timeStamp, stationId, parameterValue) async {
-    String dataTable =
-        GlobalConfiguration().getDeepValue('DATABASE_CONFIG:$parameter');
-    final data = await _supabaseClient.from(dataTable).insert({
-      'collected_at': timeStamp.toString(),
-      stationId: parameterValue
-    }).select();
-    return true;
+  Future<bool> insertWeatherData(String parameter, DateTime timeStamp,
+      String stationId, double parameterValue) async {
+    try {
+      final data = await _supabaseClient
+          .from(GlobalConfiguration().getValue('DB_WEATHER_TABLE'))
+          .insert({
+        'collected_at': timeStamp.toIso8601String(),
+        'station_id': stationId,
+        'parameter': parameter,
+        'value': parameterValue,
+      }).select();
+      return data.isNotEmpty;
+    } catch (e) {
+      debugPrint('insertWeatherData error: $e');
+      return false;
+    }
   }
 
   // Future<void> readWeatherData(param) async {}

@@ -22,3 +22,4 @@ ios/Runner/**/*
 android/app/src/main/res/**/*
 android/app/.cxx
 .aider*
+/releases/

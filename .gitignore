@@ -24,7 +24,7 @@ android/app/.cxx
 .aider*
 
 # Ignore the releases folder, which contains the built app bundles and APKs
-releases
+/releases/
 
 # Ignore the IOS build artifacts and Xcode project files
-ios
+/ios/

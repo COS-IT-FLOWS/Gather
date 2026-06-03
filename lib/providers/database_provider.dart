@@ -11,17 +11,22 @@ class DatabaseProvider with ChangeNotifier {
   final SupabaseClient _supabaseClient;
   DatabaseProvider(this._supabaseClient, this.userId);
 
-  Future<bool> insertWeatherData(String parameter, DateTime timeStamp,
-      String stationId, double parameterValue) async {
+  Future<bool> insertWeatherData(
+    String parameter,
+    DateTime timeStamp,
+    String stationId,
+    double parameterValue,
+  ) async {
     try {
       final data = await _supabaseClient
           .from(GlobalConfiguration().getValue('DB_WEATHER_TABLE'))
           .insert({
-        'collected_at': timeStamp.toIso8601String(),
-        'station_id': stationId,
-        'parameter': parameter,
-        'value': parameterValue,
-      }).select();
+            'collected_at': timeStamp.toIso8601String(),
+            'station_id': stationId,
+            'parameter': parameter.toLowerCase(),
+            'value': parameterValue,
+          })
+          .select();
       return data.isNotEmpty;
     } catch (e) {
       debugPrint('insertWeatherData error: $e');
@@ -33,26 +38,30 @@ class DatabaseProvider with ChangeNotifier {
 
   Future<UserDataModel> readUserData(userId) async {
     final UserDataModel userDataModel;
-    final userData =
-        await _supabaseClient.from('profiles').select('*').eq('id', userId);
+    final userData = await _supabaseClient
+        .from('profiles')
+        .select('*')
+        .eq('id', userId);
     if (userData.isNotEmpty) {
       userDataModel = UserDataModel(
-          firstName: userData[0]['first_name'],
-          lastName: userData[0]['last_name'],
-          phoneNumber: userData[0]['phone_number'],
-          emailAddress: userData[0]['email'],
-          occupation: userData[0]['occupation'],
-          userAge: userData[0]['age'],
-          stationIds: userData[0]['station_id']);
+        firstName: userData[0]['first_name'],
+        lastName: userData[0]['last_name'],
+        phoneNumber: userData[0]['phone_number'],
+        emailAddress: userData[0]['email'],
+        occupation: userData[0]['occupation'],
+        userAge: userData[0]['age'],
+        stationIds: userData[0]['station_id'],
+      );
     } else {
       userDataModel = UserDataModel(
-          firstName: '',
-          lastName: '',
-          phoneNumber: '',
-          emailAddress: '',
-          occupation: '',
-          userAge: 0,
-          stationIds: []);
+        firstName: '',
+        lastName: '',
+        phoneNumber: '',
+        emailAddress: '',
+        occupation: '',
+        userAge: 0,
+        stationIds: [],
+      );
     }
     return userDataModel;
     // UserDataModel userDataModel = UserDataModel()
@@ -65,13 +74,14 @@ class DatabaseProvider with ChangeNotifier {
       'phone_number': userDataWriteModel.phoneNumber,
       'email': userDataWriteModel.emailAddress,
       'occupation': userDataWriteModel.occupation,
-      'age': userDataWriteModel.userAge
+      'age': userDataWriteModel.userAge,
     });
     return true;
   }
 
   Future<String> insertHazardEventDataAndGetHazardId(
-      HazardDataModel hazardDataWriteModel) async {
+    HazardDataModel hazardDataWriteModel,
+  ) async {
     final hazardData = await _supabaseClient
         .from('hazard_events')
         .upsert({

@@ -27,11 +27,7 @@ class DateTimeProvider with ChangeNotifier {
 
   String getDateString(DateTime date) {
     final dateFormatter = DateFormat('MMM d');
-    if (date != null) {
-      return dateFormatter.format(date).toString();
-    } else {
-      return '';
-    }
+    return dateFormatter.format(date).toString();
   }
 
   String getTimeString(TimeOfDay time) {
@@ -48,8 +44,13 @@ class DateTimeProvider with ChangeNotifier {
   }
 
   DateTime getSelectedDateTime() {
-    DateTime _selectedDateTime = DateTime(selectedDate.year, selectedDate.month,
-        selectedDate.day, selectedTime.hour, selectedTime.minute);
+    DateTime _selectedDateTime = DateTime(
+      selectedDate.year,
+      selectedDate.month,
+      selectedDate.day,
+      selectedTime.hour,
+      selectedTime.minute,
+    );
     return _selectedDateTime;
   }
 }

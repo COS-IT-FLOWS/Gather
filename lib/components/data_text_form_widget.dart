@@ -11,11 +11,7 @@ import 'package:gather/providers/profile_provider.dart';
 import 'package:gather/themes/app_theme.dart';
 
 class DataTextFormWidget extends StatefulWidget {
-  const DataTextFormWidget({
-    super.key,
-    this.paramType,
-    this.unitType,
-  });
+  const DataTextFormWidget({super.key, this.paramType, this.unitType});
 
   final String? paramType;
   final String? unitType;
@@ -61,20 +57,27 @@ class _DataTextFormWidgetState extends State<DataTextFormWidget> {
     DatabaseProvider databaseProvider = context.read<DatabaseProvider>();
     ProfileProvider profileProvider = context.read<ProfileProvider>();
     // if (dateTimeProvider.initialDate != null) {
-    _dateTextController.text =
-        dateTimeProvider.getDateString(dateTimeProvider.selectedDate);
+    _dateTextController.text = dateTimeProvider.getDateString(
+      dateTimeProvider.selectedDate,
+    );
     // }
-    _timeTextController.text =
-        dateTimeProvider.getTimeString(dateTimeProvider.initialTime);
+    _timeTextController.text = dateTimeProvider.getTimeString(
+      dateTimeProvider.initialTime,
+    );
     String parameterType = widget.paramType ?? '';
-    String? stationIdPrefix = (GlobalConfiguration()
-                .getDeepValue('STATION_ID_TEMPLATE:$parameterType') !=
+    String? stationIdPrefix =
+        (GlobalConfiguration().getDeepValue(
+              'STATION_ID_TEMPLATE:$parameterType',
+            ) !=
             null)
-        ? GlobalConfiguration()
-            .getDeepValue('STATION_ID_TEMPLATE:$parameterType')
+        ? GlobalConfiguration().getDeepValue(
+            'STATION_ID_TEMPLATE:$parameterType',
+          )
         : 'TEST';
-    String? selectedStationId = profileProvider.stationIds!
-        .firstWhere((id) => id.contains(stationIdPrefix), orElse: () => null);
+    String? selectedStationId = profileProvider.stationIds!.firstWhere(
+      (id) => id.contains(stationIdPrefix),
+      orElse: () => null,
+    );
     if (selectedStationId == null) {
       return AlertDialog(
         title: const Text('No Station ID Found'),
@@ -138,7 +141,8 @@ class _DataTextFormWidgetState extends State<DataTextFormWidget> {
                         children: [
                           Text(
                             GlobalConfiguration().getDeepValue(
-                                    'DISPLAY_NAME_PARAMS:$parameterType') ??
+                                  'DISPLAY_NAME_PARAMS:$parameterType',
+                                ) ??
                                 'parameter',
                             style: TextStyle(
                               fontFamily: 'Readex Pro',
@@ -154,68 +158,78 @@ class _DataTextFormWidgetState extends State<DataTextFormWidget> {
                                   alignment: AlignmentDirectional(0, 0),
                                   child: Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        8, 0, 8, 0),
+                                      8,
+                                      0,
+                                      8,
+                                      0,
+                                    ),
                                     child: TextFormField(
-                                        controller: _model.textController,
-                                        focusNode: _model.textFieldFocusNode,
-                                        autofocus: true,
-                                        obscureText: false,
-                                        keyboardType: TextInputType.number,
-                                        decoration: InputDecoration(
-                                          alignLabelWithHint: false,
-                                          // hintStyle:
-                                          //     FlutterFlowTheme.of(context)
-                                          //         .labelMedium,
-                                          enabledBorder: UnderlineInputBorder(
-                                            borderSide: BorderSide(
-                                              color:
-                                                  AppTheme.accentColor(context),
-                                              width: 2,
+                                      controller: _model.textController,
+                                      focusNode: _model.textFieldFocusNode,
+                                      autofocus: true,
+                                      obscureText: false,
+                                      keyboardType: TextInputType.number,
+                                      decoration: InputDecoration(
+                                        alignLabelWithHint: false,
+                                        // hintStyle:
+                                        //     FlutterFlowTheme.of(context)
+                                        //         .labelMedium,
+                                        enabledBorder: UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: AppTheme.accentColor(
+                                              context,
                                             ),
-                                            borderRadius:
-                                                BorderRadius.circular(8),
+                                            width: 2,
                                           ),
-                                          focusedBorder: UnderlineInputBorder(
-                                            borderSide: BorderSide(
-                                              color: AppTheme.primaryColor(
-                                                  context),
-                                              width: 2,
-                                            ),
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                          ),
-                                          errorBorder: UnderlineInputBorder(
-                                            borderSide: BorderSide(
-                                              color:
-                                                  AppTheme.errorColor(context),
-                                              width: 2,
-                                            ),
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                          ),
-                                          focusedErrorBorder:
-                                              UnderlineInputBorder(
-                                            borderSide: BorderSide(
-                                              color:
-                                                  AppTheme.errorColor(context),
-                                              width: 2,
-                                            ),
-                                            borderRadius:
-                                                BorderRadius.circular(8),
+                                          borderRadius: BorderRadius.circular(
+                                            8,
                                           ),
                                         ),
-                                        style: TextStyle(
-                                          fontFamily: 'Readex Pro',
-                                          fontSize: 25,
-                                          letterSpacing: 10,
+                                        focusedBorder: UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: AppTheme.primaryColor(
+                                              context,
+                                            ),
+                                            width: 2,
+                                          ),
+                                          borderRadius: BorderRadius.circular(
+                                            8,
+                                          ),
                                         ),
-                                        textAlign: TextAlign.end,
-                                        validator: (value) {
-                                          if (value == null || value.isEmpty) {
-                                            return 'Please enter a value';
-                                          }
-                                          return null;
-                                        }),
+                                        errorBorder: UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: AppTheme.errorColor(context),
+                                            width: 2,
+                                          ),
+                                          borderRadius: BorderRadius.circular(
+                                            8,
+                                          ),
+                                        ),
+                                        focusedErrorBorder:
+                                            UnderlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color: AppTheme.errorColor(
+                                                  context,
+                                                ),
+                                                width: 2,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                            ),
+                                      ),
+                                      style: TextStyle(
+                                        fontFamily: 'Readex Pro',
+                                        fontSize: 25,
+                                        letterSpacing: 10,
+                                      ),
+                                      textAlign: TextAlign.end,
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Please enter a value';
+                                        }
+                                        return null;
+                                      },
+                                    ),
                                   ),
                                 ),
                               ),
@@ -232,71 +246,91 @@ class _DataTextFormWidgetState extends State<DataTextFormWidget> {
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               Expanded(
-                                  flex: 1,
-                                  child: Align(
-                                      alignment: AlignmentDirectional(0, 0),
-                                      child: Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  8, 0, 8, 0),
-                                          child: Column(children: [
-                                            TextFormField(
-                                                controller: _dateTextController,
-                                                readOnly: true,
-                                                onTap: () async {
-                                                  _selectedDate =
-                                                      await showDatePicker(
-                                                          context: context,
-                                                          initialDate:
-                                                              DateTime.now(),
-                                                          firstDate: DateTime
-                                                                  .now()
-                                                              .subtract(
-                                                                  const Duration(
-                                                                      days: 1)),
-                                                          lastDate:
-                                                              DateTime.now());
-                                                  if (_selectedDate != null) {
-                                                    dateTimeProvider.selectDate(
-                                                        _selectedDate!);
-                                                    _dateTextController.text =
+                                flex: 1,
+                                child: Align(
+                                  alignment: AlignmentDirectional(0, 0),
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                      8,
+                                      0,
+                                      8,
+                                      0,
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        TextFormField(
+                                          controller: _dateTextController,
+                                          readOnly: true,
+                                          onTap: () async {
+                                            _selectedDate =
+                                                await showDatePicker(
+                                                  context: context,
+                                                  initialDate: DateTime.now(),
+                                                  firstDate: DateTime.now()
+                                                      .subtract(
+                                                        const Duration(days: 1),
+                                                      ),
+                                                  lastDate: DateTime.now(),
+                                                );
+                                            if (_selectedDate != null) {
+                                              dateTimeProvider.selectDate(
+                                                _selectedDate!,
+                                              );
+                                              _dateTextController.text =
+                                                  dateTimeProvider
+                                                      .getDateString(
                                                         dateTimeProvider
-                                                            .getDateString(
-                                                                dateTimeProvider
-                                                                    .selectedDate!);
-                                                  }
-                                                })
-                                          ])))),
+                                                            .selectedDate!,
+                                                      );
+                                            }
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
                               Expanded(
-                                  flex: 1,
-                                  child: Align(
-                                      alignment: AlignmentDirectional(0, 0),
-                                      child: Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  8, 0, 8, 0),
-                                          child: Column(children: [
-                                            TextFormField(
-                                                controller: _timeTextController,
-                                                readOnly: true,
-                                                onTap: () async {
-                                                  _selectedTime =
-                                                      await showTimePicker(
-                                                          context: context,
-                                                          initialTime:
-                                                              dateTimeProvider
-                                                                  .selectedTime!);
-                                                  if (_selectedTime != null) {
-                                                    dateTimeProvider.selectTime(
-                                                        _selectedTime!);
-                                                    _timeTextController.text =
+                                flex: 1,
+                                child: Align(
+                                  alignment: AlignmentDirectional(0, 0),
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                      8,
+                                      0,
+                                      8,
+                                      0,
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        TextFormField(
+                                          controller: _timeTextController,
+                                          readOnly: true,
+                                          onTap: () async {
+                                            _selectedTime =
+                                                await showTimePicker(
+                                                  context: context,
+                                                  initialTime: dateTimeProvider
+                                                      .selectedTime!,
+                                                );
+                                            if (_selectedTime != null) {
+                                              dateTimeProvider.selectTime(
+                                                _selectedTime!,
+                                              );
+                                              _timeTextController.text =
+                                                  dateTimeProvider
+                                                      .getTimeString(
                                                         dateTimeProvider
-                                                            .getTimeString(
-                                                                dateTimeProvider
-                                                                    .selectedTime);
-                                                  }
-                                                })
-                                          ])))),
+                                                            .selectedTime,
+                                                      );
+                                            }
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
                             ],
                           ),
                           Align(
@@ -304,31 +338,36 @@ class _DataTextFormWidgetState extends State<DataTextFormWidget> {
                             child: ElevatedButton(
                               onPressed: () async {
                                 if (_formKey.currentState!.validate()) {
-                                  DateTime _timeStamp =
-                                      dateTimeProvider.getSelectedDateTime();
-                                  double _parameterValue =
-                                      double.parse(_model.textController!.text);
-                                  bool ifSuccess =
-                                      await databaseProvider.insertWeatherData(
-                                          parameterType,
-                                          _timeStamp,
-                                          selectedStationId,
-                                          _parameterValue);
+                                  DateTime _timeStamp = dateTimeProvider
+                                      .getSelectedDateTime();
+                                  double _parameterValue = double.parse(
+                                    _model.textController!.text,
+                                  );
+                                  bool ifSuccess = await databaseProvider
+                                      .insertWeatherData(
+                                        parameterType,
+                                        _timeStamp,
+                                        selectedStationId,
+                                        _parameterValue,
+                                      );
                                   if (ifSuccess) {
                                     await showDialog<String>(
                                       context: context,
                                       builder: (BuildContext context) =>
                                           AlertDialog(
-                                        title: const Text(
-                                            'Data Submitted Successfully'),
-                                        actions: <Widget>[
-                                          TextButton(
-                                            onPressed: () =>
-                                                Navigator.pop(context, 'OK'),
-                                            child: const Text('OK'),
+                                            title: const Text(
+                                              'Data Submitted Successfully',
+                                            ),
+                                            actions: <Widget>[
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(
+                                                  context,
+                                                  'OK',
+                                                ),
+                                                child: const Text('OK'),
+                                              ),
+                                            ],
                                           ),
-                                        ],
-                                      ),
                                     );
                                   }
                                   // ScaffoldMessenger.of(context)
@@ -351,17 +390,14 @@ class _DataTextFormWidgetState extends State<DataTextFormWidget> {
                                   ),
                                 ),
                                 minimumSize: Size(
-                                    MediaQuery.of(context).size.width * 0.6,
-                                    40),
+                                  MediaQuery.of(context).size.width * 0.6,
+                                  40,
+                                ),
                               ),
                               child: Text(
                                 'Submit',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleMedium
-                                    ?.copyWith(
-                                      color: Colors.white,
-                                    ),
+                                style: Theme.of(context).textTheme.titleMedium
+                                    ?.copyWith(color: Colors.white),
                               ),
                             ),
                           ),

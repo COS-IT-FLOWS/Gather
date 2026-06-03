@@ -22,3 +22,9 @@ ios/Runner/**/*
 android/app/src/main/res/**/*
 android/app/.cxx
 .aider*
+
+# Ignore the releases folder, which contains the built app bundles and APKs
+releases
+
+# Ignore the IOS build artifacts and Xcode project files
+ios

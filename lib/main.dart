@@ -16,22 +16,30 @@ var globalMessengerKey = GlobalKey<ScaffoldMessengerState>();
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await GlobalConfiguration().loadFromAsset("app_settings_testing");
+  await GlobalConfiguration().loadFromAsset("app_settings_v1");
   await Supabase.initialize(
     url: GlobalConfiguration().get('SUPABASE_URL'),
     anonKey: GlobalConfiguration().get('SUPABASE_ANON_KEY'),
   );
 
   runApp(
-    MultiProvider(providers: [
-      ChangeNotifierProvider<SignInProvider>(
-          create: (_) => SignInProvider(supabase)),
-      ChangeNotifierProvider<DatabaseProvider>(
-          create: (_) => DatabaseProvider(supabase, 'testUserId')),
-      ChangeNotifierProvider<DateTimeProvider>(
-          create: (_) => DateTimeProvider()),
-      ChangeNotifierProvider<ProfileProvider>(create: (_) => ProfileProvider())
-    ], child: GatherApp()),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider<SignInProvider>(
+          create: (_) => SignInProvider(supabase),
+        ),
+        ChangeNotifierProvider<DatabaseProvider>(
+          create: (_) => DatabaseProvider(supabase, 'testUserId'),
+        ),
+        ChangeNotifierProvider<DateTimeProvider>(
+          create: (_) => DateTimeProvider(),
+        ),
+        ChangeNotifierProvider<ProfileProvider>(
+          create: (_) => ProfileProvider(),
+        ),
+      ],
+      child: GatherApp(),
+    ),
   );
 }
 
@@ -41,19 +49,19 @@ class GatherApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Gather',
-        // Apply the light theme
-        theme: AppTheme.lightTheme,
-        // Apply the dark theme if needed
-        darkTheme: AppTheme.darkTheme,
-        // Let the device control the theme based on system settings
-        themeMode: ThemeMode.system,
-        routes: AppRoutes.routes(),
-        initialRoute: Provider.of<SignInProvider>(context).isLoggedIn
-            ? '/home'
-            : '/authentication'
-        //       scaffoldMessengerKey: globalMessengerKey,
-        );
+      title: 'Gather',
+      // Apply the light theme
+      theme: AppTheme.lightTheme,
+      // Apply the dark theme if needed
+      darkTheme: AppTheme.darkTheme,
+      // Let the device control the theme based on system settings
+      themeMode: ThemeMode.system,
+      routes: AppRoutes.routes(),
+      initialRoute: Provider.of<SignInProvider>(context).isLoggedIn
+          ? '/home'
+          : '/authentication',
+      //       scaffoldMessengerKey: globalMessengerKey,
+    );
   }
 }
 

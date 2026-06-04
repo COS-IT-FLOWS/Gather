@@ -1,0 +1,6 @@
+package_name("com.equinoct.gatherapp")
+
+# Google Play service account JSON key
+# For CI/CD: set GOOGLE_PLAY_SERVICE_ACCOUNT_JSON env var (the JSON content)
+# For local dev: set GOOGLE_PLAY_JSON_KEY_FILE env var (path to .json file)
+

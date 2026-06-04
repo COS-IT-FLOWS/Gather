@@ -1,0 +1,55 @@
+name: Deploy to Google Play
+
+on:
+  push:
+    branches:
+      - deploy/google-play-internal
+      - deploy/google-play-production
+
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.4"
+          bundler-cache: true
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: "temurin"
+          java-version: "17"
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.x"
+          channel: "stable"
+
+      - name: Decode keystore
+        run: |
+          mkdir -p "$(dirname "${{ vars.KEYSTORE_PATH || 'android/upload-keystore.jks' }}")"
+          echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 --decode > "${{ vars.KEYSTORE_PATH || 'android/upload-keystore.jks' }}"
+
+      - name: Create key.properties
+        run: |
+          cat > android/key.properties <<EOF
+          storePassword=${{ secrets.KEYSTORE_STORE_PASSWORD }}
+          keyPassword=${{ secrets.KEYSTORE_KEY_PASSWORD }}
+          keyAlias=${{ secrets.KEYSTORE_KEY_ALIAS }}
+          storeFile=${{ vars.KEYSTORE_PATH || 'android/upload-keystore.jks' }}
+          EOF
+
+      - name: Deploy to Google Play
+        env:
+          GOOGLE_PLAY_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON }}
+        run: bundle exec fastlane android ${{ github.ref_name == 'deploy/google-play-production' && 'production' || 'internal' }}

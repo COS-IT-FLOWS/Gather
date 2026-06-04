@@ -1,0 +1,65 @@
+default_platform(:android)
+
+def resolve_google_play_creds
+  if ENV["GOOGLE_PLAY_JSON_KEY_FILE"]
+    ENV["GOOGLE_PLAY_JSON_KEY_FILE"]
+  elsif ENV["GOOGLE_PLAY_SERVICE_ACCOUNT_JSON"]
+    tmp = Dir.mktmpdir("gplay-json")
+    path = File.join(tmp, "service-account.json")
+    File.write(path, ENV["GOOGLE_PLAY_SERVICE_ACCOUNT_JSON"])
+    path
+  else
+    nil
+  end
+end
+
+def pubspec_version
+  pubspec = File.read("../pubspec.yaml")
+  version_line = pubspec[/^version: (.+)$/, 1]
+  match = version_line.match(/^(\S+)\+(\d+)$/)
+  { name: match[1], code: match[2].to_i }
+end
+
+def update_pubspec_version(code:)
+  path = "../pubspec.yaml"
+  content = File.read(path)
+  current = pubspec_version
+  File.write(path, content.sub(/^version: .+$/, "version: #{current[:name]}+#{code}"))
+end
+
+def build_and_upload(track:)
+  creds = resolve_google_play_creds
+  UI.user_error!("Set GOOGLE_PLAY_JSON_KEY_FILE or GOOGLE_PLAY_SERVICE_ACCOUNT_JSON") unless creds
+
+  version = pubspec_version
+  new_code = version[:code] + 1
+  update_pubspec_version(code: new_code)
+
+  sh("flutter", "pub", "get")
+  sh("flutter", "build", "appbundle", "--release")
+
+  aab = "build/app/outputs/bundle/release/app-release.aab"
+
+  upload_to_play_store(
+    track: track,
+    aab: aab,
+    json_key: creds,
+    release_status: "completed",
+    skip_upload_metadata: true,
+    skip_upload_images: true,
+    skip_upload_screenshots: true,
+    version_code: new_code.to_s,
+  )
+end
+
+platform :android do
+  desc "Build and upload to Google Play Internal Testing"
+  lane :internal do
+    build_and_upload(track: "internal")
+  end
+
+  desc "Build and upload to Google Play Production"
+  lane :production do
+    build_and_upload(track: "production")
+  end
+end

@@ -1,6 +1,6 @@
 name: gather
 description: A community weather data gathering application built on flutter
-version: 0.0.1+7
+version: 0.0.1+6
 environment:
   sdk: '>=3.8.0 <3.11.0'
 dependencies: 

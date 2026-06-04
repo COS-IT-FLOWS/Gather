@@ -23,8 +23,6 @@ android/app/src/main/res/**/*
 android/app/.cxx
 .aider*
 
-/.bundle/
-
 # Ignore the releases folder, which contains the built app bundles and APKs
 /releases/
 
